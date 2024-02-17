@@ -1,0 +1,9 @@
+{
+  "name": "Rogielike",
+  "description": "Crimespree but good",
+  "author": "0lafe and NYAS",
+  "contact": "N/A",
+  "version": "1",
+  "priority": 0,
+  "blt_version": 2
+}
