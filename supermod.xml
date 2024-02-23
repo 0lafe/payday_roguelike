@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<mod name="RoguelikePayday">
+  <hooks script_path="lua/" hook_id="lib/">
+    <group :script_path="managers/" :hook_id="managers/">
+      <post :script_path="blackmarketmanager.lua" :hook_id="blackmarketmanager"/>
+      <post :script_path="dlcmanager.lua" :hook_id="dlcmanager"/>
+      <post :script_path="localizationmanager.lua" :hook_id="localizationmanager"/>
+      <post :script_path="menumanager.lua" :hook_id="menumanager"/>
+      <post :script_path="savefilemanager.lua" :hook_id="savefilemanager"/>
+      <post :script_path="storymissionsmanager.lua" :hook_id="storymissionsmanager"/>
+      <group :script_path="menu/" :hook_id="menu/">
+        <post :script_path="blackmarketgui.lua" :hook_id="blackmarketgui"/>
+        <post :script_path="extendeduielemets.lua" :hook_id="extendeduielemets"/>
+        <post :script_path="playerinventorygui.lua" :hook_id="playerinventorygui"/>
+        <post :script_path="specializationguinew.lua" :hook_id="specializationguinew"/>
+        <post :script_path="storymissionsgui.lua" :hook_id="storymissionsgui"/>
+      </group>
+      <group :script_path="mission/" :hook_id="mission/">
+        <post :script_path="elementjobstagealternative.lua" :hook_id="elementjobstagealternative"/>
+      </group>
+    </group>
+
+    <group :script_path="roguelike/">
+      <post :script_path="roguelikemanager.lua" :hook_id="setups/setup"/>
+      <post :script_path="rogueliketweakdata.lua" :hook_id="tweak_data/weapontweakdata"/>
+    </group>
+
+    <group :script_path="tweak_data/" :hook_id="tweak_data/">
+      <post :script_path="achievementstweakdata.lua" :hook_id="achievementstweakdata"/>
+      <post :script_path="skilltreetweakdata.lua" :hook_id="skilltreetweakdata"/>
+      <post :script_path="storymissionstweakdata.lua" :hook_id="storymissionstweakdata"/>
+    </group>
+
+    <group :script_path="network/" :hook_id="network/">
+      <post :script_path="base/networkmanager.lua" :hook_id="base/networkmanager"/>
+    </grpup>
+  </hooks>
+</mod>

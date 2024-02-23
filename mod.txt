@@ -1,7 +1,7 @@
 {
-  "name": "Rogielike",
+  "name": "Roguelike",
   "description": "Crimespree but good",
-  "author": "0lafe and NYAS",
+  "author": "0lafe",
   "contact": "N/A",
   "version": "1",
   "priority": 0,
