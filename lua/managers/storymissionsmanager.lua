@@ -24,3 +24,42 @@ function StoryMissionsManager:start_mission(mission, objective_id)
 
 	old_start_mission(self, mission, objective_id)
 end
+
+-- redoes completion logic a bit to handle better COOP
+function StoryMissionsManager:award(id, steps)
+	steps = steps or 1
+	local m = self:current_mission() or {}
+	local o = m.objectives_flat and m.objectives_flat[id]
+
+	-- completes the objective if you complete a heist of the same tier
+	if id and m.tier and not o and Network:is_client() then
+		local tier_pool = tweak_data.story:heist_pool(m.tier)
+		local completed_heist = id:gsub("story_", "")
+		for _, heist in pairs(tier_pool) do
+			if heist == completed_heist then
+				for k, _ in pairs(m.objectives_flat) do
+					o = m.objectives_flat[k]
+					break
+				end
+				break
+			end
+		end
+	end
+
+	if not o or o.completed then
+		return
+	end
+
+	o.progress = o.progress + 1
+
+	print("[Story]", "progress", id, o.progress)
+
+	if o.max_progress <= o.progress then
+		print("[Story]", "objective complete", id, o.progress, o.max_progress)
+
+		o.completed = true
+		o.progress = o.max_progress
+
+		self:_check_complete(m)
+	end
+end

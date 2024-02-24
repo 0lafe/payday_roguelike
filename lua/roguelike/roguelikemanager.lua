@@ -122,17 +122,18 @@ function RoguelikeManager:build_objectives(mission)
 
   local objectives = self.save_data.rolled_heists[mission.id]
   if not objectives then
-    local heists = {}
     local heist_pool = tweak_data.story:heist_pool(mission.tier)
-    local heist = heist_pool[math.random(#heist_pool)]
-    table.insert(heists, heist)
-    self.save_data.rolled_heists[mission.id] = heists
+    objectives = { heist_pool[math.random(#heist_pool)] }
+    self.save_data.rolled_heists[mission.id] = objectives
     self:_save_to_file()
-    objectives = heists
   end
 
+  self:_assign_objectives(objectives, mission)
+end
+
+function RoguelikeManager:_assign_objectives(objectives, mission)
   local built_objectives = {}
-  for k, objective in pairs(objectives) do
+  for _, objective in pairs(objectives) do
     table.insert(built_objectives, {
       tweak_data.story:_level_progress("story_" .. objective, 1, {
         name_id = "menu_sm_" .. objective
@@ -170,7 +171,23 @@ end
 -- function for rerolling heists
 function RoguelikeManager:reroll()
   local current_mission = managers.story:current_mission()
-  current_mission.completed = nil
-  self.save_data.rolled_heists[current_mission.id] = nil
+  local heist_pool = tweak_data.story:heist_pool(current_mission.tier)
+  local unique_heists = {}
+  local heist_unique = true
+  for _, heist in pairs(heist_pool) do
+    for current_heist, _ in pairs(current_mission.objectives_flat) do
+      local current_heist_name = current_heist:gsub("story_", "")
+      if current_heist_name == heist then
+        heist_unique = false
+      end
+    end
+    if heist_unique then
+      table.insert(unique_heists, heist)
+    end
+    heist_unique = true
+  end
+  local heists = { unique_heists[math.random(#unique_heists)] }
+  self.save_data.rolled_heists[current_mission.id] = heists
+  self:_save_to_file()
   self.story_mission_gui:_update(current_mission)
 end

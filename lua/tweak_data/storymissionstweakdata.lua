@@ -22,35 +22,41 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       objectives = {},
       rewards = self:_default_reward(),
       tier = 0
-    }),
-    self:_mission("sm_3", {
-      reward_id = "menu_sm_default_reward",
-      voice_line = "Play_pln_stq_01",
-      objectives = {},
-      rewards = self:_default_reward(),
-      tier = 1
-    }),
-    self:_mission("sm_4", {
-      reward_id = "menu_sm_default_reward",
-      voice_line = "Play_pln_stq_01",
-      objectives = {},
-      rewards = self:_default_reward(),
-      tier = 1
-    }),
-    self:_mission("sm_5", {
-      reward_id = "menu_sm_default_reward",
-      voice_line = "Play_pln_stq_01",
-      objectives = {},
-      rewards = self:_default_reward(),
-      tier = 1
-    }),
-    self:_mission("sm_6", {
-      reward_id = "menu_sm_default_reward",
-      voice_line = "Play_pln_stq_01",
-      objectives = {},
-      rewards = self:_default_reward(),
-      tier = 1
     })
+  }
+  -- create multiple tier 1 missions
+  for i = 3, 10 do
+    table.insert(self.missions,
+      self:_mission("sm_" .. i, {
+        reward_id = "menu_sm_default_reward",
+        voice_line = "Play_pln_stq_01",
+        objectives = {},
+        rewards = self:_default_reward(),
+        tier = 1
+      })
+    )
+  end
+  table.insert(self.missions,
+    self:_mission("sm_end", {
+      rewarded = true,
+      completed = true,
+      last_mission = true,
+      objectives = {}
+    })
+  )
+
+  self._heist_pool = {
+    {
+      "four_store",
+      "ukrainian_job",
+      "mallcrasher"
+    },
+    {
+      "go_bank",
+      "jewelry_store",
+      "bank_heist",
+      "nightclub",
+    }
   }
 end
 
@@ -82,20 +88,7 @@ end
 
 -- heist pools set by tier
 function StoryMissionsTweakData:heist_pool(mission_tier)
-  if mission_tier == 0 then
-    return {
-      "four_store",
-      "ukrainian_job",
-      "mallcrasher"
-    }
-  elseif mission_tier == 1 then
-    return {
-      "go_bank",
-      "jewelry_store",
-      "bank_heist",
-      "nightclub",
-    }
-  end
+  return self._heist_pool[mission_tier + 1]
 end
 
 -- change how missions are built to be more dynamic

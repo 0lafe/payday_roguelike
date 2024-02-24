@@ -235,7 +235,7 @@ function StoryMissionsGui:_update_info(mission)
         elseif objective.completed or owned or not gvalue_tweak or not gvalue_tweak.hide_unavailable then
           local texture = "guis/textures/menu_tickbox"
           local texture_rect = {
-            objective.completed and 24 or 0,
+            (objective.completed or mission.completed) and 24 or 0,
             0,
             24,
             24
