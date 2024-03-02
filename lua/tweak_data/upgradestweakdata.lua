@@ -22,7 +22,20 @@ function UpgradesTweakData.mrwi_deck9_options()
   local copycat_cards = copycat_cards()
   local noob_lube = {
     tree = 16,
-    tier = 1
+    tier = 1,
+    upgrades = {
+      "temporary_mrwi_health_invulnerable_1"
+    },
+    desc_id = "menu_deck23_noob_lube_desc",
+    short_id = "menu_deck23_noob_lube_short",
+    name_id = "menu_deck23_noob_lube",
+    custom_editable_descs = {
+      [1.0] = "5",
+      [2.0] = "4",
+      [3.0] = "50%",
+      [4.0] = "2",
+      [5.0] = "15",
+    }
   }
 
   local out = {}
@@ -54,4 +67,8 @@ end
 -- Assign all copycat card function to self
 Hooks:PostHook(UpgradesTweakData, "init", "init_roguelike_copycat_options", function(self, tweak_data)
   self.copycat_cards = copycat_cards
+  self.specialization_descs[23][1] = {}
+  self.specialization_descs[23][3] = {}
+  self.specialization_descs[23][5] = {}
+  self.specialization_descs[23][7] = {}
 end)

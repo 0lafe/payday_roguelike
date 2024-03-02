@@ -176,6 +176,12 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       "bulucs_mansion",
       "black_cat",
       "prison_nightmare"
+    },
+    [4] = {
+      "goat_simulator",
+      "transport_train",
+      "slaughterhouse",
+      "white_house"
     }
   }
 end

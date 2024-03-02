@@ -3,7 +3,9 @@ WiP
 # TODO
 
 - Copycat card options
-- Create tiers 3+
+- Copycat base cards
+- Create tier 4
+- Single day heists?
 
 - Move career mode button in lobby screen/color button
 - Remove start heist button when complete

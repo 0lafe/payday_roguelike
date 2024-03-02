@@ -67,4 +67,5 @@ end)
 Hooks:PostHook(MenuCallbackHandler, "_dialog_clear_progress_yes", "_dialog_clear_progress_yes_roguelike", function(self)
   managers.roguelike:_create_save_data()
   managers.story:current_mission().completed = true
+  managers.roguelike:_reset_copycat_tweak_data()
 end)

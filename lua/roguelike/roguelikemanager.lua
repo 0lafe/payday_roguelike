@@ -64,6 +64,10 @@ function RoguelikeManager:add_copycat_card(quantity)
     table.insert(self._dropped_copycat_cards, rolled_card_name)
     self:_save_to_file()
   end
+  self:_reset_copycat_tweak_data()
+end
+
+function RoguelikeManager:_reset_copycat_tweak_data()
   tweak_data.upgrades = UpgradesTweakData:new(tweak_data)
   tweak_data.skilltree = SkillTreeTweakData:new()
 end
