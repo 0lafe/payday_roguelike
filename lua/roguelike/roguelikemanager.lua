@@ -12,6 +12,7 @@ function RoguelikeManager:init()
   else
     self.save_data = self:create_save_data()
   end
+  -- self:build_copycat_cards()
 end
 
 -- creates a new save when none is present
@@ -43,8 +44,28 @@ function RoguelikeManager:unlock_copycat()
 end
 
 -- adds random copycat cards for rewards
-function RoguelikeManager:add_copycat_card()
+function RoguelikeManager:add_copycat_card(quantity)
   self._dropped_copycat_cards = {}
+  local all_cards = tweak_data.upgrades:copycat_cards()
+
+  for i = 1, quantity or 1 do
+    local current_cards = self.save_data.unlocked_cards
+    for _, card in pairs(current_cards) do
+      all_cards[card] = nil
+    end
+
+    local card_names = {}
+    for name, _ in pairs(all_cards) do
+      table.insert(card_names, name)
+    end
+
+    local rolled_card_name = card_names[math.random(#card_names)]
+    table.insert(self.save_data.unlocked_cards, rolled_card_name)
+    table.insert(self._dropped_copycat_cards, rolled_card_name)
+    self:_save_to_file()
+  end
+  tweak_data.upgrades = UpgradesTweakData:new(tweak_data)
+  tweak_data.skilltree = SkillTreeTweakData:new()
 end
 
 -- adds weapons for rewards
@@ -115,6 +136,7 @@ function RoguelikeManager:add_weapon_mods(quantity)
   end
 end
 
+-- dynamically create objective data for mission
 function RoguelikeManager:build_objectives(mission)
   if not mission or not mission.tier then
     return

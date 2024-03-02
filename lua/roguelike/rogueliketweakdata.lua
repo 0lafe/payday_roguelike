@@ -24,7 +24,4 @@ function RoguelikeTweakData:init(tweak_data)
       story = "story_nightclub"
     }
   }
-  self.copycat_cards = {
-
-  }
 end

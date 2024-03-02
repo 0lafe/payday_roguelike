@@ -29,6 +29,7 @@
       <post :script_path="achievementstweakdata.lua" :hook_id="achievementstweakdata"/>
       <post :script_path="skilltreetweakdata.lua" :hook_id="skilltreetweakdata"/>
       <post :script_path="storymissionstweakdata.lua" :hook_id="storymissionstweakdata"/>
+      <post :script_path="upgradestweakdata.lua" :hook_id="upgradestweakdata"/>
     </group>
 
     <group :script_path="network/" :hook_id="network/">

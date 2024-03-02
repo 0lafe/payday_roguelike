@@ -376,7 +376,7 @@ function StoryMissionsGui:_get_reward_dialog_string(mission)
     local compiled_string = "Dropped Copycat Cards: "
     for k, v in pairs(managers.roguelike._dropped_copycat_cards) do
       compiled_string = compiled_string .. "\n"
-      compiled_string = compiled_string .. managers.localization:text(v)
+      compiled_string = compiled_string .. managers.localization:text("copycat_" .. v)
     end
     compiled_string = compiled_string .. "\n"
     compiled_string = compiled_string .. "\n"
