@@ -3,7 +3,7 @@ WiP
 # TODO
 
 - Copycat card options
-- Create tiers 2+
+- Create tiers 3+
 
 - Move career mode button in lobby screen/color button
 - Remove start heist button when complete
@@ -11,3 +11,7 @@ WiP
 - Handle CC/money gain
 - Cost for rerolling
 - Recycling weapons/cards(?)
+- Throwables?
+- Cosmetics?
+- Persist RNG
+- RNG Assets

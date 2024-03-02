@@ -103,5 +103,69 @@ function RoguelikeTweakData:init(tweak_data)
       job = "chas",
       story = "story_dragon_heist"
     },
+    story_alaskan_deal = {
+      job = "wwh",
+      story = "story_alaskan_deal"
+    },
+    story_mountain_master = {
+      job = "pent",
+      story = "story_mountain_master"
+    },
+    story_scarface_mansion = {
+      job = "friend",
+      story = "story_scarface_mansion"
+    },
+    story_heat_street = {
+      job = "run",
+      story = "story_heat_street"
+    },
+    story_hells_island = {
+      job = "bph",
+      story = "story_hells_island"
+    },
+    story_shacklethorne_auction = {
+      job = "sah",
+      story = "story_shacklethorne_auction"
+    },
+    story_beneath_the_mountain = {
+      job = "pbr",
+      story = "story_beneath_the_mountain"
+    },
+    story_birth_of_sky = {
+      job = "pbr2",
+      story = "story_birth_of_sky"
+    },
+    story_ukrainian_prisoner = {
+      job = "sand",
+      story = "story_ukrainian_prisoner"
+    },
+    story_brooklyn_10_10 = {
+      job = "spa",
+      story = "story_brooklyn_10_10"
+    },
+    story_biker_heist = {
+      job = "born",
+      story = "story_biker_heist"
+    },
+    story_reservoir_dogs = {
+      job = "rvd",
+      story = "story_reservoir_dogs"
+    },
+    story_henrys_rock = {
+      job = "des",
+      story = "story_henrys_rock"
+    },
+    story_bulucs_mansion = {
+      job = "fex",
+      story = "story_bulucs_mansion"
+    },
+    story_black_cat = {
+      job = "chca",
+      story = "story_black_cat"
+    },
+    story_prison_nightmare = {
+      job = "help",
+      story = "story_prison_nightmare"
+    },
   }
 end

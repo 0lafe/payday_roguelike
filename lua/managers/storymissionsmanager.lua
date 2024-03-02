@@ -32,7 +32,7 @@ function StoryMissionsManager:award(id, steps)
 	local o = m.objectives_flat and m.objectives_flat[id]
 
 	-- completes the objective if you complete a heist of the same tier
-	if id and m.tier and not o and Network:is_client() then
+	if id and m.tier and Network:is_client() and not o then
 		local tier_pool = tweak_data.story:heist_pool(m.tier)
 		local completed_heist = id:gsub("story_", "")
 		for _, heist in pairs(tier_pool) do

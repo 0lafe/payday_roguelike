@@ -82,10 +82,45 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
         voice_line = "Play_pln_stq_01",
         objectives = {},
         rewards = self:_default_reward(),
-        tier = 2
+        tier = 2,
+        completed = true
       })
     )
   end
+
+  table.insert(self.missions,
+    self:_mission("sm_act_3", {
+      rewarded = true,
+      completed = true,
+      is_header = true,
+      objectives = {}
+    })
+  )
+  table.insert(self.missions,
+    self:_mission("sm_14", {
+      reward_id = "menu_sm_copycat_card",
+      voice_line = "Play_pln_stq_01",
+      objectives = {},
+      rewards = self:_copycat_card_reward(),
+      completed = true,
+      hide_progress = true,
+      tier_list = true,
+      list_tier = 3
+    })
+  )
+  -- create multiple tier 3 missions
+  for i = 15, 22 do
+    table.insert(self.missions,
+      self:_mission("sm_" .. i, {
+        reward_id = "menu_sm_default_reward",
+        voice_line = "Play_pln_stq_01",
+        objectives = {},
+        rewards = self:_default_reward(),
+        tier = 3
+      })
+    )
+  end
+
   table.insert(self.missions,
     self:_mission("sm_end", {
       rewarded = true,
@@ -116,13 +151,31 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       "first_world_bank",
       "diamond_heist",
       "diamond_store",
-      "safe_house_nightmare",
       "brooklyn_bank",
       "breakfast_in_tijuana",
       "big_bank",
       "the_diamond",
       "hotline_miami",
+      "election_day",
       "dragon_heist"
+    },
+    [3] = {
+      "alaskan_deal",
+      "mountain_master",
+      "scarface_mansion",
+      "heat_street",
+      "hells_island",
+      "shacklethorne_auction",
+      "beneath_the_mountain",
+      "birth_of_sky",
+      "ukrainian_prisoner",
+      "brooklyn_10_10",
+      "biker_heist",
+      "reservoir_dogs",
+      "henrys_rock",
+      "bulucs_mansion",
+      "black_cat",
+      "prison_nightmare"
     }
   }
 end
@@ -141,7 +194,7 @@ function StoryMissionsTweakData:_default_reward()
   return {
     {
       weapon_reward = "random",
-      quantity = 1
+      quantity = 2
     },
     {
       mod_reward = "random",
