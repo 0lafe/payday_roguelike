@@ -110,20 +110,42 @@ function StoryMissionsGui:_update_info(mission)
     self:toggle_voice_message(mission.voice_line)
   end
 
-  placer:add_row(canvas:fine_text({
-    text = managers.localization:to_upper_text("menu_challenge_objective_title"),
-    font = small_font,
-    font_size = small_font_size,
-    color = tweak_data.screen_colors.challenge_title
-  }))
-  placer:add_row(canvas:fine_text({
-    wrap = true,
-    word_wrap = true,
-    text = managers.localization:text(mission.objective_id),
-    font = small_font,
-    font_size = small_font_size,
-    color = text_col
-  }), nil, 0)
+  if mission.tier_list then
+    placer:add_row(canvas:fine_text({
+      text = managers.localization:to_upper_text("roguelike_tier_heist_title"),
+      font = small_font,
+      font_size = small_font_size,
+      color = tweak_data.screen_colors.challenge_title
+    }))
+    local tier_heists = tweak_data.story:heist_pool(mission.list_tier)
+    local all_heists = ""
+    for _, heist in pairs(tier_heists) do
+      all_heists = all_heists .. managers.localization:text("menu_sm_" .. heist) .. "\n"
+    end
+    placer:add_row(canvas:fine_text({
+      wrap = true,
+      word_wrap = true,
+      text = all_heists,
+      font = small_font,
+      font_size = small_font_size,
+      color = text_col
+    }), nil, 0)
+  else
+    placer:add_row(canvas:fine_text({
+      text = managers.localization:to_upper_text("menu_challenge_objective_title"),
+      font = small_font,
+      font_size = small_font_size,
+      color = tweak_data.screen_colors.challenge_title
+    }))
+    placer:add_row(canvas:fine_text({
+      wrap = true,
+      word_wrap = true,
+      text = managers.localization:text(mission.objective_id),
+      font = small_font,
+      font_size = small_font_size,
+      color = text_col
+    }), nil, 0)
+  end
 
   local locked = false
   local can_skip_mission = false
@@ -373,16 +395,8 @@ end
 
 function StoryMissionsGui:_get_reward_dialog_string(mission)
   if mission.reward_id == 'menu_sm_default_reward' then
-    local compiled_string = "Dropped Copycat Cards: "
-    for k, v in pairs(managers.roguelike._dropped_copycat_cards) do
-      compiled_string = compiled_string .. "\n"
-      compiled_string = compiled_string .. managers.localization:text("copycat_" .. v)
-    end
-    compiled_string = compiled_string .. "\n"
-    compiled_string = compiled_string .. "\n"
-
-    compiled_string = compiled_string .. "Dropped Weapons: "
-    for k, v in pairs(managers.roguelike._dropped_weapons) do
+    local compiled_string = "Dropped Weapons: "
+    for _, v in pairs(managers.roguelike._dropped_weapons) do
       compiled_string = compiled_string .. "\n"
       compiled_string = compiled_string .. managers.localization:text(v)
     end
@@ -390,9 +404,19 @@ function StoryMissionsGui:_get_reward_dialog_string(mission)
     compiled_string = compiled_string .. "\n"
 
     compiled_string = compiled_string .. "Dropped Weapon Mods: "
-    for k, v in pairs(managers.roguelike._dropped_mods) do
+    for _, v in pairs(managers.roguelike._dropped_mods) do
       compiled_string = compiled_string .. "\n"
       compiled_string = compiled_string .. managers.localization:text(v)
+    end
+    compiled_string = compiled_string .. "\n"
+    compiled_string = compiled_string .. "\n"
+
+    return compiled_string
+  elseif mission.reward_id == "menu_sm_copycat_card" then
+    local compiled_string = "Dropped Copycat Cards: "
+    for _, v in pairs(managers.roguelike._dropped_copycat_cards) do
+      compiled_string = compiled_string .. "\n"
+      compiled_string = compiled_string .. managers.localization:text("copycat_" .. v)
     end
     compiled_string = compiled_string .. "\n"
     compiled_string = compiled_string .. "\n"

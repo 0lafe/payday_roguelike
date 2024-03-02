@@ -10,13 +10,13 @@ function RoguelikeManager:init()
   if io.file_is_readable(self.save_path) then
     self.save_data = io.load_as_json(self.save_path)
   else
-    self.save_data = self:create_save_data()
+    self.save_data = self:_create_save_data()
   end
   -- self:build_copycat_cards()
 end
 
 -- creates a new save when none is present
-function RoguelikeManager:create_save_data()
+function RoguelikeManager:_create_save_data()
   local schema = {
     unlocked_cards = {},
     rolled_heists = {}
