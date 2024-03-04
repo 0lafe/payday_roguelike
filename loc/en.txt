@@ -47,7 +47,7 @@
   "roguelike_tier_3_intro_title": "Welcome to Tier 3",
   "roguelike_tier_3_intro_desc": "Tier 3 is composed of more difficult heists. Most heists will come from the later days of legacy Payday 2 content, with a few other heists sprinkled in. Expect more challenging heists, although nothing too absurd yet",
   "menu_sm_unlock_copycat": "Completed Copycat Perk Deck",
-  "menu_sm_default_reward": "2 random weapons, and 5 random weapon mods for weapons you own",
+  "menu_sm_default_reward": "1 Random Primary, 1 Random Secondary, and 5 Random Weapon Mods",
   "menu_sm_copycat_card": "1 Random Copycat Card",
   "menu_sm_four_store": "Four Stores",
   "menu_sm_ukrainian_job": "Ukrainian Job",

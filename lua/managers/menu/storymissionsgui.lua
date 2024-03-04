@@ -477,23 +477,7 @@ function StoryMissionGuiRewardItem:init(panel, reward_data, config, skipped_miss
       reward_string = managers.localization:text("roguelike_copycat_reward")
     end
   elseif reward_data.weapon_reward then
-    local specialization_data = tweak_data.skilltree.specializations[5]
-    local tier_data = specialization_data[9]
-    local texture_rect_x = tier_data.icon_xy and tier_data.icon_xy[1] or 0
-    local texture_rect_y = tier_data.icon_xy and tier_data.icon_xy[2] or 0
-
-    local guis_catalog = "guis/"
-    if tier_data.texture_bundle_folder then
-      guis_catalog = guis_catalog .. "dlcs/" .. tostring(tier_data.texture_bundle_folder) .. "/"
-    end
-    texture_path = guis_catalog .. "textures/pd2/specialization/icons_atlas"
-    texture_rect = {
-      texture_rect_x * 64,
-      texture_rect_y * 64,
-      64,
-      64
-    }
-
+    texture_path = "guis/dlcs/tng/textures/pd2/blackmarket/icons/side_job_rewards/gage_mod_rewards"
     reward_string = managers.localization:text("roguelike_weapon_reward_2")
   elseif reward_data.mod_reward then
     texture_path = "guis/textures/pd2/icon_modbox_df"

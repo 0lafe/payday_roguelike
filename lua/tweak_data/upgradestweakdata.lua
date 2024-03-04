@@ -128,10 +128,11 @@ function UpgradesTweakData.mrwi_deck9_options()
 end
 
 -- Assign all copycat card function to self
-Hooks:PostHook(UpgradesTweakData, "init", "init_roguelike_copycat_options", function(self, tweak_data)
+Hooks:PostHook(UpgradesTweakData, "init", "init_roguelike_upgrade_tweak_data", function(self, tweak_data)
   self.copycat_cards = copycat_cards
   self.specialization_descs[23][1] = {}
   self.specialization_descs[23][3] = {}
   self.specialization_descs[23][5] = {}
   self.specialization_descs[23][7] = {}
+  tweak_data.roguelike:initialize_weapon_drop_tables(tweak_data, self.definitions)
 end)

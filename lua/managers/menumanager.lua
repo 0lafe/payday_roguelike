@@ -48,18 +48,18 @@ Hooks:PostHook(MenuManager, "init", "init_show_career", function(self, is_start_
   end
 
   -- Hides extra menu options
-  -- local main_node = nodes and nodes.main
-  -- for _, v in pairs({ "crimenet", "crimenet_offline", "social_hub" }) do
-  --   local node = main_node:item(v)
-  --   if node then
-  --     node:set_visible(false)
-  --   end
-  -- end
+  local main_node = nodes and nodes.main
+  for _, v in pairs({ "crimenet", "crimenet_offline", "social_hub" }) do
+    local node = main_node:item(v)
+    if node then
+      node:set_visible(false)
+    end
+  end
 
-  -- local story_node = main_node:item("story_missions")
-  -- if story_node then
-  --   story_node._parameters.trial_buy = true
-  -- end
+  local story_node = main_node:item("story_missions")
+  if story_node then
+    story_node._parameters.trial_buy = true
+  end
 
   for _, v in pairs({ "crimenet_nj", "crimenet_j" }) do
     local node = lobby_node:item(v)

@@ -92,38 +92,27 @@ end
 -- adds weapons for rewards
 function RoguelikeManager:add_weapons(quantity)
   self._dropped_weapons = {}
-  local all_weapon_keys = {}
-  local all_weapons = {}
-  local weapon_tweak_data = tweak_data.weapon
-  for k, v in pairs(tweak_data.upgrades.definitions) do
-    if v.category == 'weapon' then
-      local weapon_data = weapon_tweak_data[k]
-      if weapon_data and weapon_data.use_data and weapon_data.use_data.selection_index and weapon_data.use_data.selection_index < 3 then
-        table.insert(all_weapon_keys, k)
-        all_weapons[k] = {
-          type = weapon_tweak_data[k].use_data.selection_index
-        }
-      end
-    end
-  end
 
   for i = 1, quantity or 1 do
-    local weapon_key = all_weapon_keys[math.random(#all_weapon_keys)]
-    local weapon_type = all_weapons[weapon_key].type
+    local weapons = {
+      {
+        key = tweak_data.roguelike.all_primary_keys[math.random(#tweak_data.roguelike.all_primary_keys)],
+        type = "primaries"
+      },
+      {
+        key = tweak_data.roguelike.all_secondary_keys[math.random(#tweak_data.roguelike.all_secondary_keys)],
+        type = "secondaries"
+      }
+    }
 
-    local category
-    if weapon_type == 1 then
-      category = 'secondaries'
-    else
-      category = 'primaries'
-    end
-
-    local slot = managers.blackmarket:_get_free_weapon_slot(category)
-    if slot then
-      managers.blackmarket:on_buy_weapon_platform(category, weapon_key, slot, true)
-      table.insert(self._dropped_weapons, weapon_tweak_data[weapon_key].name_id)
-    else
-      table.insert(self._dropped_weapons, "roguelike_error_no_inventory_space")
+    for _, weapon in pairs(weapons) do
+      local slot = managers.blackmarket:_get_free_weapon_slot(weapon.type)
+      if slot then
+        managers.blackmarket:on_buy_weapon_platform(weapon.type, weapon.key, slot, true)
+        table.insert(self._dropped_weapons, tweak_data.weapon[weapon.key].name_id)
+      else
+        table.insert(self._dropped_weapons, "roguelike_error_no_inventory_space")
+      end
     end
   end
 end

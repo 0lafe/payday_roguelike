@@ -203,7 +203,7 @@ function StoryMissionsTweakData:_default_reward()
   return {
     {
       weapon_reward = "random",
-      quantity = 2
+      quantity = 1
     },
     {
       mod_reward = "random",

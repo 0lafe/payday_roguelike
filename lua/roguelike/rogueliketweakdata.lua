@@ -1,9 +1,31 @@
 -- assigns roguelike tweak data to the global tweak_data
 Hooks:PostHook(WeaponTweakData, "init", "init_roguelike_tweak_data", function(self, tweak_data)
-  tweak_data.roguelike = RoguelikeTweakData:new(tweak_data)
+  tweak_data.roguelike = RoguelikeTweakData:new(tweak_data, self)
 end)
 
 RoguelikeTweakData = RoguelikeTweakData or class()
+
+-- initialize weapon drop tables for rewards
+function RoguelikeTweakData:initialize_weapon_drop_tables(tweak_data, upgrade_tweak_data)
+  local all_primary_keys = {}
+  local all_secondary_keys = {}
+  local weapon_tweak_data = tweak_data.weapon
+  for k, v in pairs(upgrade_tweak_data) do
+    if v.category == 'weapon' then
+      local weapon_data = weapon_tweak_data[k]
+      if weapon_data and weapon_data.use_data and weapon_data.use_data.selection_index and weapon_data.use_data.selection_index < 3 then
+        if weapon_data.use_data.selection_index == 1 then
+          table.insert(all_secondary_keys, k)
+        else
+          table.insert(all_primary_keys, k)
+        end
+      end
+    end
+  end
+
+  self.all_primary_keys = all_primary_keys
+  self.all_secondary_keys = all_secondary_keys
+end
 
 function RoguelikeTweakData:init(tweak_data)
   self.achievement_additions = {
