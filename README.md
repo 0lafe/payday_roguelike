@@ -4,7 +4,6 @@ WiP
 
 - Vanilla decks?
 - Pick a deck to start?
-- Make weapon drop 1 primary and 1 secondary
 
 # BUGS
 
