@@ -9,10 +9,10 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       objectives = {}
     }),
     self:_mission("sm_1", {
-      reward_id = "menu_sm_unlock_copycat",
+      reward_id = "menu_sm_perkdeck_reward",
       voice_line = "Play_pln_stq_01",
       objectives = {},
-      rewards = self:_initial_reward(),
+      rewards = self:_perkdeck_reward(),
       completed = true,
       hide_progress = true,
       auto_complete = true
@@ -31,10 +31,10 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       objectives = {}
     }),
     self:_mission("sm_3", {
-      reward_id = "menu_sm_copycat_card",
+      reward_id = "menu_sm_perkdeck_reward",
       voice_line = "Play_pln_stq_01",
       objectives = {},
-      rewards = self:_copycat_card_reward(),
+      rewards = self:_perkdeck_reward(),
       completed = true,
       hide_progress = true,
       tier_list = true,
@@ -66,10 +66,10 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
   )
   table.insert(self.missions,
     self:_mission("sm_7", {
-      reward_id = "menu_sm_copycat_card",
+      reward_id = "menu_sm_perkdeck_reward",
       voice_line = "Play_pln_stq_01",
       objectives = {},
-      rewards = self:_copycat_card_reward(),
+      rewards = self:_perkdeck_reward(),
       completed = true,
       hide_progress = true,
       tier_list = true,
@@ -101,10 +101,10 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
   )
   table.insert(self.missions,
     self:_mission("sm_14", {
-      reward_id = "menu_sm_copycat_card",
+      reward_id = "menu_sm_perkdeck_reward",
       voice_line = "Play_pln_stq_01",
       objectives = {},
-      rewards = self:_copycat_card_reward(),
+      rewards = self:_perkdeck_reward(),
       completed = true,
       hide_progress = true,
       tier_list = true,
@@ -193,7 +193,7 @@ end
 function StoryMissionsTweakData:_initial_reward()
   return {
     {
-      copycat_reward = "unlock_deck"
+      perkdeck_reward = "first_deck"
     }
   }
 end
@@ -216,6 +216,14 @@ function StoryMissionsTweakData:_copycat_card_reward()
   return {
     {
       copycat_reward = "new_card"
+    }
+  }
+end
+
+function StoryMissionsTweakData:_perkdeck_reward()
+  return {
+    {
+      perkdeck_reward = "new_deck"
     }
   }
 end

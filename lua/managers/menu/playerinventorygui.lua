@@ -8,4 +8,8 @@ Hooks:PreHook(PlayerInventoryGui, 'create_box', 'disable_perkdeck_switching_from
       down = false
     }
   end
+
+  if params and params.name == "primary" then
+    Utils.PrintTable(params.image, 4)
+  end
 end)

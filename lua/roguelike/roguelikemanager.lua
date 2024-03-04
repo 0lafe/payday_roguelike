@@ -35,7 +35,7 @@ function RoguelikeManager:unlock_copycat()
   managers.skilltree:spend_specialization_points(13700, 23)
   managers.skilltree:set_current_specialization(23)
 
-  for _, category in pairs({ "primaries", "secondaries" }) do
+  for _, category in pairs({ "primaries", "secondaries", "masks" }) do
     for i = 10, (tweak_data.gui.MAX_WEAPON_SLOTS or 72) do
       managers.blackmarket:_unlock_weapon_slot(category, i)
     end
@@ -64,11 +64,40 @@ function RoguelikeManager:add_copycat_card(quantity)
     self:_save_to_file()
   end
   self:_reset_copycat_tweak_data()
+end
 
-  -- removes noob lube boost
-  if #self.save_data.unlocked_cards == 1 then
-
+function RoguelikeManager:add_perkdeck()
+  self._dropped_perkdecks = {}
+  local perkdeck_list = {}
+  local completed_decks = {}
+  for i = 1, 23 do
+    local tier = managers.skilltree:get_specialization_value(i, "tiers", "current_tier")
+    if tier < 9 then
+      table.insert(perkdeck_list, i)
+    else
+      table.insert(completed_decks, tier)
+    end
   end
+
+  local selected_deck = perkdeck_list[math.random(#perkdeck_list)]
+
+  managers.skilltree:give_specialization_points(1370000)
+  managers.skilltree:spend_specialization_points(13700, selected_deck)
+
+  -- Logic to run on initial deck unlock
+  if #completed_decks == 0 then
+    managers.skilltree:set_current_specialization(selected_deck)
+    for _, category in pairs({ "primaries", "secondaries" }) do
+      for i = 10, (tweak_data.gui.MAX_WEAPON_SLOTS or 72) do
+        managers.blackmarket:_unlock_weapon_slot(category, i)
+      end
+    end
+    for i = 10, (tweak_data.gui.MAX_MASK_SLOTS or 72) do
+      managers.blackmarket:_unlock_mask_slot(i)
+    end
+  end
+
+  table.insert(self._dropped_perkdecks, selected_deck)
 end
 
 function RoguelikeManager:reset_progress()

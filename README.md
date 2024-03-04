@@ -2,18 +2,16 @@ WiP
 
 # TODO
 
-- Vanilla decks?
 - Pick a deck to start?
 
 # BUGS
 
-- Noob Lube persists
+- Possible client completion problem with escapes
+- Crash when opening perkdecks with none unlocked
 
 # FEATURES
 
-- Create tier 4
 - Single day heists?
-- Unlock all mask slots
 
 - Move career mode button in lobby screen
 - Remove start heist button when complete
