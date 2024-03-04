@@ -29,7 +29,7 @@
   "sm_1_obj": "Read and understand the rules and changes to the game",
   "roguelike_tier_heist_title": "Possible Heists",
   "roguelike_tier_0_name": "Intro heist",
-  "roguelike_tier_0_desc": "All heists are broken into difficulty tiers. Each tier has an associated pool of heists it will pull from",
+  "roguelike_tier_0_desc": "Let's get you back in the saddle",
   "roguelike_tier_0_obj": "Complete a randomly assigned intro heist",
   "roguelike_tier_1_name": "Tier 1 heist",
   "roguelike_tier_1_desc": "",

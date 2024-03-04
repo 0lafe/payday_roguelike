@@ -44,16 +44,22 @@ Hooks:PostHook(MenuManager, "init", "init_show_career", function(self, is_start_
   if story_missions then
     story_missions._visible_callback_list = nil
     story_missions:set_visible(true)
+    story_missions._parameters.trial_buy = true
   end
 
   -- Hides extra menu options
-  local main_node = nodes and nodes.main
-  for _, v in pairs({ "crimenet", "crimenet_offline", "social_hub" }) do
-    local node = main_node:item(v)
-    if node then
-      node:set_visible(false)
-    end
-  end
+  -- local main_node = nodes and nodes.main
+  -- for _, v in pairs({ "crimenet", "crimenet_offline", "social_hub" }) do
+  --   local node = main_node:item(v)
+  --   if node then
+  --     node:set_visible(false)
+  --   end
+  -- end
+
+  -- local story_node = main_node:item("story_missions")
+  -- if story_node then
+  --   story_node._parameters.trial_buy = true
+  -- end
 
   for _, v in pairs({ "crimenet_nj", "crimenet_j" }) do
     local node = lobby_node:item(v)
@@ -65,7 +71,6 @@ end)
 
 -- Handles resetting roguelike data when account progression is reset
 Hooks:PostHook(MenuCallbackHandler, "_dialog_clear_progress_yes", "_dialog_clear_progress_yes_roguelike", function(self)
-  managers.roguelike:_create_save_data()
   managers.story:current_mission().completed = true
-  managers.roguelike:_reset_copycat_tweak_data()
+  managers.roguelike:reset_progress()
 end)

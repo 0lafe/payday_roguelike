@@ -2,12 +2,21 @@ WiP
 
 # TODO
 
-- Copycat card options
-- Copycat base cards
+- Vanilla decks?
+- Pick a deck to start?
+- Make weapon drop 1 primary and 1 secondary
+
+# BUGS
+
+- Noob Lube persists
+
+# FEATURES
+
 - Create tier 4
 - Single day heists?
+- Unlock all mask slots
 
-- Move career mode button in lobby screen/color button
+- Move career mode button in lobby screen
 - Remove start heist button when complete
 - Loot card drops
 - Handle CC/money gain
@@ -17,3 +26,5 @@ WiP
 - Cosmetics?
 - Persist RNG
 - RNG Assets
+
+# Ideas

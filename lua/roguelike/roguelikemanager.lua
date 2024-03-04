@@ -12,7 +12,6 @@ function RoguelikeManager:init()
   else
     self.save_data = self:_create_save_data()
   end
-  -- self:build_copycat_cards()
 end
 
 -- creates a new save when none is present
@@ -65,6 +64,24 @@ function RoguelikeManager:add_copycat_card(quantity)
     self:_save_to_file()
   end
   self:_reset_copycat_tweak_data()
+
+  -- removes noob lube boost
+  if #self.save_data.unlocked_cards == 1 then
+
+  end
+end
+
+function RoguelikeManager:reset_progress()
+  self.save_data = self:_create_save_data()
+  managers.roguelike:_reset_copycat_tweak_data()
+  for _, mission in pairs(managers.story:missions()) do
+    if mission.completed == false then
+      mission.completed = nil
+    end
+    if mission.auto_complete then
+      mission.completed = true
+    end
+  end
 end
 
 function RoguelikeManager:_reset_copycat_tweak_data()

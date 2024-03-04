@@ -14,7 +14,8 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       objectives = {},
       rewards = self:_initial_reward(),
       completed = true,
-      hide_progress = true
+      hide_progress = true,
+      auto_complete = true
     }),
     self:_mission("sm_2", {
       reward_id = "menu_sm_default_reward",
@@ -37,7 +38,8 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       completed = true,
       hide_progress = true,
       tier_list = true,
-      list_tier = 1
+      list_tier = 1,
+      auto_complete = true
     }),
   }
 
@@ -71,7 +73,8 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       completed = true,
       hide_progress = true,
       tier_list = true,
-      list_tier = 2
+      list_tier = 2,
+      auto_complete = true
     })
   )
   -- create multiple tier 2 missions
@@ -105,7 +108,8 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       completed = true,
       hide_progress = true,
       tier_list = true,
-      list_tier = 3
+      list_tier = 3,
+      auto_complete = true
     })
   )
   -- create multiple tier 3 missions
@@ -134,8 +138,7 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
     [0] = {
       "four_store",
       "ukrainian_job",
-      "mallcrasher",
-      "cursed_kill_room"
+      "mallcrasher"
     },
     [1] = {
       "go_bank",

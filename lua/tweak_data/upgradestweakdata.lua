@@ -12,7 +12,70 @@ local function copycat_cards()
     grinder_heal = {
       tree = 11,
       tier = 1
-    }
+    },
+    crew_chief_dr = {
+      tree = 1,
+      tier = 1
+    },
+    rogue_dodge = {
+      desc_id = "menu_deck23_9_7_desc",
+      short_id = "menu_deck23_9_7_short",
+      name_id = "menu_deck7_7",
+      upgrades = {
+        "player_tier_dodge_chance_1",
+        "player_stand_still_crouch_camouflage_bonus_1",
+        "player_stand_still_crouch_camouflage_bonus_2",
+        "player_stand_still_crouch_camouflage_bonus_3",
+        "player_alarm_pager_speed_multiplier"
+      },
+      custom_editable_descs = {
+        "20%",
+        "20%",
+        "10%"
+      },
+      icon_xy = {
+        1,
+        4
+      }
+    },
+    infil_damage_reduction = {
+      tier = 7,
+      tree = 8,
+      desc_id = "menu_deck8_1_desc",
+      upgrades = {
+        "player_damage_dampener_close_contact_1",
+        "player_damage_dampener_close_contact_2"
+      },
+      custom_editable_descs = {
+        [1.0] = "24%"
+      }
+    },
+    socio_gating = {
+      tree = 9,
+      tier = 3
+    },
+    gambler_heal = {
+      tree = 10,
+      tier = 1
+    },
+    exprez_heal = {
+      desc_id = "menu_deck23_9_13_desc",
+      short_id = "menu_deck23_9_13_short",
+      tier = 3,
+      tree = 13,
+      upgrades = {
+        "player_armor_health_store_amount_1"
+      },
+      custom_editable_descs = {
+        "8",
+        "1",
+        "10%"
+      }
+    },
+    hacker_pecm = {
+      tree = 21,
+      tier = 1
+    },
   }
   return options
 end
