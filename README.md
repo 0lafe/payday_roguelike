@@ -2,12 +2,14 @@ WiP
 
 # TODO
 
+- Move tier skips around a bit
+- Try removing start heist buttons on completed missions
+
 # BUGS
 
 - Possible client completion problem with escapes (MissionEndState:chk_complete_heist_achievements())
 - You can buy weapons through bot customization
 - Possible problem receiving perk deck reward when in lobby with other players
-- Roguelike mod options crashing zing
 
 # FEATURES
 
@@ -25,6 +27,8 @@ WiP
 # Ideas
 
 - Hard Mode
-  - Blacklists certain weapons/decks/etc, lock to DS loud
+  - Blacklists certain weapons/decks/etc
+  - lock to DS loud
+  - reduce/remove bots
 - Pro Job
   - Resets save on fail
