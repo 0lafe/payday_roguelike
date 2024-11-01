@@ -1,0 +1,26 @@
+{
+  "menu_id" : "roguelike_main_settings",
+  "parent_menu_id" : "blt_options",
+  "title" : "roguelike_main_settings",
+  "description" : "roguelike_main_settings_desc",
+  "items" : [
+    {
+      "type": "toggle",
+      "id": "roguelike_toggle_pro_job",
+      "title": "roguelike_toggle_pro_job",
+      "description": "roguelike_toggle_pro_job_desc",
+      "callback": "roguelike_toggle_menu_item",
+      "value": "roguelike_toggle_pro_job",
+      "default_value": false
+    },
+    {
+      "type": "toggle",
+      "id": "roguelike_toggle_hard_mode",
+      "title": "roguelike_toggle_hard_mode",
+      "description": "roguelike_toggle_hard_mode_desc",
+      "callback": "roguelike_toggle_menu_item",
+      "value": "roguelike_toggle_hard_mode",
+      "default_value": false
+    }
+  ]
+}

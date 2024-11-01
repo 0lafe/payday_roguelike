@@ -17,8 +17,9 @@ end
 -- creates a new save when none is present
 function RoguelikeManager:_create_save_data()
   local schema = {
-    unlocked_cards = {},
-    rolled_heists = {}
+    rolled_heists = {},
+    highest_tier = 4,
+    settings = {}
   }
   io.save_as_json(schema, self.save_path)
   return schema
@@ -26,6 +27,7 @@ end
 
 -- general purpose function to save the current save_data value
 function RoguelikeManager:_save_to_file()
+  self.save_data.settings = Roguelike._settings
   io.save_as_json(self.save_data, self.save_path)
 end
 
@@ -42,62 +44,49 @@ function RoguelikeManager:unlock_copycat()
   end
 end
 
--- adds random copycat cards for rewards
-function RoguelikeManager:add_copycat_card(quantity)
-  self._dropped_copycat_cards = {}
-  local all_cards = tweak_data.upgrades:copycat_cards()
-
-  for i = 1, quantity or 1 do
-    local current_cards = self.save_data.unlocked_cards
-    for _, card in pairs(current_cards) do
-      all_cards[card] = nil
+function RoguelikeManager:unlock_slots()
+  for _, category in pairs({ "primaries", "secondaries" }) do
+    for i = 10, (tweak_data.gui.MAX_WEAPON_SLOTS or 72) do
+      managers.blackmarket:_unlock_weapon_slot(category, i)
     end
-
-    local card_names = {}
-    for name, _ in pairs(all_cards) do
-      table.insert(card_names, name)
-    end
-
-    local rolled_card_name = card_names[math.random(#card_names)]
-    table.insert(self.save_data.unlocked_cards, rolled_card_name)
-    table.insert(self._dropped_copycat_cards, rolled_card_name)
-    self:_save_to_file()
   end
-  self:_reset_copycat_tweak_data()
+  for i = 10, (tweak_data.gui.MAX_MASK_SLOTS or 72) do
+    managers.blackmarket:_unlock_mask_slot(i)
+  end
 end
 
-function RoguelikeManager:add_perkdeck()
+function RoguelikeManager:add_perkdeck(quantity)
+  local quantity = quantity or 1
   self._dropped_perkdecks = {}
-  local perkdeck_list = {}
-  local completed_decks = {}
-  for i = 1, 23 do
-    local tier = managers.skilltree:get_specialization_value(i, "tiers", "current_tier")
-    if tier < 9 then
-      table.insert(perkdeck_list, i)
-    else
-      table.insert(completed_decks, tier)
-    end
-  end
 
-  local selected_deck = perkdeck_list[math.random(#perkdeck_list)]
-
-  managers.skilltree:give_specialization_points(1370000)
-  managers.skilltree:spend_specialization_points(13700, selected_deck)
-
-  -- Logic to run on initial deck unlock
-  if #completed_decks == 0 then
-    managers.skilltree:set_current_specialization(selected_deck)
-    for _, category in pairs({ "primaries", "secondaries" }) do
-      for i = 10, (tweak_data.gui.MAX_WEAPON_SLOTS or 72) do
-        managers.blackmarket:_unlock_weapon_slot(category, i)
+  for i = 1, quantity do
+    local perkdeck_list = {}
+    local completed_decks = {}
+    for i = 1, 23 do
+      local tier = managers.skilltree:get_specialization_value(i, "tiers", "current_tier")
+      if tier < 9 then
+        table.insert(perkdeck_list, i)
+      else
+        table.insert(completed_decks, tier)
       end
     end
-    for i = 10, (tweak_data.gui.MAX_MASK_SLOTS or 72) do
-      managers.blackmarket:_unlock_mask_slot(i)
-    end
-  end
 
-  table.insert(self._dropped_perkdecks, selected_deck)
+    if #perkdeck_list == 0 then
+      return
+    end
+
+    local selected_deck = perkdeck_list[math.random(#perkdeck_list)]
+
+    managers.skilltree:give_specialization_points(1370000)
+    managers.skilltree:spend_specialization_points(13700, selected_deck)
+
+    -- Logic to run on initial deck unlock
+    if #completed_decks == 0 then
+      managers.skilltree:set_current_specialization(selected_deck)
+      self:unlock_slots()
+    end
+    table.insert(self._dropped_perkdecks, selected_deck)
+  end
 end
 
 function RoguelikeManager:reset_progress()
@@ -181,7 +170,14 @@ function RoguelikeManager:build_objectives(mission)
     return
   end
 
+  -- track highest tier achieved
+  if mission.tier > self.save_data.highest_tier then
+    self.save_data.highest_tier = mission.tier
+    self:_save_to_file()
+  end
+
   local objectives = self.save_data.rolled_heists[mission.id]
+  -- generate a heist based on list for given tier
   if not objectives then
     local heist_pool = tweak_data.story:heist_pool(mission.tier)
     objectives = { heist_pool[math.random(#heist_pool)] }
@@ -200,6 +196,11 @@ function RoguelikeManager:_assign_objectives(objectives, mission)
         name_id = "menu_sm_" .. objective
       })
     })
+  end
+
+  -- add option to skip to completed tiers
+  if mission.tier == 0 and self.save_data.highest_tier > 0 then
+    mission.tier_skip = true
   end
 
   mission.objectives = built_objectives
@@ -251,4 +252,29 @@ function RoguelikeManager:reroll()
   self.save_data.rolled_heists[current_mission.id] = heists
   self:_save_to_file()
   self.story_mission_gui:_update(current_mission)
+end
+
+function RoguelikeManager:tier_skip_rewards(tier)
+  local values = {
+    { 1, 2,  5 },
+    { 2, 8,  20 },
+    { 3, 20, 50 },
+    { 4, 40, 100 },
+  }
+
+  self:add_perkdeck(values[tier][1])
+  self:add_weapons(values[tier][2])
+  self:add_weapon_mods(values[tier][3])
+end
+
+function RoguelikeManager:skip_to_tier(tier)
+  local current_mission = managers.story:current_mission()
+  while not current_mission.tier or current_mission.tier < tier do
+    current_mission.rewarded = true
+    current_mission.completed = true
+    current_mission = managers.story:_find_next_mission()
+    self:build_objectives(current_mission)
+  end
+
+  self:tier_skip_rewards(tier)
 end

@@ -9,6 +9,7 @@ function StoryMissionsManager:_reward(reward)
 	else
 		Application:error("[Story] Failed to give reward")
 	end
+	managers.savefile:save_progress()
 end
 
 -- temp fix for preventing starting heists when mission is completed

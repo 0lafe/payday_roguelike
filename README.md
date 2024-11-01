@@ -2,19 +2,19 @@ WiP
 
 # TODO
 
-- Pick a deck to start?
+- Tier 4
 
 # BUGS
 
-- Possible client completion problem with escapes
-- Crash when opening perkdecks with none unlocked
+- Possible client completion problem with escapes (MissionEndState:chk_complete_heist_achievements())
+- You can buy weapons through bot customization
+- Dont get first perkdeck after reset
+- Update the description about copycat cards
 
 # FEATURES
 
 - Single day heists?
 
-- Move career mode button in lobby screen
-- Remove start heist button when complete
 - Loot card drops
 - Handle CC/money gain
 - Cost for rerolling
@@ -25,3 +25,8 @@ WiP
 - RNG Assets
 
 # Ideas
+
+- Hard Mode
+  - Blacklists certain weapons/decks/etc, lock to DS loud
+- Pro Job
+  - Resets save on fail

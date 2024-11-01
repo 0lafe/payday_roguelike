@@ -281,6 +281,47 @@ function StoryMissionsGui:_update_info(mission)
         }), nil, 0)
       end
     end
+
+    if mission.tier_skip then
+      for i = 1, managers.roguelike.save_data.highest_tier do
+        local text = placer:add_row(canvas:fine_text({
+          wrap = true,
+          word_wrap = true,
+          text = managers.localization:text("roguelike_tierskip_title") .. " " .. i,
+          font = small_font,
+          font_size = small_font_size,
+          color = text_col
+        }), obj_padd_x, 0)
+
+        local btn = TextButton:new(canvas, {
+          text = managers.localization:text("roguelike_tierskip_button"),
+          font = small_font,
+          font_size = small_font_size
+        }, function()
+          managers.roguelike:skip_to_tier(i)
+
+          self:_update()
+
+          local dialog_data = {
+            title = managers.localization:text("roguelike_tierskip_title") .. " " .. i,
+            text = self:_compile_perkdeck_reward_string() .. self:_compile_weapon_reward_string()
+          }
+          local ok_button = {
+            text = managers.localization:text("dialog_ok"),
+            callback_func = function()
+              self:_update()
+            end
+          }
+          dialog_data.button_list = {
+            ok_button
+          }
+
+          managers.system_menu:show(dialog_data)
+        end)
+
+        placer:add_right(btn, 10)
+      end
+    end
   end
 
   if locked then
@@ -393,35 +434,43 @@ function StoryMissionsGui:_update_info(mission)
   end
 end
 
+function StoryMissionsGui:_compile_weapon_reward_string()
+  local compiled_string = "Dropped Weapons: "
+  for _, v in pairs(managers.roguelike._dropped_weapons) do
+    compiled_string = compiled_string .. "\n"
+    compiled_string = compiled_string .. managers.localization:text(v)
+  end
+  compiled_string = compiled_string .. "\n"
+  compiled_string = compiled_string .. "\n"
+
+  compiled_string = compiled_string .. "Dropped Weapon Mods: "
+  for _, v in pairs(managers.roguelike._dropped_mods) do
+    compiled_string = compiled_string .. "\n"
+    compiled_string = compiled_string .. managers.localization:text(v)
+  end
+  compiled_string = compiled_string .. "\n"
+  compiled_string = compiled_string .. "\n"
+
+  return compiled_string
+end
+
+function StoryMissionsGui:_compile_perkdeck_reward_string()
+  local compiled_string = "Dropped Perk Decks: "
+  for _, v in pairs(managers.roguelike._dropped_perkdecks or {}) do
+    compiled_string = compiled_string .. "\n"
+    compiled_string = compiled_string .. managers.localization:text(tweak_data.skilltree.specializations[v].name_id)
+  end
+  compiled_string = compiled_string .. "\n"
+  compiled_string = compiled_string .. "\n"
+
+  return compiled_string
+end
+
 function StoryMissionsGui:_get_reward_dialog_string(mission)
   if mission.reward_id == 'menu_sm_default_reward' then
-    local compiled_string = "Dropped Weapons: "
-    for _, v in pairs(managers.roguelike._dropped_weapons) do
-      compiled_string = compiled_string .. "\n"
-      compiled_string = compiled_string .. managers.localization:text(v)
-    end
-    compiled_string = compiled_string .. "\n"
-    compiled_string = compiled_string .. "\n"
-
-    compiled_string = compiled_string .. "Dropped Weapon Mods: "
-    for _, v in pairs(managers.roguelike._dropped_mods) do
-      compiled_string = compiled_string .. "\n"
-      compiled_string = compiled_string .. managers.localization:text(v)
-    end
-    compiled_string = compiled_string .. "\n"
-    compiled_string = compiled_string .. "\n"
-
-    return compiled_string
+    return self:_compile_weapon_reward_string()
   elseif mission.reward_id == "menu_sm_perkdeck_reward" then
-    local compiled_string = "Dropped Perk Decks: "
-    for _, v in pairs(managers.roguelike._dropped_perkdecks or {}) do
-      compiled_string = compiled_string .. "\n"
-      compiled_string = compiled_string .. managers.localization:text(tweak_data.skilltree.specializations[v].name_id)
-    end
-    compiled_string = compiled_string .. "\n"
-    compiled_string = compiled_string .. "\n"
-
-    return compiled_string
+    return self:_compile_perkdeck_reward_string()
   else
     return managers.localization:text(self:_get_reward_string(mission))
   end
