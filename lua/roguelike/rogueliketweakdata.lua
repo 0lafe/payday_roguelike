@@ -192,5 +192,21 @@ function RoguelikeTweakData:init(tweak_data)
       job = "help",
       story = "story_prison_nightmare"
     },
+    story_goat_simulator = {
+      job = "peta",
+      story = "story_goat_simulator"
+    },
+    story_transport_train = {
+      job = "arm_for",
+      story = "story_transport_train"
+    },
+    story_slaughterhouse = {
+      job = "dinner",
+      story = "story_slaughterhouse"
+    },
+    story_white_house = {
+      job = "vit",
+      story = "story_white_house"
+    },
   }
 end

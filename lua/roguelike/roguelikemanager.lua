@@ -254,19 +254,25 @@ function RoguelikeManager:reroll()
   self.story_mission_gui:_update(current_mission)
 end
 
+-- handles adding rewards when skipping tiers
 function RoguelikeManager:tier_skip_rewards(tier)
   local values = {
-    { 1, 2,  5 },
-    { 2, 8,  20 },
-    { 3, 20, 50 },
-    { 4, 40, 100 },
+    { 1, 1,  5,   50000,    25 },
+    { 2, 4,  20,  500000,   60 },
+    { 3, 10, 50,  5000000,  80 },
+    { 4, 20, 100, 20000000, 100 },
   }
 
   self:add_perkdeck(values[tier][1])
   self:add_weapons(values[tier][2])
   self:add_weapon_mods(values[tier][3])
+  managers.money:_set_total(values[tier][4])
+  for i = managers.experience:current_level(), values[tier][5] - 1 do
+    managers.experience:_level_up()
+  end
 end
 
+-- Skips to given tier by setting missions to complete
 function RoguelikeManager:skip_to_tier(tier)
   local current_mission = managers.story:current_mission()
   while not current_mission.tier or current_mission.tier < tier do

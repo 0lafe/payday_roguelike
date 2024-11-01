@@ -282,7 +282,7 @@ function StoryMissionsGui:_update_info(mission)
       end
     end
 
-    if mission.tier_skip then
+    if mission.tier_skip and mission == managers.story:current_mission() then
       for i = 1, managers.roguelike.save_data.highest_tier do
         local text = placer:add_row(canvas:fine_text({
           wrap = true,

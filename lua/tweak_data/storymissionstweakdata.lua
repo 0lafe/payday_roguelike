@@ -210,7 +210,6 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       "brooklyn_10_10",
       "biker_heist",
       "reservoir_dogs",
-      "henrys_rock",
       "bulucs_mansion",
       "black_cat",
       "prison_nightmare"
@@ -219,7 +218,8 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       "goat_simulator",
       "transport_train",
       "slaughterhouse",
-      "white_house"
+      "white_house",
+      "henrys_rock",
     }
   }
 end
@@ -242,7 +242,7 @@ function StoryMissionsTweakData:_default_reward()
     },
     {
       mod_reward = "random",
-      quantity = 5
+      quantity = 10
     }
   }
 end
