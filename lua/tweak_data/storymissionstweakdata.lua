@@ -1,4 +1,4 @@
--- Overwrites and additions to career mode data
+-- Contains Overwrites and additions to career mode data
 function StoryMissionsTweakData:_init_missions(tweak_data)
   self.sm_2_skillpoints = 8
   self.missions = {
@@ -56,6 +56,7 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
     )
   end
 
+  -- tier divider
   table.insert(self.missions,
     self:_mission("sm_act_2", {
       rewarded = true,
@@ -64,6 +65,8 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       objectives = {}
     })
   )
+
+  -- tier 2 intro description
   table.insert(self.missions,
     self:_mission("sm_7", {
       reward_id = "menu_sm_perkdeck_reward",
@@ -90,6 +93,7 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
     )
   end
 
+  -- tier divider
   table.insert(self.missions,
     self:_mission("sm_act_3", {
       rewarded = true,
@@ -98,6 +102,8 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       objectives = {}
     })
   )
+
+  -- tier 3 intro description
   table.insert(self.missions,
     self:_mission("sm_14", {
       reward_id = "menu_sm_perkdeck_reward",
@@ -125,6 +131,7 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
     )
   end
 
+  -- tier divider
   table.insert(self.missions,
     self:_mission("sm_act_4", {
       rewarded = true,
@@ -133,6 +140,8 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       objectives = {}
     })
   )
+
+  -- tier 4 intro description
   table.insert(self.missions,
     self:_mission("sm_25", {
       reward_id = "menu_sm_perkdeck_reward",
@@ -160,6 +169,7 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
     )
   end
 
+  -- WiP for ending information
   table.insert(self.missions,
     self:_mission("sm_end", {
       rewarded = true,
@@ -169,6 +179,7 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
     })
   )
 
+  -- Main list of heist pool by tier
   self._heist_pool = {
     [0] = {
       "four_store",
@@ -224,15 +235,6 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
   }
 end
 
--- reward for initially unlocking copycat
-function StoryMissionsTweakData:_initial_reward()
-  return {
-    {
-      perkdeck_reward = "first_deck"
-    }
-  }
-end
-
 -- standard reward for most heists
 function StoryMissionsTweakData:_default_reward()
   return {
@@ -247,14 +249,7 @@ function StoryMissionsTweakData:_default_reward()
   }
 end
 
-function StoryMissionsTweakData:_copycat_card_reward()
-  return {
-    {
-      copycat_reward = "new_card"
-    }
-  }
-end
-
+-- gives a perk deck to the player
 function StoryMissionsTweakData:_perkdeck_reward()
   return {
     {

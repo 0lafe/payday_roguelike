@@ -1,5 +1,6 @@
 -- disables perkdecks from displaying
 
+-- checks if any decks have been unlocked
 local function any_decks_unlocked()
   local rtn = false
   for i = 1, 23 do
@@ -11,6 +12,7 @@ local function any_decks_unlocked()
   return rtn
 end
 
+-- adds flag to deck to skip displaying if the deck is locked
 local old_init = SpecializationListItem.init
 function SpecializationListItem:init(parent, panel_data, info_data)
   if info_data and info_data.spec_data and info_data.spec_id then

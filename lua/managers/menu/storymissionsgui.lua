@@ -2,19 +2,17 @@ Hooks:PostHook(StoryMissionsGui, "init", "link_to_roguelike_manager", function(s
   managers.roguelike:set_story_mission_gui(self)
 end)
 
-local padding = 10
-local massive_font = tweak_data.menu.pd2_massive_font
+-- ugly ass stupid ass file
+-- does too much for a hook but there is way too much to override
 local large_font = tweak_data.menu.pd2_large_font
 local medium_font = tweak_data.menu.pd2_medium_font
 local small_font = tweak_data.menu.pd2_small_font
-local massive_font_size = tweak_data.menu.pd2_massive_font_size
 local large_font_size = tweak_data.menu.pd2_large_font_size
 local medium_font_size = tweak_data.menu.pd2_medium_font_size
 local small_font_size = tweak_data.menu.pd2_small_font_size
-local done_icon = "guis/textures/menu_singletick"
-local reward_icon = "guis/textures/pd2/icon_reward"
-local active_mission_icon = "guis/textures/scrollarrow"
 
+-- handles updaing the UI when switching missions
+-- Contains all UI elements for a given mission
 function StoryMissionsGui:_update_info(mission)
   self._info_scroll:clear()
   self:_change_legend("select", false)
@@ -434,6 +432,7 @@ function StoryMissionsGui:_update_info(mission)
   end
 end
 
+-- Turns dropped items into a readable string
 function StoryMissionsGui:_compile_weapon_reward_string()
   local compiled_string = "Dropped Weapons: "
   for _, v in pairs(managers.roguelike._dropped_weapons) do
@@ -454,6 +453,7 @@ function StoryMissionsGui:_compile_weapon_reward_string()
   return compiled_string
 end
 
+-- turns dropped perkdecks into a readable string
 function StoryMissionsGui:_compile_perkdeck_reward_string()
   local compiled_string = "Dropped Perk Decks: "
   for _, v in pairs(managers.roguelike._dropped_perkdecks or {}) do
@@ -466,6 +466,7 @@ function StoryMissionsGui:_compile_perkdeck_reward_string()
   return compiled_string
 end
 
+-- picks rewrad string based on reward type
 function StoryMissionsGui:_get_reward_dialog_string(mission)
   if mission.reward_id == 'menu_sm_default_reward' then
     return self:_compile_weapon_reward_string()
@@ -476,6 +477,7 @@ function StoryMissionsGui:_get_reward_dialog_string(mission)
   end
 end
 
+-- some default function idk
 local function set_defaults(target, source)
   target = target or {}
 
@@ -488,6 +490,7 @@ local function set_defaults(target, source)
   return target
 end
 
+-- override init function
 function StoryMissionGuiRewardItem:init(panel, reward_data, config, skipped_mission)
   config = set_defaults(config, {
     input = true,
