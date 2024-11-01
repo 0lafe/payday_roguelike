@@ -2,21 +2,19 @@ WiP
 
 # TODO
 
-- Vanilla decks?
-- Pick a deck to start?
+- Move tier skips around a bit
+- Try removing start heist buttons on completed missions
 
 # BUGS
 
-- Noob Lube persists
+- Possible client completion problem with escapes (MissionEndState:chk_complete_heist_achievements())
+- You can buy weapons through bot customization
+- Possible problem receiving perk deck reward when in lobby with other players
 
 # FEATURES
 
-- Create tier 4
 - Single day heists?
-- Unlock all mask slots
 
-- Move career mode button in lobby screen
-- Remove start heist button when complete
 - Loot card drops
 - Handle CC/money gain
 - Cost for rerolling
@@ -27,3 +25,10 @@ WiP
 - RNG Assets
 
 # Ideas
+
+- Hard Mode
+  - Blacklists certain weapons/decks/etc
+  - lock to DS loud
+  - reduce/remove bots
+- Pro Job
+  - Resets save on fail

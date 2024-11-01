@@ -1,11 +1,7 @@
 -- handle custom reward logic
 function StoryMissionsManager:_reward(reward)
-	if reward.copycat_reward then
-		if reward.copycat_reward == "unlock_deck" then
-			managers.roguelike:unlock_copycat()
-		elseif reward.copycat_reward == "new_card" then
-			managers.roguelike:add_copycat_card()
-		end
+	if reward.perkdeck_reward then
+		managers.roguelike:add_perkdeck()
 	elseif reward.weapon_reward then
 		managers.roguelike:add_weapons(reward.quantity)
 	elseif reward.mod_reward then
@@ -13,6 +9,7 @@ function StoryMissionsManager:_reward(reward)
 	else
 		Application:error("[Story] Failed to give reward")
 	end
+	managers.savefile:save_progress()
 end
 
 -- temp fix for preventing starting heists when mission is completed

@@ -281,6 +281,47 @@ function StoryMissionsGui:_update_info(mission)
         }), nil, 0)
       end
     end
+
+    if mission.tier_skip and mission == managers.story:current_mission() then
+      for i = 1, managers.roguelike.save_data.highest_tier do
+        local text = placer:add_row(canvas:fine_text({
+          wrap = true,
+          word_wrap = true,
+          text = managers.localization:text("roguelike_tierskip_title") .. " " .. i,
+          font = small_font,
+          font_size = small_font_size,
+          color = text_col
+        }), obj_padd_x, 0)
+
+        local btn = TextButton:new(canvas, {
+          text = managers.localization:text("roguelike_tierskip_button"),
+          font = small_font,
+          font_size = small_font_size
+        }, function()
+          managers.roguelike:skip_to_tier(i)
+
+          self:_update()
+
+          local dialog_data = {
+            title = managers.localization:text("roguelike_tierskip_title") .. " " .. i,
+            text = self:_compile_perkdeck_reward_string() .. self:_compile_weapon_reward_string()
+          }
+          local ok_button = {
+            text = managers.localization:text("dialog_ok"),
+            callback_func = function()
+              self:_update()
+            end
+          }
+          dialog_data.button_list = {
+            ok_button
+          }
+
+          managers.system_menu:show(dialog_data)
+        end)
+
+        placer:add_right(btn, 10)
+      end
+    end
   end
 
   if locked then
@@ -393,35 +434,43 @@ function StoryMissionsGui:_update_info(mission)
   end
 end
 
+function StoryMissionsGui:_compile_weapon_reward_string()
+  local compiled_string = "Dropped Weapons: "
+  for _, v in pairs(managers.roguelike._dropped_weapons) do
+    compiled_string = compiled_string .. "\n"
+    compiled_string = compiled_string .. managers.localization:text(v)
+  end
+  compiled_string = compiled_string .. "\n"
+  compiled_string = compiled_string .. "\n"
+
+  compiled_string = compiled_string .. "Dropped Weapon Mods: "
+  for _, v in pairs(managers.roguelike._dropped_mods) do
+    compiled_string = compiled_string .. "\n"
+    compiled_string = compiled_string .. managers.localization:text(v)
+  end
+  compiled_string = compiled_string .. "\n"
+  compiled_string = compiled_string .. "\n"
+
+  return compiled_string
+end
+
+function StoryMissionsGui:_compile_perkdeck_reward_string()
+  local compiled_string = "Dropped Perk Decks: "
+  for _, v in pairs(managers.roguelike._dropped_perkdecks or {}) do
+    compiled_string = compiled_string .. "\n"
+    compiled_string = compiled_string .. managers.localization:text(tweak_data.skilltree.specializations[v].name_id)
+  end
+  compiled_string = compiled_string .. "\n"
+  compiled_string = compiled_string .. "\n"
+
+  return compiled_string
+end
+
 function StoryMissionsGui:_get_reward_dialog_string(mission)
   if mission.reward_id == 'menu_sm_default_reward' then
-    local compiled_string = "Dropped Weapons: "
-    for _, v in pairs(managers.roguelike._dropped_weapons) do
-      compiled_string = compiled_string .. "\n"
-      compiled_string = compiled_string .. managers.localization:text(v)
-    end
-    compiled_string = compiled_string .. "\n"
-    compiled_string = compiled_string .. "\n"
-
-    compiled_string = compiled_string .. "Dropped Weapon Mods: "
-    for _, v in pairs(managers.roguelike._dropped_mods) do
-      compiled_string = compiled_string .. "\n"
-      compiled_string = compiled_string .. managers.localization:text(v)
-    end
-    compiled_string = compiled_string .. "\n"
-    compiled_string = compiled_string .. "\n"
-
-    return compiled_string
-  elseif mission.reward_id == "menu_sm_copycat_card" then
-    local compiled_string = "Dropped Copycat Cards: "
-    for _, v in pairs(managers.roguelike._dropped_copycat_cards) do
-      compiled_string = compiled_string .. "\n"
-      compiled_string = compiled_string .. managers.localization:text("copycat_" .. v)
-    end
-    compiled_string = compiled_string .. "\n"
-    compiled_string = compiled_string .. "\n"
-
-    return compiled_string
+    return self:_compile_weapon_reward_string()
+  elseif mission.reward_id == "menu_sm_perkdeck_reward" then
+    return self:_compile_perkdeck_reward_string()
   else
     return managers.localization:text(self:_get_reward_string(mission))
   end
@@ -449,12 +498,9 @@ function StoryMissionGuiRewardItem:init(panel, reward_data, config, skipped_miss
   StoryMissionGuiRewardItem.super.init(self, panel, config)
 
   local texture_path, texture_rect, reward_string = nil
-  local is_pattern = false
-  local is_material = false
-  local is_weapon = false
 
-  if reward_data.copycat_reward then
-    local specialization_data = tweak_data.skilltree.specializations[23]
+  if reward_data.perkdeck_reward then
+    local specialization_data = tweak_data.skilltree.specializations[math.random(23)]
     local tier_data = specialization_data[9]
     local texture_rect_x = tier_data.icon_xy and tier_data.icon_xy[1] or 0
     local texture_rect_y = tier_data.icon_xy and tier_data.icon_xy[2] or 0
@@ -471,20 +517,81 @@ function StoryMissionGuiRewardItem:init(panel, reward_data, config, skipped_miss
       64
     }
 
-    if reward_data.copycat_reward == "unlock_deck" then
-      reward_string = managers.localization:text("roguelike_copycat_unlock")
+    if reward_data.perkdeck_reward == "first_deck" then
+      reward_string = managers.localization:text("roguelike_initial_perkdeck_reward")
     else
-      reward_string = managers.localization:text("roguelike_copycat_reward")
+      reward_string = managers.localization:text("roguelike_perkdeck_reward")
     end
+
+    local function perkdeck_anim_func(reward_item)
+      reward_item._image:set_size(0, 0)
+      local specialization_data = tweak_data.skilltree.specializations[math.random(23)]
+      local tier_data = specialization_data[9]
+      local texture_rect_x = tier_data.icon_xy and tier_data.icon_xy[1] or 0
+      local texture_rect_y = tier_data.icon_xy and tier_data.icon_xy[2] or 0
+
+      local guis_catalog = "guis/"
+      if tier_data.texture_bundle_folder then
+        guis_catalog = guis_catalog .. "dlcs/" .. tostring(tier_data.texture_bundle_folder) .. "/"
+      end
+      texture_path = guis_catalog .. "textures/pd2/specialization/icons_atlas"
+      texture_rect = {
+        texture_rect_x * 64,
+        texture_rect_y * 64,
+        64,
+        64
+      }
+
+      local scale = 0.7
+      reward_item._image = reward_item:fit_bitmap({
+        texture = texture_path,
+        texture_rect = texture_rect
+      }, scale * reward_item:w(), scale * reward_item:h())
+
+      reward_item._image:set_center_y(reward_item:h() * 0.5)
+      reward_item._image:set_center_x(reward_item:w() * 0.5)
+    end
+
+    panel:animate(function(o)
+      while true do
+        _G.wait(0.5)
+        perkdeck_anim_func(self)
+      end
+    end)
   elseif reward_data.weapon_reward then
-    texture_path = "guis/dlcs/tng/textures/pd2/blackmarket/icons/side_job_rewards/gage_mod_rewards"
+    texture_path = managers.blackmarket:get_weapon_icon_path(tweak_data.roguelike.all_weapon_keys
+      [math.random(#tweak_data.roguelike.all_weapon_keys)]
+    )
     reward_string = managers.localization:text("roguelike_weapon_reward_2")
+
+    local function weapon_anim_func(reward_item)
+      reward_item._image:set_size(0, 0)
+      local texture_path = managers.blackmarket:get_weapon_icon_path(tweak_data.roguelike.all_weapon_keys
+        [math.random(#tweak_data.roguelike.all_weapon_keys)]
+      )
+
+      local scale = 0.7
+      reward_item._image = reward_item:fit_bitmap({
+        texture = texture_path,
+        texture_rect = nil
+      }, scale * reward_item:w(), scale * reward_item:h())
+
+      reward_item._image:set_center_y(reward_item:h() * 0.5)
+      reward_item._image:set_center_x(reward_item:w() * 0.5)
+    end
+
+    panel:animate(function(o)
+      while true do
+        _G.wait(0.5)
+        weapon_anim_func(self)
+      end
+    end)
   elseif reward_data.mod_reward then
     texture_path = "guis/textures/pd2/icon_modbox_df"
     reward_string = managers.localization:text("roguelike_mod_reward_5")
   end
 
-  local scale = is_material and 0.7 or 0.8
+  local scale = 0.7
   self._image = self:fit_bitmap({
     texture = texture_path,
     texture_rect = texture_rect
@@ -492,11 +599,6 @@ function StoryMissionGuiRewardItem:init(panel, reward_data, config, skipped_miss
 
   self._image:set_center_y(self:h() * 0.5)
   self._image:set_center_x(self:w() * 0.5)
-
-  if is_pattern then
-    self._image:set_render_template(Idstring("VertexColorTexturedPatterns"))
-    self._image:set_blend_mode("normal")
-  end
 
   self._text = self:fine_text({
     vertical = "bottom",

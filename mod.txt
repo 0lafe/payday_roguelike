@@ -3,7 +3,15 @@
   "description": "Crimespree but good",
   "author": "0lafe",
   "contact": "N/A",
-  "version": "1",
+  "version": "1.0",
   "priority": 0,
-  "blt_version": 2
+  "blt_version": 2,
+  "updates" : [
+    {
+      "identifier" : "lafe_roguelike_mod",
+      "host": {
+        "meta": "https://raw.githubusercontent.com/0lafe/payday_roguelike/refs/heads/main/meta.json"
+      }
+    }
+  ]
 }

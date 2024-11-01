@@ -9,10 +9,10 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       objectives = {}
     }),
     self:_mission("sm_1", {
-      reward_id = "menu_sm_unlock_copycat",
+      reward_id = "menu_sm_perkdeck_reward",
       voice_line = "Play_pln_stq_01",
       objectives = {},
-      rewards = self:_initial_reward(),
+      rewards = self:_perkdeck_reward(),
       completed = true,
       hide_progress = true,
       auto_complete = true
@@ -31,10 +31,10 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       objectives = {}
     }),
     self:_mission("sm_3", {
-      reward_id = "menu_sm_copycat_card",
+      reward_id = "menu_sm_perkdeck_reward",
       voice_line = "Play_pln_stq_01",
       objectives = {},
-      rewards = self:_copycat_card_reward(),
+      rewards = self:_perkdeck_reward(),
       completed = true,
       hide_progress = true,
       tier_list = true,
@@ -66,10 +66,10 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
   )
   table.insert(self.missions,
     self:_mission("sm_7", {
-      reward_id = "menu_sm_copycat_card",
+      reward_id = "menu_sm_perkdeck_reward",
       voice_line = "Play_pln_stq_01",
       objectives = {},
-      rewards = self:_copycat_card_reward(),
+      rewards = self:_perkdeck_reward(),
       completed = true,
       hide_progress = true,
       tier_list = true,
@@ -86,7 +86,6 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
         objectives = {},
         rewards = self:_default_reward(),
         tier = 2,
-        completed = true
       })
     )
   end
@@ -101,10 +100,10 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
   )
   table.insert(self.missions,
     self:_mission("sm_14", {
-      reward_id = "menu_sm_copycat_card",
+      reward_id = "menu_sm_perkdeck_reward",
       voice_line = "Play_pln_stq_01",
       objectives = {},
-      rewards = self:_copycat_card_reward(),
+      rewards = self:_perkdeck_reward(),
       completed = true,
       hide_progress = true,
       tier_list = true,
@@ -112,8 +111,9 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       auto_complete = true
     })
   )
+
   -- create multiple tier 3 missions
-  for i = 15, 22 do
+  for i = 15, 24 do
     table.insert(self.missions,
       self:_mission("sm_" .. i, {
         reward_id = "menu_sm_default_reward",
@@ -121,6 +121,41 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
         objectives = {},
         rewards = self:_default_reward(),
         tier = 3
+      })
+    )
+  end
+
+  table.insert(self.missions,
+    self:_mission("sm_act_4", {
+      rewarded = true,
+      completed = true,
+      is_header = true,
+      objectives = {}
+    })
+  )
+  table.insert(self.missions,
+    self:_mission("sm_25", {
+      reward_id = "menu_sm_perkdeck_reward",
+      voice_line = "Play_pln_stq_01",
+      objectives = {},
+      rewards = self:_perkdeck_reward(),
+      completed = true,
+      hide_progress = true,
+      tier_list = true,
+      list_tier = 4,
+      auto_complete = true
+    })
+  )
+
+  -- create multiple tier 4 missions
+  for i = 26, 29 do
+    table.insert(self.missions,
+      self:_mission("sm_" .. i, {
+        reward_id = "menu_sm_default_reward",
+        voice_line = "Play_pln_stq_01",
+        objectives = {},
+        rewards = self:_default_reward(),
+        tier = 4
       })
     )
   end
@@ -175,7 +210,6 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       "brooklyn_10_10",
       "biker_heist",
       "reservoir_dogs",
-      "henrys_rock",
       "bulucs_mansion",
       "black_cat",
       "prison_nightmare"
@@ -184,7 +218,8 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       "goat_simulator",
       "transport_train",
       "slaughterhouse",
-      "white_house"
+      "white_house",
+      "henrys_rock",
     }
   }
 end
@@ -193,7 +228,7 @@ end
 function StoryMissionsTweakData:_initial_reward()
   return {
     {
-      copycat_reward = "unlock_deck"
+      perkdeck_reward = "first_deck"
     }
   }
 end
@@ -207,7 +242,7 @@ function StoryMissionsTweakData:_default_reward()
     },
     {
       mod_reward = "random",
-      quantity = 5
+      quantity = 10
     }
   }
 end
@@ -216,6 +251,14 @@ function StoryMissionsTweakData:_copycat_card_reward()
   return {
     {
       copycat_reward = "new_card"
+    }
+  }
+end
+
+function StoryMissionsTweakData:_perkdeck_reward()
+  return {
+    {
+      perkdeck_reward = "new_deck"
     }
   }
 end

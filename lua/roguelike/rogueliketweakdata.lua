@@ -9,6 +9,7 @@ RoguelikeTweakData = RoguelikeTweakData or class()
 function RoguelikeTweakData:initialize_weapon_drop_tables(tweak_data, upgrade_tweak_data)
   local all_primary_keys = {}
   local all_secondary_keys = {}
+  local all_weapon_keys = {}
   local weapon_tweak_data = tweak_data.weapon
   for k, v in pairs(upgrade_tweak_data) do
     if v.category == 'weapon' then
@@ -19,12 +20,14 @@ function RoguelikeTweakData:initialize_weapon_drop_tables(tweak_data, upgrade_tw
         else
           table.insert(all_primary_keys, k)
         end
+        table.insert(all_weapon_keys, k)
       end
     end
   end
 
   self.all_primary_keys = all_primary_keys
   self.all_secondary_keys = all_secondary_keys
+  self.all_weapon_keys = all_weapon_keys
 end
 
 function RoguelikeTweakData:init(tweak_data)
@@ -188,6 +191,22 @@ function RoguelikeTweakData:init(tweak_data)
     story_prison_nightmare = {
       job = "help",
       story = "story_prison_nightmare"
+    },
+    story_goat_simulator = {
+      job = "peta",
+      story = "story_goat_simulator"
+    },
+    story_transport_train = {
+      job = "arm_for",
+      story = "story_transport_train"
+    },
+    story_slaughterhouse = {
+      job = "dinner",
+      story = "story_slaughterhouse"
+    },
+    story_white_house = {
+      job = "vit",
+      story = "story_white_house"
     },
   }
 end
