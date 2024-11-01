@@ -60,3 +60,58 @@ function StoryMissionsManager:award(id, steps)
 		self:_check_complete(m)
 	end
 end
+
+-- Overwrite with logic for hardmode
+function StoryMissionsManager:start_mission(mission, objective_id)
+	local m = self:_get_or_current(mission) or {
+		objectives_flat = {}
+	}
+	local o = nil
+
+	if not objective_id then
+		local left_to_do = table.filter_list(m.objectives_flat, function(o)
+			return not o.completed
+		end)
+		o = table.random(left_to_do)
+	else
+		o = objective_id and m.objectives_flat[objective_id]
+	end
+
+	if not o then
+		return
+	end
+
+	local level = table.random(o.levels or {})
+
+	if not level then
+		return
+	end
+
+	if Global.game_settings.single_player then
+		MenuCallbackHandler:play_single_player()
+	else
+		MenuCallbackHandler:play_online_game()
+	end
+
+	local difficulty = "normal"
+	local customize_difficulty = true
+	if Roguelike:hard_mode() then
+		difficulty = "sm_wish"
+		customize_difficulty = false
+	end
+
+	local job_data = tweak_data.narrative:job_data(level)
+	local data = {
+		customize_difficulty = customize_difficulty,
+		difficulty = difficulty,
+		difficulty_id = tweak_data:difficulty_to_index(difficulty),
+		job_id = level,
+		contract_visuals = job_data and job_data.contract_visuals
+	}
+	self._global.story_level_opened = level
+
+	managers.menu:open_node(
+		Global.game_settings.single_player and "crimenet_contract_singleplayer" or "crimenet_contract_host", {
+			data
+		})
+end
