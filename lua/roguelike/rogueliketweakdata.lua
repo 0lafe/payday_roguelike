@@ -209,4 +209,37 @@ function RoguelikeTweakData:init(tweak_data)
       story = "story_white_house"
     },
   }
+
+  local lootdrop_table = {
+    masks = {
+      chance = 50,
+      data = {
+        name = "masks",
+        masks = 10,
+        colors = 10,
+        patterns = 10
+      }
+    },
+    xp = {
+      chance = 25,
+      data = {
+        name = "xp",
+        quantity = 3
+      }
+    },
+    cc = {
+      chance = 25,
+      data = {
+        name = "coins",
+        quantity = 12
+      }
+    }
+  }
+
+  self.lootdrop_table = {}
+  for _, v in pairs(lootdrop_table) do
+    for i = 1, v.chance do
+      table.insert(self.lootdrop_table, v.data)
+    end
+  end
 end
