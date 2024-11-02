@@ -149,6 +149,47 @@ function StoryMissionsGui:_update_info(mission)
   local can_skip_mission = false
   local levels = {}
 
+  if mission.tier_skip and mission == managers.story:current_mission() then
+    for i = 1, managers.roguelike.save_data.highest_tier do
+      local text = placer:add_row(canvas:fine_text({
+        wrap = true,
+        word_wrap = true,
+        text = managers.localization:text("roguelike_tierskip_title") .. " " .. i,
+        font = small_font,
+        font_size = small_font_size,
+        color = text_col
+      }), obj_padd_x, 0)
+
+      local btn = TextButton:new(canvas, {
+        text = managers.localization:text("roguelike_tierskip_button"),
+        font = small_font,
+        font_size = small_font_size
+      }, function()
+        managers.roguelike:skip_to_tier(i)
+
+        self:_update()
+
+        local dialog_data = {
+          title = managers.localization:text("roguelike_tierskip_title") .. " " .. i,
+          text = self:_compile_perkdeck_reward_string() .. self:_compile_weapon_reward_string()
+        }
+        local ok_button = {
+          text = managers.localization:text("dialog_ok"),
+          callback_func = function()
+            self:_update()
+          end
+        }
+        dialog_data.button_list = {
+          ok_button
+        }
+
+        managers.system_menu:show(dialog_data)
+      end)
+
+      placer:add_right(btn, 10)
+    end
+  end
+
   if not mission.hide_progress then
     if not mission.completed then
       local reroll_btn = TextButton:new(canvas, {
@@ -180,7 +221,8 @@ function StoryMissionsGui:_update_info(mission)
         local text = placer:add_row(canvas:fine_text({
           wrap = true,
           word_wrap = true,
-          text = managers.localization:text(objective.name_id),
+          -- for some reason adding a space prevents the start button from appearing on completed heists. I cant explain it, but it works
+          text = managers.localization:text(objective.name_id) .. " ",
           font = small_font,
           font_size = small_font_size,
           color = text_col
@@ -277,47 +319,6 @@ function StoryMissionsGui:_update_info(mission)
           font_size = small_font_size,
           color = tweak_data.screen_colors.challenge_title
         }), nil, 0)
-      end
-    end
-
-    if mission.tier_skip and mission == managers.story:current_mission() then
-      for i = 1, managers.roguelike.save_data.highest_tier do
-        local text = placer:add_row(canvas:fine_text({
-          wrap = true,
-          word_wrap = true,
-          text = managers.localization:text("roguelike_tierskip_title") .. " " .. i,
-          font = small_font,
-          font_size = small_font_size,
-          color = text_col
-        }), obj_padd_x, 0)
-
-        local btn = TextButton:new(canvas, {
-          text = managers.localization:text("roguelike_tierskip_button"),
-          font = small_font,
-          font_size = small_font_size
-        }, function()
-          managers.roguelike:skip_to_tier(i)
-
-          self:_update()
-
-          local dialog_data = {
-            title = managers.localization:text("roguelike_tierskip_title") .. " " .. i,
-            text = self:_compile_perkdeck_reward_string() .. self:_compile_weapon_reward_string()
-          }
-          local ok_button = {
-            text = managers.localization:text("dialog_ok"),
-            callback_func = function()
-              self:_update()
-            end
-          }
-          dialog_data.button_list = {
-            ok_button
-          }
-
-          managers.system_menu:show(dialog_data)
-        end)
-
-        placer:add_right(btn, 10)
       end
     end
   end

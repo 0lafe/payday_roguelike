@@ -1,4 +1,5 @@
---Don't do setup twice
+-- Container for some global logic and setting management
+
 if _G.Roguelike then
   return
 end
@@ -11,8 +12,14 @@ Roguelike._settings = {
   roguelike_toggle_hard_mode = false
 }
 
+-- checks if hardmode is enabled
 function Roguelike:hard_mode()
   return Roguelike._settings.roguelike_toggle_hard_mode
+end
+
+-- checks if projob is enabled
+function Roguelike:pro_job()
+  return Roguelike._settings.roguelike_toggle_pro_job
 end
 
 --Load settings function

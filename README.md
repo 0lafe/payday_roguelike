@@ -4,6 +4,9 @@ WiP
 
 - Move tier skips around a bit
 - Try removing start heist buttons on completed missions
+- better save resetting to not overwrite settings or achievements
+- Make default tier 0 before publishing
+- Scope drops to owned items
 
 # BUGS
 
@@ -13,14 +16,17 @@ WiP
 # FEATURES
 
 - Single day heists?
+- - ED D3
+- - Biker D1
+- - Biker D2
 
+- Cost for rerolling
 - Loot card drops
 - Handle CC/money gain
-- Cost for rerolling
 - Recycling weapons/cards(?)
 - Throwables?
 - Cosmetics?
-- Persist RNG
+- Persist RNG?
 - RNG Assets
 
 # Ideas

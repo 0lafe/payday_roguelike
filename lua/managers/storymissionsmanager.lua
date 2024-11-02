@@ -12,16 +12,6 @@ function StoryMissionsManager:_reward(reward)
 	managers.savefile:save_progress()
 end
 
--- temp fix for preventing starting heists when mission is completed
-local old_start_mission = StoryMissionsManager.start_mission
-function StoryMissionsManager:start_mission(mission, objective_id)
-	if mission.completed then
-		return
-	end
-
-	old_start_mission(self, mission, objective_id)
-end
-
 -- redoes completion logic a bit to handle better COOP
 function StoryMissionsManager:award(id, steps)
 	steps = steps or 1
@@ -63,6 +53,10 @@ end
 
 -- Overwrite with logic for hardmode
 function StoryMissionsManager:start_mission(mission, objective_id)
+	if mission.completed then
+		return
+	end
+
 	local m = self:_get_or_current(mission) or {
 		objectives_flat = {}
 	}

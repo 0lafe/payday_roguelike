@@ -31,20 +31,21 @@ function RoguelikeManager:_save_to_file()
   io.save_as_json(self.save_data, self.save_path)
 end
 
--- initial unlocker for the copycat deck
-function RoguelikeManager:unlock_copycat()
-  managers.skilltree:give_specialization_points(1370000)
-  managers.skilltree:spend_specialization_points(13700, 23)
-  managers.skilltree:set_current_specialization(23)
-
-  for _, category in pairs({ "primaries", "secondaries", "masks" }) do
-    for i = 10, (tweak_data.gui.MAX_WEAPON_SLOTS or 72) do
-      managers.blackmarket:_unlock_weapon_slot(category, i)
-    end
+-- Complete all sidejobs to unlock certain items
+function RoguelikeManager:_complete_sidejobs()
+  for _, challenge in pairs(managers.tango:challenges()) do
+    managers.tango:completed_challenge(challenge.id)
+  end
+  for _, challenge in pairs(managers.event_jobs:challenges()) do
+    managers.event_jobs:completed_challenge(challenge.id)
+  end
+  for _, challenge in pairs(managers.raid_jobs:challenges()) do
+    managers.raid_jobs:completed_challenge(challenge.id)
   end
 end
 
-function RoguelikeManager:unlock_slots()
+-- unlocks all inventory slots
+function RoguelikeManager:_unlock_slots()
   for _, category in pairs({ "primaries", "secondaries" }) do
     for i = 10, (tweak_data.gui.MAX_WEAPON_SLOTS or 72) do
       managers.blackmarket:_unlock_weapon_slot(category, i)
@@ -83,7 +84,8 @@ function RoguelikeManager:add_perkdeck(quantity)
     -- Logic to run on initial deck unlock
     if #completed_decks == 0 then
       managers.skilltree:set_current_specialization(selected_deck)
-      self:unlock_slots()
+      self:_unlock_slots()
+      self:_complete_sidejobs()
     end
     table.insert(self._dropped_perkdecks, selected_deck)
   end
@@ -256,6 +258,7 @@ end
 
 -- handles adding rewards when skipping tiers
 function RoguelikeManager:tier_skip_rewards(tier)
+  -- perkdeck, weapon, weapon mods, money, level
   local values = {
     { 1, 1,  5,   50000,    25 },
     { 2, 4,  20,  500000,   60 },
