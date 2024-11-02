@@ -217,10 +217,6 @@ function RoguelikeManager:_assign_objectives(objectives, mission)
       for _, id in pairs(o.levels or {}) do
         local found = tweak_data.narrative.jobs[id].dlc
 
-        if found and dlc and dlc ~= found then
-          Application:error("Found multiple DLC's for a single objecitive!", o.progress_id)
-        end
-
         o.dlc = found
       end
     end

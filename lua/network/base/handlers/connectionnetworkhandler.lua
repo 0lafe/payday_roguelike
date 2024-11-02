@@ -1,5 +1,5 @@
 function ConnectionNetworkHandler:feed_lootdrop(global_value, item_category, item_id, max_pc, item_pc, left_pc, right_pc,
-                                                sender)
+                                                drop, sender)
   local peer = self._verify_sender(sender)
 
   if not peer then
@@ -19,7 +19,8 @@ function ConnectionNetworkHandler:feed_lootdrop(global_value, item_category, ite
     max_pc,
     item_pc,
     left_pc,
-    right_pc
+    right_pc,
+    drop
   }
 
   if item_pc == 0 then
