@@ -1,6 +1,12 @@
-function ConnectionNetworkHandler:feed_lootdrop(global_value, item_category, item_id, max_pc, item_pc, left_pc, right_pc,
-                                                drop, sender)
-  local peer = self._verify_sender(sender)
+function ConnectionNetworkHandler:feed_lootdrop(drop, item_category, item_id, max_pc, item_pc, left_pc, right_pc,
+                                                sender)
+  Utils.PrintTable(drop, 2)
+  Utils.PrintTable(sender, 2)
+
+  local peer
+  if sender then
+    peer = self._verify_sender(sender)
+  end
 
   if not peer then
     return
@@ -13,7 +19,7 @@ function ConnectionNetworkHandler:feed_lootdrop(global_value, item_category, ite
   local global_values = tweak_data.lootdrop.global_value_list_index
   local lootdrop_data = {
     peer,
-    global_values[global_value] or "normal",
+    "normal",
     item_category,
     item_id,
     max_pc,
