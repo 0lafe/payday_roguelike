@@ -3,7 +3,6 @@ WiP
 # TODO
 
 - Move tier skips around a bit/menu
-- better save resetting to not overwrite settings or achievements
 - Make default tier 0 before publishing
 - Scope drops to owned items
 - Single day heists?

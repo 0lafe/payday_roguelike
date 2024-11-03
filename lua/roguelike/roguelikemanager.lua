@@ -15,11 +15,11 @@ function RoguelikeManager:init()
 end
 
 -- creates a new save when none is present
-function RoguelikeManager:_create_save_data()
+function RoguelikeManager:_create_save_data(highest_tier, settings)
   local schema = {
     rolled_heists = {},
-    highest_tier = 4,
-    settings = {}
+    highest_tier = highest_tier or 0,
+    settings = settings or {}
   }
   io.save_as_json(schema, self.save_path)
   return schema
@@ -91,9 +91,11 @@ function RoguelikeManager:add_perkdeck(quantity)
   end
 end
 
+-- callback on the default progress reset function
 function RoguelikeManager:reset_progress()
-  self.save_data = self:_create_save_data()
-  managers.roguelike:_reset_copycat_tweak_data()
+  local heisted_tier = self.save_data.highest_tier
+  local settings = self.save_data.settings
+  self.save_data = self:_create_save_data(heisted_tier, settings)
   for _, mission in pairs(managers.story:missions()) do
     if mission.completed == false then
       mission.completed = nil
@@ -102,11 +104,6 @@ function RoguelikeManager:reset_progress()
       mission.completed = true
     end
   end
-end
-
-function RoguelikeManager:_reset_copycat_tweak_data()
-  tweak_data.upgrades = UpgradesTweakData:new(tweak_data)
-  tweak_data.skilltree = SkillTreeTweakData:new()
 end
 
 -- adds weapons for rewards
