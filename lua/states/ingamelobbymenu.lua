@@ -35,7 +35,7 @@ function IngameLobbyMenuState:set_lootdrop()
     local global_values = tweak_data.lootdrop.global_value_list_map
     local global_index = global_values[global_value] or 1
 
-    managers.network:session():send_to_peers("feed_lootdrop", global_index, item_category, item_id, max_pc, item_pc,
-      card_left_pc, card_right_pc, drop)
+    managers.network:session():send_to_peers("feed_lootdrop", drop, item_category, item_id, max_pc, item_pc,
+      card_left_pc, card_right_pc)
   end
 end
