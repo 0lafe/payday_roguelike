@@ -1,11 +1,9 @@
 function IngameLobbyMenuState:set_lootdrop()
-  local global_value, item_category, item_id, max_pc, item_pc = nil
-
-  global_value = "armored_transport"
-  item_category = "weapon_mods"
-  item_id = "wpn_fps_smg_m45_s_folded"
-  max_pc = 10
-  item_pc = 0
+  local global_value = "armored_transport"
+  local item_category = "weapon_mods"
+  local item_id = "wpn_fps_smg_m45_s_folded"
+  local max_pc = 10
+  local item_pc = 0
 
   local peer = managers.network:session() and managers.network:session():local_peer() or false
   local disable_weapon_mods = not managers.lootdrop:can_drop_weapon_mods() and true or nil
@@ -16,8 +14,9 @@ function IngameLobbyMenuState:set_lootdrop()
     weapon_mods = disable_weapon_mods
   })
 
-  local drops = tweak_data.roguelike.lootdrop_table
-  local drop = drops[math.random(#drops)]
+
+  local drop = managers.roguelike:handle_lootdrop()
+
   local lootdrop_data = {
     peer,
     global_value,

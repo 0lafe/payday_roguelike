@@ -283,3 +283,86 @@ function RoguelikeManager:skip_to_tier(tier)
 
   self:tier_skip_rewards(tier)
 end
+
+-- give masks and items for mask customization
+function RoguelikeManager:_give_mask_customization(count)
+  -- give 10 random masks
+  local masks = tweak_data.blackmarket.masks
+  local mask_keys = {}
+  for k, v in pairs(masks) do
+    if not v.inaccessible then
+      table.insert(mask_keys, k)
+    end
+  end
+  for i = 1, count do
+    local guis_mask_id = mask_keys[math.random(#mask_keys)]
+    local mask = masks[guis_mask_id]
+    local slot = managers.blackmarket:_get_free_mask_slot()
+    if slot then
+      managers.blackmarket:on_buy_mask(guis_mask_id, mask.global_value, slot, nil)
+    end
+  end
+
+  for name, item in pairs(tweak_data.blackmarket.materials) do
+    if name ~= "plastic" then
+      if item.dlc and managers.dlc:is_dlc_unlocked(item.dlc) then
+        local global_value = item.infamous and "infamous" or item.global_value or item.dlc
+        for i = 1, count do
+          managers.blackmarket:add_to_inventory(global_value, "materials", name)
+        end
+      else
+        local global_value = item.infamous and "infamous" or item.global_value or "normal"
+        for i = 1, count do
+          managers.blackmarket:add_to_inventory(global_value, "materials", name)
+        end
+      end
+    end
+  end
+  for name, item in pairs(tweak_data.blackmarket.textures) do
+    if name ~= "no_color_no_material" and name ~= "no_color_full_material" then
+      if item.dlc and managers.dlc:is_dlc_unlocked(item.dlc) then
+        local global_value = item.infamous and "infamous" or item.global_value or item.dlc
+        for i = 1, count do
+          managers.blackmarket:add_to_inventory(global_value, "textures", name)
+        end
+      else
+        local global_value = item.infamous and "infamous" or item.global_value or "normal"
+        for i = 1, count do
+          managers.blackmarket:add_to_inventory(global_value, "textures", name)
+        end
+      end
+    end
+  end
+  for name, item in pairs(tweak_data.blackmarket.colors) do
+    if item.dlc and managers.dlc:is_dlc_unlocked(item.dlc) then
+      local global_value = item.infamous and "infamous" or item.global_value or item.dlc
+      for i = 1, count do
+        managers.blackmarket:add_to_inventory(global_value, "colors", name)
+      end
+    else
+      local global_value = item.infamous and "infamous" or item.global_value or "normal"
+      for i = 1, count do
+        managers.blackmarket:add_to_inventory(global_value, "colors", name)
+      end
+    end
+  end
+end
+
+-- logic to pick, apply, then return a lootdrop at the end of a heist
+function RoguelikeManager:handle_lootdrop()
+  local drops = tweak_data.roguelike.lootdrop_table
+  local drop = drops[math.random(#drops)]
+
+  if drop.name == "xp" then
+    local levels = math.min(100 - managers.experience:current_level(), drop.quantity)
+    for i = 1, levels do
+      managers.experience:_level_up()
+    end
+  elseif drop.name == "coins" then
+    managers.custom_safehouse:add_coins(drop.quantity)
+  elseif drop.name == "masks" then
+    self:_give_mask_customization(drop.masks)
+  end
+
+  return drop
+end
