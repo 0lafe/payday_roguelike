@@ -7,6 +7,7 @@
       <post :script_path="dlcmanager.lua" :hook_id="dlcmanager"/>
       <post :script_path="localizationmanager.lua" :hook_id="localizationmanager"/>
       <post :script_path="menumanager.lua" :hook_id="menumanager"/>
+      <post :script_path="menumanagerpd2.lua" :hook_id="menumanagerpd2"/>
       <post :script_path="savefilemanager.lua" :hook_id="savefilemanager"/>
       <post :script_path="storymissionsmanager.lua" :hook_id="storymissionsmanager"/>
       <group :script_path="hud/" :hook_id="hud/">

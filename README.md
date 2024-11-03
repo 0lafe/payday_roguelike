@@ -2,8 +2,6 @@ WiP
 
 # TODO
 
-- Move tier skips around a bit/menu
-- Make default tier 0 before publishing
 - Scope drops to owned items
 - Single day heists?
 - - ED D3

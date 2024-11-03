@@ -53,6 +53,8 @@
   "roguelike_toggle_pro_job_desc": "Will reset your progress if you fail a heist",
   "roguelike_toggle_hard_mode": "Hard Mode",
   "roguelike_toggle_hard_mode_desc": "Enables a few changes to make the game harder",
+  "menu_challenge_roguelike_tierskip_challenge": "Bonus:"
+  "menu_roguelike_tierskip_body": "You have made it to at least tier one in the past. You are now able to skip to a previously completed tier"
   "menu_unlock_progress": "Heist:",
   "menu_sm_initial_perkdeck": "Starting Perk Deck",
   "menu_sm_default_reward": "1 Random Primary, 1 Random Secondary, and 10 Random Weapon Mods",

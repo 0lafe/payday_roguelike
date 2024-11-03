@@ -233,6 +233,8 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       "henrys_rock",
     }
   }
+
+  self.heist_days = {}
 end
 
 -- standard reward for most heists

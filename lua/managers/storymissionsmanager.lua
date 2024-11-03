@@ -100,7 +100,8 @@ function StoryMissionsManager:start_mission(mission, objective_id)
 		difficulty = difficulty,
 		difficulty_id = tweak_data:difficulty_to_index(difficulty),
 		job_id = level,
-		contract_visuals = job_data and job_data.contract_visuals
+		contract_visuals = job_data and job_data.contract_visuals,
+		single_day_id = o.single_day_id
 	}
 	self._global.story_level_opened = level
 

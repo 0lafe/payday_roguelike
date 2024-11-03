@@ -190,10 +190,12 @@ end
 function RoguelikeManager:_assign_objectives(objectives, mission)
   local built_objectives = {}
   for _, objective in pairs(objectives) do
+    local level_progress = tweak_data.story:_level_progress("story_" .. objective, 1, {
+      name_id = "menu_sm_" .. objective
+    })
+    level_progress.single_day_id = tweak_data.story.heist_days[objective]
     table.insert(built_objectives, {
-      tweak_data.story:_level_progress("story_" .. objective, 1, {
-        name_id = "menu_sm_" .. objective
-      })
+      level_progress
     })
   end
 
