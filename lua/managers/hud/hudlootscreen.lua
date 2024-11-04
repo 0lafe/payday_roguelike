@@ -172,7 +172,6 @@ function HUDLootScreen:texture_loaded_clbk(params, texture_idstring)
 end
 
 function HUDLootScreen:flipcard(card_panel, timer, done_clbk, peer_id, effects)
-  log("flip card")
   local downcard = card_panel:child("downcard")
   local upcard = card_panel:child("upcard")
   local bg = card_panel:child("bg")
@@ -298,7 +297,6 @@ function HUDLootScreen:flipcard(card_panel, timer, done_clbk, peer_id, effects)
 end
 
 function HUDLootScreen:make_cards(peer, max_pc, left_card, right_card)
-  log("make_cards")
   if not self:is_active() then
     self:show()
   end
@@ -393,7 +391,6 @@ function HUDLootScreen:make_cards(peer, max_pc, left_card, right_card)
 end
 
 function HUDLootScreen:begin_choose_card(peer_id, card_id)
-  log("begin_choose_card")
   if not self._peer_data[peer_id].active then
     self._peer_data[peer_id].delayed_card_id = card_id
 
@@ -473,7 +470,6 @@ function HUDLootScreen:begin_choose_card(peer_id, card_id)
 end
 
 function HUDLootScreen:begin_flip_card(peer_id)
-  log("begin_flip_card")
   self._peer_data[peer_id].wait_t = 5
   local type_to_card = {
     weapon_mods = 2,
@@ -547,7 +543,6 @@ function HUDLootScreen:begin_flip_card(peer_id)
 end
 
 function HUDLootScreen:show_item(peer_id)
-  log("showing item")
   if not self._peer_data[peer_id].active then
     return
   end
@@ -607,7 +602,6 @@ function HUDLootScreen:show_item(peer_id)
 end
 
 function HUDLootScreen:create_stars_giving_animation()
-  log("create_stars_giving_animation")
   local lootdrops = self:fetch_local_lootdata()
   local human_players = managers.network:session() and managers.network:session():amount_of_alive_players() or 1
   local all_humans = human_players == tweak_data.max_players
@@ -685,173 +679,4 @@ function HUDLootScreen:create_stars_giving_animation()
   end
 
   self._stars_panel:animate(animation_func)
-end
-
-function HUDLootScreen:update(t, dt)
-  for peer_id = 1, tweak_data.max_players do
-    if self._peer_data[peer_id].wait_t then
-      self._peer_data[peer_id].wait_t = math.max(self._peer_data[peer_id].wait_t - dt, 0)
-      local panel = self._peers_panel:child("peer" .. tostring(peer_id))
-      local card_info_panel = panel:child("card_info")
-      local main_text = card_info_panel:child("main_text")
-
-      main_text:set_text(managers.localization:to_upper_text("menu_l_choose_card_chosen", {
-        time = math.ceil(self._peer_data[peer_id].wait_t)
-      }))
-
-      local _, _, _, hh = main_text:text_rect()
-
-      main_text:set_h(hh + 2)
-
-      if self._peer_data[peer_id].wait_t == 0 then
-        main_text:set_text(managers.localization:to_upper_text("menu_l_choose_card_chosen_suspense"))
-
-        local joker = self._peer_data[peer_id].joker
-        local steam_drop = self._peer_data[peer_id].steam_drop
-        local effects = self._peer_data[peer_id].effects
-
-        panel:child("card" .. self._peer_data[peer_id].selected):animate(callback(self, self, "flipcard"),
-          steam_drop and 5.5 or 2.5, callback(self, self, "show_item"), peer_id, effects)
-
-        self._peer_data[peer_id].wait_t = false
-      end
-    end
-  end
-end
-
-function HUDLootScreen:init(hud, workspace, saved_lootdrop, saved_selected, saved_chosen, saved_setup)
-  self._backdrop = MenuBackdropGUI:new(workspace)
-
-  if not _G.IS_VR then
-    self._backdrop:create_black_borders()
-  end
-
-  self._active = false
-  self._hud = hud
-  self._workspace = workspace
-  local massive_font = tweak_data.menu.pd2_massive_font
-  local large_font = tweak_data.menu.pd2_large_font
-  local medium_font = tweak_data.menu.pd2_medium_font
-  local small_font = tweak_data.menu.pd2_small_font
-  local massive_font_size = tweak_data.menu.pd2_massive_font_size
-  local large_font_size = tweak_data.menu.pd2_large_font_size
-  local medium_font_size = tweak_data.menu.pd2_medium_font_size
-  local small_font_size = tweak_data.menu.pd2_small_font_size
-  self._background_layer_safe = self._backdrop:get_new_background_layer()
-  self._background_layer_full = self._backdrop:get_new_background_layer()
-  self._foreground_layer_safe = self._backdrop:get_new_foreground_layer()
-  self._foreground_layer_full = self._backdrop:get_new_foreground_layer()
-  self._baselayer_two = self._backdrop:get_new_base_layer()
-
-  self._backdrop:set_panel_to_saferect(self._background_layer_safe)
-  self._backdrop:set_panel_to_saferect(self._foreground_layer_safe)
-
-  self._callback_handler = {}
-  local lootscreen_string = managers.localization:to_upper_text("menu_l_lootscreen")
-  local loot_text = self._foreground_layer_safe:text({
-    vertical = "top",
-    name = "loot_text",
-    align = "center",
-    text = lootscreen_string,
-    font_size = large_font_size,
-    font = large_font,
-    color = tweak_data.screen_colors.text
-  })
-
-  self:make_fine_text(loot_text)
-
-  local bg_text = self._background_layer_full:text({
-    vertical = "top",
-    h = 90,
-    align = "left",
-    alpha = 0.4,
-    text = loot_text:text(),
-    font_size = massive_font_size,
-    font = massive_font,
-    color = tweak_data.screen_colors.button_stage_3
-  })
-
-  self:make_fine_text(bg_text)
-
-  local x, y = managers.gui_data:safe_to_full_16_9(loot_text:world_x(), loot_text:world_center_y())
-
-  bg_text:set_world_left(loot_text:world_x())
-  bg_text:set_world_center_y(loot_text:world_center_y())
-  bg_text:move(-13, 9)
-
-  local icon_path, texture_rect = tweak_data.hud_icons:get_icon_data("downcard_overkill_deck")
-  self._downcard_icon_path = icon_path
-  self._downcard_texture_rect = texture_rect
-  self._hud_panel = self._foreground_layer_safe:panel()
-
-  self._hud_panel:set_y(25)
-  self._hud_panel:set_h(self._hud_panel:h() - 25 - 150)
-
-  self._peer_data = {}
-  self._peers_panel = self._hud_panel:panel({})
-
-  for i = 1, tweak_data.max_players do
-    self:create_peer(self._peers_panel, i)
-  end
-
-  self._num_visible = 1
-
-  self:set_num_visible(self:get_local_peer_id())
-
-  if saved_setup then
-    for _, setup in ipairs(saved_setup) do
-      self:make_cards(setup.peer, setup.max_pc, setup.left_card, setup.right_card)
-    end
-  end
-
-  self._lootdrops = self._lootdrops or {}
-
-  if saved_lootdrop then
-    for _, lootdrop in ipairs(saved_lootdrop) do
-      self:make_lootdrop(lootdrop)
-    end
-  end
-
-  if saved_selected then
-    for peer_id, selected in pairs(saved_selected) do
-      self:set_selected(peer_id, selected)
-    end
-  end
-
-  if saved_chosen then
-    for peer_id, card_id in pairs(saved_chosen) do
-      self:begin_choose_card(peer_id, card_id)
-    end
-  end
-
-  local local_peer_id = self:get_local_peer_id()
-  local panel = self._peers_panel:child("peer" .. tostring(local_peer_id))
-  local peer_info_panel = panel:child("peer_info")
-  local peer_name = peer_info_panel:child("peer_name")
-  local peer_name_string = tostring(managers.network.account:username() or
-    managers.blackmarket:get_preferred_character_real_name())
-  local color_range_offset = utf8.len(peer_name_string) + 2
-  local experience, color_ranges = managers.experience:gui_string(managers.experience:current_level(),
-    managers.experience:current_rank(), color_range_offset)
-
-  peer_name:set_text(peer_name_string .. " (" .. experience .. ")")
-
-  for _, color_range in ipairs(color_ranges or {}) do
-    peer_name:set_range_color(color_range.start, color_range.stop, color_range.color)
-  end
-
-  self:make_fine_text(peer_name)
-  peer_name:set_right(peer_info_panel:w())
-
-  if managers.experience:current_rank() > 0 then
-    peer_info_panel:child("peer_infamy"):set_visible(true)
-    peer_info_panel:child("peer_infamy"):set_right(peer_name:x())
-    peer_info_panel:child("peer_infamy"):set_top(peer_name:y() + 4)
-  else
-    peer_info_panel:child("peer_infamy"):set_visible(false)
-  end
-
-  panel:set_alpha(1)
-  peer_info_panel:show()
-  panel:child("card_info"):hide()
 end

@@ -20,7 +20,7 @@ function IngameLobbyMenuState:set_lootdrop()
 
   managers.hud:make_lootdrop_hud(lootdrop_data)
 
-  -- if not Global.game_settings.single_player and managers.network:session() then
-  --   managers.network:session():send_to_peers("feed_lootdrop", card_left_pc, card_right_pc, drop_name)
-  -- end
+  if not Global.game_settings.single_player and managers.network:session() then
+    managers.network:session():send_to_peers("feed_lootdrop", card_left_pc, card_right_pc, drop_name)
+  end
 end
