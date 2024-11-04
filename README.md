@@ -2,8 +2,6 @@ WiP
 
 # TODO
 
-- Unlock all build slots
-
 - Scope drops to owned items
 - Single day heists?
 - - ED D3
@@ -14,11 +12,10 @@ WiP
 
 # BUGS
 
-- Picking a loot card does not flip it
+- Loot cards in coop
 
 - Possible client completion problem with escapes (MissionEndState:chk_complete_heist_achievements())
 - Possible problem receiving perk deck reward when in lobby with other players
-- Possible clicking roguelike puts you in offline mode
 
 # FEATURES
 

@@ -56,6 +56,13 @@ function RoguelikeManager:_unlock_slots()
   end
 end
 
+-- unlocks all skill sets
+function RoguelikeManager:_unlock_skill_switches()
+  for i, _ in pairs(managers.skilltree._global.skill_switches) do
+    managers.skilltree._global.skill_switches[i].unlocked = true
+  end
+end
+
 function RoguelikeManager:add_perkdeck(quantity)
   local quantity = quantity or 1
   self._dropped_perkdecks = {}
@@ -86,6 +93,7 @@ function RoguelikeManager:add_perkdeck(quantity)
       managers.skilltree:set_current_specialization(selected_deck)
       self:_unlock_slots()
       self:_complete_sidejobs()
+      self:_unlock_skill_switches()
     end
     table.insert(self._dropped_perkdecks, selected_deck)
   end
