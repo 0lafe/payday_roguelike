@@ -212,7 +212,7 @@ function RoguelikeTweakData:init(tweak_data)
 
   local lootdrop_table = {
     masks = {
-      chance = 100,
+      chance = 50,
       data = {
         name = "masks",
         masks = 10,
@@ -221,14 +221,14 @@ function RoguelikeTweakData:init(tweak_data)
       }
     },
     xp = {
-      chance = 0,
+      chance = 25,
       data = {
         name = "xp",
         quantity = 2
       }
     },
     cc = {
-      chance = 0,
+      chance = 25,
       data = {
         name = "coins",
         quantity = 12

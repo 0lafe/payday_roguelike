@@ -237,7 +237,7 @@ function StoryMissionsGui:_update_info(mission)
           wrap = true,
           word_wrap = true,
           -- for some reason adding a space prevents the start button from appearing on completed heists. I cant explain it, but it works
-          text = managers.localization:text(objective.name_id),
+          text = managers.localization:text(objective.name_id) .. " ",
           font = small_font,
           font_size = small_font_size,
           color = text_col
