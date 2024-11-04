@@ -53,9 +53,9 @@ end
 
 -- Overwrite with logic for hardmode
 function StoryMissionsManager:start_mission(mission, objective_id)
-	if mission.completed then
-		return
-	end
+	-- if mission.completed then
+	-- 	return
+	-- end
 
 	local m = self:_get_or_current(mission) or {
 		objectives_flat = {}

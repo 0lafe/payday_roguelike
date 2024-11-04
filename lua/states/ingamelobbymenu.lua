@@ -1,10 +1,4 @@
 function IngameLobbyMenuState:set_lootdrop()
-  local global_value = "armored_transport"
-  local item_category = "weapon_mods"
-  local item_id = "wpn_fps_smg_m45_s_folded"
-  local max_pc = 10
-  local item_pc = 0
-
   local peer = managers.network:session() and managers.network:session():local_peer() or false
   local disable_weapon_mods = not managers.lootdrop:can_drop_weapon_mods() and true or nil
   local card_left_pc = managers.lootdrop:new_fake_loot_pc(nil, {
@@ -14,28 +8,19 @@ function IngameLobbyMenuState:set_lootdrop()
     weapon_mods = disable_weapon_mods
   })
 
-
   local drop = managers.roguelike:handle_lootdrop()
+  local drop_name = drop.name
 
   local lootdrop_data = {
     peer,
-    global_value,
-    item_category,
-    item_id,
-    max_pc,
-    item_pc,
     card_left_pc,
     card_right_pc,
-    drop
+    drop_name
   }
 
   managers.hud:make_lootdrop_hud(lootdrop_data)
 
-  if not Global.game_settings.single_player and managers.network:session() then
-    local global_values = tweak_data.lootdrop.global_value_list_map
-    local global_index = global_values[global_value] or 1
-
-    managers.network:session():send_to_peers("feed_lootdrop", drop, item_category, item_id, max_pc, item_pc,
-      card_left_pc, card_right_pc)
-  end
+  -- if not Global.game_settings.single_player and managers.network:session() then
+  --   managers.network:session():send_to_peers("feed_lootdrop", card_left_pc, card_right_pc, drop_name)
+  -- end
 end
