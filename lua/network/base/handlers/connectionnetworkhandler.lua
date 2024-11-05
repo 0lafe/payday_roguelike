@@ -1,4 +1,4 @@
-function ConnectionNetworkHandler:feed_lootdrop(card_left_pc, card_right_pc, drop_name, sender)
+function ConnectionNetworkHandler:feed_lootdrop(card_left_pc, card_right_pc, drop_name, _, _, _, _, sender)
   local peer = self._verify_sender(sender)
 
   if not peer then
@@ -16,5 +16,5 @@ function ConnectionNetworkHandler:feed_lootdrop(card_left_pc, card_right_pc, dro
     drop_name
   }
 
-  managers.hud:make_lootdrop_hud(lootdrop_data)
+  managers.hud:make_cards_hud(peer, 10, card_left_pc, card_right_pc)
 end
