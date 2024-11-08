@@ -57,7 +57,7 @@ function IngameLobbyMenuState:make_lootdrop()
       card_left_pc, card_right_pc)
 
     if not Global.game_settings.single_player and managers.network:session() then
-      managers.network:session():send_to_peers("feed_lootdrop", card_left_pc, card_right_pc, "xp")
+      managers.network:session():send_to_peers("feed_lootdrop", card_left_pc, card_right_pc, "")
     end
   end
 
