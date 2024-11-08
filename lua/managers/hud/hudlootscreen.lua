@@ -296,7 +296,7 @@ function HUDLootScreen:flipcard(card_panel, timer, done_clbk, peer_id, effects)
   end)
 end
 
-function HUDLootScreen:make_cards(peer, max_pc, left_card, right_card)
+function HUDLootScreen:make_cards(peer, left_card, right_card)
   if not self:is_active() then
     self:show()
   end
@@ -316,7 +316,6 @@ function HUDLootScreen:make_cards(peer, max_pc, left_card, right_card)
   local panel = self._peers_panel:child("peer" .. tostring(peer_id))
   local peer_info_panel = panel:child("peer_info")
   local peer_name = peer_info_panel:child("peer_name")
-  local max_quality = peer_info_panel:child("max_quality")
 
   if player_level then
     local color_range_offset = utf8.len(peer_name_string) + 2
@@ -331,13 +330,8 @@ function HUDLootScreen:make_cards(peer, max_pc, left_card, right_card)
     peer_name:set_text(peer_name_string)
   end
 
-  max_quality:set_text(managers.localization:to_upper_text("menu_l_max_quality", {
-    quality = max_pc
-  }))
   self:make_fine_text(peer_name)
-  self:make_fine_text(max_quality)
   peer_name:set_right(peer_info_panel:w())
-  max_quality:set_right(peer_info_panel:w())
 
   if player_level then
     local peer_infamy = peer_info_panel:child("peer_infamy")

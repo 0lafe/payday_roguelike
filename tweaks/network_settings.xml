@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<tweak version="2" name="settings/network" extension="network_settings">
+  <search>
+    <network/>
+    <rpc/>
+    <message name="feed_lootdrop"/>
+  </search>
+  <target mode="replace">
+    <message name="feed_lootdrop" delivery="ordered" receiver="connection">
+			<param type="int" min="0" max="10" /> <!-- left card pc, 0=JOKER -->
+			<param type="int" min="0" max="10" /> <!-- right card pc, 0=JOKER -->
+			<param type="string" />				  <!-- drop_name -->
+		</message>
+  </target>
+</tweak>

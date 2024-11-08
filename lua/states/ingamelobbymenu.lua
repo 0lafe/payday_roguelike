@@ -63,3 +63,7 @@ function IngameLobbyMenuState:make_lootdrop()
 
   self:_set_lootdrop()
 end
+
+function IngameLobbyMenuState:_set_lootdrop()
+  self:set_lootdrop()
+end
