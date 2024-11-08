@@ -71,7 +71,6 @@ local function _mask_anim_function(hudlootscreen, panel, peer_id)
 end
 
 function HUDLootScreen:make_lootdrop(lootdrop_data)
-  log("make_lootdrop")
   local peer = lootdrop_data[1]
   local peer_id = peer and peer:id() or 1
   self._peer_data[peer_id].lootdrops = lootdrop_data
