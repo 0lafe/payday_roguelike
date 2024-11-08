@@ -9,5 +9,13 @@ function ConnectionNetworkHandler:feed_lootdrop(card_left_pc, card_right_pc, dro
     return
   end
 
-  managers.hud:make_cards_hud(peer, 10, card_left_pc, card_right_pc)
+  local lootdrop_data = {
+    peer,
+    card_left_pc,
+    card_right_pc,
+    drop_name
+  }
+
+  managers.hud:make_lootdrop_hud(lootdrop_data)
+  -- managers.hud:make_cards_hud(peer, 10, card_left_pc, card_right_pc)
 end

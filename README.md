@@ -9,6 +9,7 @@ WiP
 - - Biker D2
 
 - Cost for rerolling
+- Remove sidejob menu for client in prelobby
 
 # BUGS
 
