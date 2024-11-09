@@ -39,11 +39,7 @@ function StoryMissionsManager:award(id, steps)
 
 	o.progress = o.progress + 1
 
-	print("[Story]", "progress", id, o.progress)
-
 	if o.max_progress <= o.progress then
-		print("[Story]", "objective complete", id, o.progress, o.max_progress)
-
 		o.completed = true
 		o.progress = o.max_progress
 

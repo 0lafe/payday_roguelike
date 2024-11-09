@@ -296,7 +296,7 @@ function HUDLootScreen:flipcard(card_panel, timer, done_clbk, peer_id, effects)
   end)
 end
 
-function HUDLootScreen:make_cards(peer, left_card, right_card)
+function HUDLootScreen:make_cards(peer, max_pc, left_card, right_card)
   if not self:is_active() then
     self:show()
   end
