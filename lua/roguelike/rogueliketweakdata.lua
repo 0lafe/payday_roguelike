@@ -120,6 +120,10 @@ function RoguelikeTweakData:init(tweak_data)
       job = "mia",
       story = "story_hotline_miami"
     },
+    story_four_floors = {
+      job = "mia",
+      story = "story_four_floors"
+    },
     story_election_day = {
       job = "election_day",
       story = "story_election_day"

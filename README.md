@@ -7,9 +7,17 @@ WiP
 - - ED D3
 - - Biker D1
 - - Biker D2
+- - Fire starter d2
+- - rats d3?
+- - res dogs
+- - hox out
+
+- Escape days maybe?
 
 - Cost for rerolling
 - Remove sidejob menu for client in prelobby
+- Restructure reward logic to be more streamlined for single days
+- Check out "Skip Mission" button
 
 # BUGS
 
@@ -25,6 +33,7 @@ WiP
 - Persist RNG?
 - RNG Assets
 - Infamy system
+- Something with heist xp modifiers
 
 # Ideas
 

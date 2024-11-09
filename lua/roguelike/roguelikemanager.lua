@@ -373,3 +373,19 @@ function RoguelikeManager:handle_lootdrop()
 
   return drop
 end
+
+function RoguelikeManager:completed_job(job_id, job_stage)
+  log(job_id)
+  log(job_stage)
+  local job_name = nil
+  for k, v in pairs(tweak_data.roguelike.achievement_additions) do
+    if v.job and v.job == job_id then
+      job_name = v.story
+    end
+  end
+
+  log(job_name)
+  if job_name then
+    managers.story:award(job_name)
+  end
+end

@@ -79,6 +79,7 @@
   "menu_sm_big_bank": "Big Bank",
   "menu_sm_the_diamond": "The Diamond",
   "menu_sm_hotline_miami": "Hotline Miami",
+  "menu_sm_four_floors": "Four Floors",
   "menu_sm_dragon_heist": "Dragon Heist",
   "menu_sm_alaskan_deal": "Alaskan Deal",
   "menu_sm_mountain_master": "Mountain Master",

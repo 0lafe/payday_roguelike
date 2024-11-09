@@ -184,7 +184,8 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
     [0] = {
       "four_store",
       "ukrainian_job",
-      "mallcrasher"
+      "mallcrasher",
+      "cursed_kill_room"
     },
     [1] = {
       "go_bank",
@@ -195,18 +196,8 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       "counterfeit"
     },
     [2] = {
-      "undercover",
-      "panic_room",
-      "first_world_bank",
-      "diamond_heist",
-      "diamond_store",
-      "brooklyn_bank",
-      "breakfast_in_tijuana",
-      "big_bank",
-      "the_diamond",
       "hotline_miami",
-      "election_day",
-      "dragon_heist"
+      "four_floors"
     },
     [3] = {
       "alaskan_deal",
@@ -234,7 +225,10 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
     }
   }
 
-  self.heist_days = {}
+  self.heist_days = {
+    hotline_miami = 1,
+    four_floors = 2
+  }
 end
 
 -- standard reward for most heists
