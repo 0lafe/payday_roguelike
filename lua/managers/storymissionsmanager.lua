@@ -12,38 +12,51 @@ function StoryMissionsManager:_reward(reward)
 	managers.savefile:save_progress()
 end
 
--- redoes completion logic a bit to handle better COOP
+-- removes default award logic
 function StoryMissionsManager:award(id, steps)
-	steps = steps or 1
-	local m = self:current_mission() or {}
-	local o = m.objectives_flat and m.objectives_flat[id]
+end
 
-	-- completes the objective if you complete a heist of the same tier
-	if id and m.tier and Network:is_client() and not o then
-		local tier_pool = tweak_data.story:heist_pool(m.tier)
-		local completed_heist = id:gsub("story_", "")
-		for _, heist in pairs(tier_pool) do
-			if heist == completed_heist then
-				for k, _ in pairs(m.objectives_flat) do
-					o = m.objectives_flat[k]
-					break
+-- re-does completion logic a bit to handle better COOP and single day heists
+function StoryMissionsManager:award_roguelike(job_id, job_stage)
+	local current_mission = self:current_mission() or {}
+
+	if current_mission.completed then
+		return
+	end
+
+	local job_name = nil
+	for k, v in pairs(tweak_data.roguelike.missions) do
+		if v.job and v.job == job_id then
+			if v.day_id then
+				if v.day_id == job_stage then
+					job_name = k
 				end
-				break
+			else
+				job_name = k
 			end
 		end
 	end
 
-	if not o or o.completed then
-		return
+	local objective = current_mission.objectives_flat and current_mission.objectives_flat["story_" .. job_name]
+
+	-- if client it completes the objective if its in the same tier as your current mission
+	if Network:is_client() then
+		if current_mission.tier then
+			if managers.tweak_data:heist_in_tier(current_mission.tier, job_name) then
+				for _, v in pairs(current_mission.objectives_flat) do
+					objective = v
+					objective.completed = true
+				end
+			end
+		end
+	else
+		if objective and not objective.completed then
+			objective.completed = true
+		end
 	end
 
-	o.progress = o.progress + 1
-
-	if o.max_progress <= o.progress then
-		o.completed = true
-		o.progress = o.max_progress
-
-		self:_check_complete(m)
+	if objective and objective.completed then
+		self:_check_complete(current_mission)
 	end
 end
 

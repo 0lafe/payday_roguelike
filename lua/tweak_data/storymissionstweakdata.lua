@@ -184,8 +184,7 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
     [0] = {
       "four_store",
       "ukrainian_job",
-      "mallcrasher",
-      "cursed_kill_room"
+      "mallcrasher"
     },
     [1] = {
       "go_bank",
@@ -197,7 +196,18 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
     },
     [2] = {
       "hotline_miami",
-      "four_floors"
+      "four_floors",
+      "undercover",
+      "panic_room",
+      "first_world_bank",
+      "diamond_heist",
+      "diamond_store",
+      "brooklyn_bank",
+      "breakfast_in_tijuana",
+      "big_bank",
+      "the_diamond",
+      "election_day",
+      "dragon_heist"
     },
     [3] = {
       "alaskan_deal",
@@ -223,11 +233,6 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       "white_house",
       "henrys_rock",
     }
-  }
-
-  self.heist_days = {
-    hotline_miami = 1,
-    four_floors = 2
   }
 end
 
@@ -259,6 +264,17 @@ function StoryMissionsTweakData:heist_pool(mission_tier)
   return self._heist_pool[mission_tier]
 end
 
+-- checks if a heist is in a given tier
+function StoryMissionsTweakData:heist_in_tier(mission_tier, heist_name)
+  local output = false
+  for _, v in pairs(self._heist_pool[mission_tier]) do
+    if v == heist_name then
+      output = true
+    end
+  end
+  return output
+end
+
 -- change how missions are built to be more dynamic
 function StoryMissionsTweakData:_mission(id, data)
   data = data or {}
@@ -275,6 +291,24 @@ function StoryMissionsTweakData:_mission(id, data)
     data.desc_id = id .. "_desc"
     data.objective_id = id .. "_obj"
   end
+
+  return data
+end
+
+-- method for attaching job id data to mission objectives
+function StoryMissionsTweakData:_level_progress(progress_id, ...)
+  local tweak_data = self._tweak_data or tweak_data
+  local data = self:_progress("story_" .. progress_id, ...)
+  local heist_data = tweak_data.roguelike.missions[progress_id]
+
+  if not heist_data then
+    return data
+  end
+
+  data.levels = data.levels or heist_data.job and {
+    heist_data.job
+  }
+  data.single_day_id = heist_data.day_id
 
   return data
 end

@@ -31,186 +31,148 @@ function RoguelikeTweakData:initialize_weapon_drop_tables(tweak_data, upgrade_tw
 end
 
 function RoguelikeTweakData:init(tweak_data)
-  self.achievement_additions = {
-    story_four_store = {
-      job = "four_stores",
-      story = "story_four_store"
+  self.missions = {
+    cursed_kill_room = {
+      job = "hvh"
     },
-    story_ukrainian_job = {
-      job = "ukrainian_job_prof",
-      story = "story_ukrainian_job"
+    black_cat = {
+      job = "chca"
     },
-    story_mallcrasher = {
-      job = "mallcrasher",
-      story = "story_mallcrasher",
+    brooklyn_bank = {
+      job = "brb"
     },
-    story_cursed_kill_room = {
-      job = "hvh",
-      story = "story_cursed_kill_room",
+    brooklyn_10_10 = {
+      job = "spa"
     },
-    story_nightclub = {
-      job = "nightclub",
-      story = "story_nightclub"
+    heat_street = {
+      job = "run"
     },
-    story_art_gallery = {
-      job = "gallery",
-      story = "story_art_gallery"
+    birth_of_sky = {
+      job = "pbr2"
     },
-    story_bank_heist_deposit = {
-      job = "branchbank_deposit",
-      story = "story_bank_heist_deposit"
+    bank_heist_deposit = {
+      job = "branchbank_deposit"
     },
-    story_bank_heist_gold = {
-      job = "branchbank_gold_prof",
-      story = "story_bank_heist_gold"
+    hells_island = {
+      job = "bph"
     },
-    story_bank_heist_cash = {
-      job = "branchbank_cash",
-      story = "story_bank_heist_cash"
+    reservoir_dogs = {
+      job = "rvd"
     },
-    story_hoxton_revenge = {
-      job = "hox_3",
-      story = "story_hoxton_revenge"
+    first_world_bank = {
+      job = "red2"
     },
-    story_counterfeit = {
-      job = "pal",
-      story = "story_counterfeit"
+    nightclub = {
+      job = "nightclub"
     },
-    story_undercover = {
-      job = "man",
-      story = "story_undercover"
+    undercover = {
+      job = "man"
     },
-    story_panic_room = {
-      job = "flat",
-      story = "story_panic_room"
-    },
-    story_first_world_bank = {
-      job = "red2",
-      story = "story_first_world_bank"
-    },
-    story_diamond_heist = {
-      job = "dah",
-      story = "story_diamond_heist"
-    },
-    story_diamond_store = {
-      job = "family",
-      story = "story_diamond_store"
-    },
-    story_safe_house_nightmare = {
-      job = "haunted",
-      story = "story_safe_house_nightmare"
-    },
-    story_brooklyn_bank = {
-      job = "brb",
-      story = "story_brooklyn_bank"
-    },
-    story_breakfast_in_tijuana = {
-      job = "pex",
-      story = "story_breakfast_in_tijuana"
-    },
-    story_big_bank = {
-      job = "big",
-      story = "story_big_bank"
-    },
-    story_the_diamond = {
-      job = "mus",
-      story = "story_the_diamond"
-    },
-    story_hotline_miami = {
-      job = "mia",
-      story = "story_hotline_miami"
-    },
-    story_four_floors = {
-      job = "mia",
-      story = "story_four_floors"
-    },
-    story_election_day = {
-      job = "election_day",
-      story = "story_election_day"
-    },
-    story_dragon_heist = {
-      job = "chas",
-      story = "story_dragon_heist"
-    },
-    story_alaskan_deal = {
-      job = "wwh",
-      story = "story_alaskan_deal"
-    },
-    story_mountain_master = {
-      job = "pent",
-      story = "story_mountain_master"
-    },
-    story_scarface_mansion = {
-      job = "friend",
-      story = "story_scarface_mansion"
-    },
-    story_heat_street = {
-      job = "run",
-      story = "story_heat_street"
-    },
-    story_hells_island = {
-      job = "bph",
-      story = "story_hells_island"
-    },
-    story_shacklethorne_auction = {
-      job = "sah",
-      story = "story_shacklethorne_auction"
-    },
-    story_beneath_the_mountain = {
-      job = "pbr",
-      story = "story_beneath_the_mountain"
-    },
-    story_birth_of_sky = {
-      job = "pbr2",
-      story = "story_birth_of_sky"
-    },
-    story_ukrainian_prisoner = {
-      job = "sand",
-      story = "story_ukrainian_prisoner"
-    },
-    story_brooklyn_10_10 = {
-      job = "spa",
-      story = "story_brooklyn_10_10"
-    },
-    story_biker_heist = {
+    lions_den = {
       job = "born",
-      story = "story_biker_heist"
+      day_id = 1
     },
-    story_reservoir_dogs = {
-      job = "rvd",
-      story = "story_reservoir_dogs"
+    road_rage = {
+      job = "born",
+      day_id = 2
     },
-    story_henrys_rock = {
-      job = "des",
-      story = "story_henrys_rock"
+    hotline_miami = {
+      job = "mia",
+      day_id = 1
     },
-    story_bulucs_mansion = {
-      job = "fex",
-      story = "story_bulucs_mansion"
+    diamond_store = {
+      job = "family"
     },
-    story_black_cat = {
-      job = "chca",
-      story = "story_black_cat"
+    art_gallery = {
+      job = "gallery"
     },
-    story_prison_nightmare = {
-      job = "help",
-      story = "story_prison_nightmare"
+    bank_heist_cash = {
+      job = "branchbank_cash"
     },
-    story_goat_simulator = {
-      job = "peta",
-      story = "story_goat_simulator"
+    ukrainian_job = {
+      job = "ukrainian_job_prof"
     },
-    story_transport_train = {
-      job = "arm_for",
-      story = "story_transport_train"
+    breakfast_in_tijuana = {
+      job = "pex"
     },
-    story_slaughterhouse = {
-      job = "dinner",
-      story = "story_slaughterhouse"
+    henrys_rock = {
+      job = "des"
     },
-    story_white_house = {
-      job = "vit",
-      story = "story_white_house"
+    the_diamond = {
+      job = "mus"
+    },
+    white_house = {
+      job = "vit"
+    },
+    slaughterhouse = {
+      job = "dinner"
+    },
+    transport_train = {
+      job = "arm_for"
+    },
+    goat_simulator = {
+      job = "peta"
+    },
+    big_bank = {
+      job = "big"
+    },
+    mallcrasher = {
+      job = "mallcrasher"
+    },
+    bank_heist_gold = {
+      job = "branchbank_gold_prof"
+    },
+    prison_nightmare = {
+      job = "help"
+    },
+    counterfeit = {
+      job = "pal"
+    },
+    hoxton_revenge = {
+      job = "hox_3"
+    },
+    bulucs_mansion = {
+      job = "fex"
+    },
+    ukrainian_prisoner = {
+      job = "sand"
+    },
+    beneath_the_mountain = {
+      job = "pbr"
+    },
+    shacklethorne_auction = {
+      job = "sah"
+    },
+    diamond_heist = {
+      job = "dah"
+    },
+    scarface_mansion = {
+      job = "friend"
+    },
+    safe_house_nightmare = {
+      job = "haunted"
+    },
+    panic_room = {
+      job = "flat"
+    },
+    dragon_heist = {
+      job = "chas"
+    },
+    election_day = {
+      job = "election_day"
+    },
+    four_floors = {
+      job = "mia",
+      day_id = 2
+    },
+    mountain_master = {
+      job = "pent"
+    },
+    four_store = {
+      job = "four_stores"
+    },
+    alaskan_deal = {
+      job = "wwh"
     },
   }
 

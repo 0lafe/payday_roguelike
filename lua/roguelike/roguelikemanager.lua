@@ -63,6 +63,7 @@ function RoguelikeManager:_unlock_skill_switches()
   end
 end
 
+-- logic to add perkdeck rewards
 function RoguelikeManager:add_perkdeck(quantity)
   local quantity = quantity or 1
   self._dropped_perkdecks = {}
@@ -198,10 +199,9 @@ end
 function RoguelikeManager:_assign_objectives(objectives, mission)
   local built_objectives = {}
   for _, objective in pairs(objectives) do
-    local level_progress = tweak_data.story:_level_progress("story_" .. objective, 1, {
+    local level_progress = tweak_data.story:_level_progress(objective, 1, {
       name_id = "menu_sm_" .. objective
     })
-    level_progress.single_day_id = tweak_data.story.heist_days[objective]
     table.insert(built_objectives, {
       level_progress
     })
@@ -372,20 +372,4 @@ function RoguelikeManager:handle_lootdrop()
   end
 
   return drop
-end
-
-function RoguelikeManager:completed_job(job_id, job_stage)
-  log(job_id)
-  log(job_stage)
-  local job_name = nil
-  for k, v in pairs(tweak_data.roguelike.achievement_additions) do
-    if v.job and v.job == job_id then
-      job_name = v.story
-    end
-  end
-
-  log(job_name)
-  if job_name then
-    managers.story:award(job_name)
-  end
 end

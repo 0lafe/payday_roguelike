@@ -13,5 +13,5 @@ function JobManager:next_stage()
   end
 
   self._global.roguelike_completed_job = true
-  managers.roguelike:completed_job(self:current_job_id(), self._global.current_job.current_stage)
+  managers.story:award_roguelike(self:current_job_id(), self._global.current_job.current_stage)
 end
