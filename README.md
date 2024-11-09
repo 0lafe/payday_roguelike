@@ -13,8 +13,6 @@ WiP
 
 # BUGS
 
-- Loot cards in coop
-
 - Possible client completion problem with escapes (MissionEndState:chk_complete_heist_achievements())
 - Possible problem receiving perk deck reward when in lobby with other players
 
