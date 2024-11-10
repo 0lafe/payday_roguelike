@@ -38,6 +38,5 @@ WiP
 - GGC
 - SHR
 - SHN
-- ED D3
 - Transports
 - Train Trade

@@ -236,6 +236,7 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       "art_gallery",
       "code_for_meth",
       "cook_off",
+      "breaking_ballot",
     },
     [2] = {
       "hotline_miami",

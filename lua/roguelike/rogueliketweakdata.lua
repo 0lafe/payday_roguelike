@@ -295,6 +295,9 @@ function RoguelikeTweakData:init(tweak_data)
     },
     lab_rats = {
       job = "nail"
+    },
+    breaking_ballot = {
+      job = "election_day_3"
     }
   }
 
