@@ -45,6 +45,7 @@
     </group>
 
     <group :script_path="tweak_data/" :hook_id="tweak_data/">
+      <post :script_path="narrativetweakdata.lua" :hook_id="narrativetweakdata"/>
       <post :script_path="skilltreetweakdata.lua" :hook_id="skilltreetweakdata"/>
       <post :script_path="storymissionstweakdata.lua" :hook_id="storymissionstweakdata"/>
       <post :script_path="upgradestweakdata.lua" :hook_id="upgradestweakdata"/>

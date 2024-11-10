@@ -292,6 +292,9 @@ function RoguelikeTweakData:init(tweak_data)
     },
     crude_awakening = {
       job = "deep"
+    },
+    lab_rats = {
+      job = "nail"
     }
   }
 

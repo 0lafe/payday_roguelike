@@ -36,7 +36,6 @@ WiP
 # Missing Heists
 
 - GGC
-- Lab Rats
 - SHR
 - SHN
 - ED D3

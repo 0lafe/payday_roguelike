@@ -119,7 +119,7 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
   )
 
   -- create multiple tier 3 missions
-  for i = 15, 24 do
+  for i = 15, 22 do
     table.insert(self.missions,
       self:_mission("sm_" .. i, {
         reward_id = "menu_sm_default_reward",
@@ -143,7 +143,7 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
 
   -- tier 4 intro description
   table.insert(self.missions,
-    self:_mission("sm_25", {
+    self:_mission("sm_23", {
       reward_id = "menu_sm_perkdeck_reward",
       voice_line = "Play_pln_stq_01",
       objectives = {},
@@ -157,7 +157,45 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
   )
 
   -- create multiple tier 4 missions
-  for i = 26, 29 do
+  for i = 24, 31 do
+    table.insert(self.missions,
+      self:_mission("sm_" .. i, {
+        reward_id = "menu_sm_default_reward",
+        voice_line = "Play_pln_stq_01",
+        objectives = {},
+        rewards = self:_default_reward(),
+        tier = 4
+      })
+    )
+  end
+
+  -- tier divider
+  table.insert(self.missions,
+    self:_mission("sm_act_5", {
+      rewarded = true,
+      completed = true,
+      is_header = true,
+      objectives = {}
+    })
+  )
+
+  -- tier 4 intro description
+  table.insert(self.missions,
+    self:_mission("sm_32", {
+      reward_id = "menu_sm_perkdeck_reward",
+      voice_line = "Play_pln_stq_01",
+      objectives = {},
+      rewards = self:_perkdeck_reward(),
+      completed = true,
+      hide_progress = true,
+      tier_list = true,
+      list_tier = 4,
+      auto_complete = true
+    })
+  )
+
+  -- create multiple tier 4 missions
+  for i = 33, 37 do
     table.insert(self.missions,
       self:_mission("sm_" .. i, {
         reward_id = "menu_sm_default_reward",
@@ -185,10 +223,9 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       "four_store",
       "ukrainian_job",
       "mallcrasher",
-      "bus_stop"
+      "bus_stop",
     },
     [1] = {
-      "go_bank",
       "jewelry_store",
       "bank_heist",
       "nightclub",
@@ -198,73 +235,77 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       "club_house",
       "art_gallery",
       "code_for_meth",
-      "cook_off"
+      "cook_off",
     },
     [2] = {
       "hotline_miami",
       "four_floors",
       "undercover",
-      "panic_room",
       "first_world_bank",
       "diamond_store",
-      "brooklyn_bank",
       "breakfast_in_tijuana",
       "big_bank",
       "the_diamond",
       "dragon_heist",
       "interception",
       "no_mercy",
-      "truck_load",
-      "airport",
       "fbi_server",
-      "engine_problems",
-      "bomb_dockyard",
-      "santas_workshop",
-      "stealing_xmas",
       "hostile_takeover",
-      "swing_vote",
-      "framing"
+      "framing",
+      "go_bank",
     },
     [3] = {
-      "alaskan_deal",
+      "brooklyn_bank",
+      "airport",
+      "truck_load",
+      "swing_vote",
+      "engine_problems",
+      "stealing_xmas",
+      "panic_room",
+      "santas_workshop",
+      "bomb_dockyard",
       "mountain_master",
+      "diamond_heist",
+      "alaskan_deal",
+      "shacklethorne_auction",
+      "the_search",
+      "alesso",
+      "crude_awakening",
+      "brooklyn_10_10",
+    },
+    [4] = {
+      "right_track",
       "scarface_mansion",
       "heat_street",
       "hells_island",
-      "shacklethorne_auction",
       "beneath_the_mountain",
-      "birth_of_sky",
       "ukrainian_prisoner",
-      "brooklyn_10_10",
-      "lions_den",
       "bulucs_mansion",
       "black_cat",
       "prison_nightmare",
-      "right_track",
-      "green_bridge",
-      "the_breakout",
-      "the_search",
       "bomb_forest",
       "meltdown",
-      "alesso",
       "aftershock",
-      "diamond_heist",
       "highland_mortuary",
-      "garnet_group_boutique",
       "border_crystals",
       "san_martin",
       "midland_ranch",
       "lost_in_transit",
-      "crude_awakening",
-      "white_xmas"
+      "white_xmas",
     },
-    [4] = {
+    [5] = {
+      "the_breakout",
       "goat_simulator",
       "transport_train",
       "slaughterhouse",
       "white_house",
       "henrys_rock",
-      "border_crossing"
+      "border_crossing",
+      "birth_of_sky",
+      "lions_den",
+      "garnet_group_boutique",
+      "green_bridge",
+      "lab_rats",
     }
   }
 end
