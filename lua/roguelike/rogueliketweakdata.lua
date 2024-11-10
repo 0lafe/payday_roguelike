@@ -56,9 +56,6 @@ function RoguelikeTweakData:init(tweak_data)
     hells_island = {
       job = "bph"
     },
-    reservoir_dogs = {
-      job = "rvd"
-    },
     first_world_bank = {
       job = "red2"
     },
@@ -72,7 +69,7 @@ function RoguelikeTweakData:init(tweak_data)
       job = "born",
       day_id = 1
     },
-    road_rage = {
+    interception = {
       job = "born",
       day_id = 2
     },
@@ -158,9 +155,6 @@ function RoguelikeTweakData:init(tweak_data)
     dragon_heist = {
       job = "chas"
     },
-    election_day = {
-      job = "election_day"
-    },
     four_floors = {
       job = "mia",
       day_id = 2
@@ -174,6 +168,131 @@ function RoguelikeTweakData:init(tweak_data)
     alaskan_deal = {
       job = "wwh"
     },
+    right_track = {
+      job = "election_day",
+      day_id = 1
+    },
+    swing_vote = {
+      job = "election_day",
+      day_id = 2
+    },
+    green_bridge = {
+      job = "glace"
+    },
+    no_mercy = {
+      job = "nmh"
+    },
+    truck_load = {
+      job = "watchdogs",
+      day_id = 1
+    },
+    boat_load = {
+      job = "watchdogs",
+      day_id = 2
+    },
+    airport = {
+      job = "firestarter",
+      day_id = 1
+    },
+    fbi_server = {
+      job = "firestarter",
+      day_id = 2
+    },
+    club_house = {
+      job = "welcome_to_the_jungle",
+      day_id = 1
+    },
+    engine_problems = {
+      job = "welcome_to_the_jungle",
+      day_id = 2
+    },
+    train_trade = {
+      job = "framing_frame",
+      day_id = 2
+    },
+    framing = {
+      job = "framing_frame",
+      day_id = 3
+    },
+    cook_off = {
+      job = "alex",
+      day_id = 1
+    },
+    code_for_meth = {
+      job = "alex",
+      day_id = 2
+    },
+    bus_stop = {
+      job = "alex",
+      day_id = 3
+    },
+    go_bank = {
+      job = "roberts"
+    },
+    jewelry_store = {
+      job = "jewelry_store"
+    },
+    bank_heist = {
+      job = "firestarter"
+    },
+    the_breakout = {
+      job = "hox",
+      day_id = 1
+    },
+    the_search = {
+      job = "hox",
+      day_id = 2
+    },
+    white_xmas = {
+      job = "pines"
+    },
+    bomb_dockyard = {
+      job = "crojob1"
+    },
+    bomb_forest = {
+      job = "crojob2"
+    },
+    meltdown = {
+      job = "shoutout_raid"
+    },
+    alesso = {
+      job = "arena"
+    },
+    aftershock = {
+      job = "jolly"
+    },
+    santas_workshop = {
+      job = "cane"
+    },
+    stealing_xmas = {
+      job = "moon"
+    },
+    highland_mortuary = {
+      job = "rvd",
+      day_id = 2
+    },
+    garnet_group_boutique = {
+      job = "rvd",
+      day_id = 1
+    },
+    border_crystals = {
+      job = "mex_cooking"
+    },
+    san_martin = {
+      job = "bex"
+    },
+    midland_ranch = {
+      job = "ranc"
+    },
+    lost_in_transit = {
+      job = "trai"
+    },
+    hostile_takeover = {
+      job = "corp"
+    },
+    crude_awakening = {
+      job = "deep"
+    }
   }
 
   local lootdrop_table = {

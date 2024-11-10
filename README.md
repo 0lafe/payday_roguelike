@@ -3,20 +3,9 @@ WiP
 # TODO
 
 - Scope drops to owned items
-- Single day heists?
-- - ED D3
-- - Biker D1
-- - Biker D2
-- - Fire starter d2
-- - rats d3?
-- - res dogs
-- - hox out
-
 - Escape days maybe?
-
 - Cost for rerolling
 - Remove sidejob menu for client in prelobby
-- Restructure reward logic to be more streamlined for single days
 - Check out "Skip Mission" button
 
 # BUGS
@@ -43,3 +32,13 @@ WiP
   - reduce/remove bots
 - Pro Job
   - Resets save on fail
+
+# Missing Heists
+
+- GGC
+- Lab Rats
+- SHR
+- SHN
+- ED D3
+- Transports
+- Train Trade

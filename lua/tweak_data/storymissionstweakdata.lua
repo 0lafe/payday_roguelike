@@ -184,7 +184,8 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
     [0] = {
       "four_store",
       "ukrainian_job",
-      "mallcrasher"
+      "mallcrasher",
+      "bus_stop"
     },
     [1] = {
       "go_bank",
@@ -192,7 +193,12 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       "bank_heist",
       "nightclub",
       "hoxton_revenge",
-      "counterfeit"
+      "counterfeit",
+      "boat_load",
+      "club_house",
+      "art_gallery",
+      "code_for_meth",
+      "cook_off"
     },
     [2] = {
       "hotline_miami",
@@ -200,14 +206,24 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       "undercover",
       "panic_room",
       "first_world_bank",
-      "diamond_heist",
       "diamond_store",
       "brooklyn_bank",
       "breakfast_in_tijuana",
       "big_bank",
       "the_diamond",
-      "election_day",
-      "dragon_heist"
+      "dragon_heist",
+      "interception",
+      "no_mercy",
+      "truck_load",
+      "airport",
+      "fbi_server",
+      "engine_problems",
+      "bomb_dockyard",
+      "santas_workshop",
+      "stealing_xmas",
+      "hostile_takeover",
+      "swing_vote",
+      "framing"
     },
     [3] = {
       "alaskan_deal",
@@ -220,11 +236,27 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       "birth_of_sky",
       "ukrainian_prisoner",
       "brooklyn_10_10",
-      "biker_heist",
-      "reservoir_dogs",
+      "lions_den",
       "bulucs_mansion",
       "black_cat",
-      "prison_nightmare"
+      "prison_nightmare",
+      "right_track",
+      "green_bridge",
+      "the_breakout",
+      "the_search",
+      "bomb_forest",
+      "meltdown",
+      "alesso",
+      "aftershock",
+      "diamond_heist",
+      "highland_mortuary",
+      "garnet_group_boutique",
+      "border_crystals",
+      "san_martin",
+      "midland_ranch",
+      "lost_in_transit",
+      "crude_awakening",
+      "white_xmas"
     },
     [4] = {
       "goat_simulator",
@@ -232,6 +264,7 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       "slaughterhouse",
       "white_house",
       "henrys_rock",
+      "border_crossing"
     }
   }
 end
