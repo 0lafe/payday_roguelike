@@ -7,6 +7,7 @@ WiP
 - Cost for rerolling
 - Remove sidejob menu for client in prelobby
 - Check out "Skip Mission" button
+- redo tier skip rewards to account for additional tier
 
 # BUGS
 

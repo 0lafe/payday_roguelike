@@ -42,7 +42,7 @@ function StoryMissionsManager:award_roguelike(job_id, job_stage)
 	-- if client it completes the objective if its in the same tier as your current mission
 	if Network:is_client() then
 		if current_mission.tier then
-			if managers.tweak_data:heist_in_tier(current_mission.tier, job_name) then
+			if tweak_data.story:heist_in_tier(current_mission.tier, job_name) then
 				for _, v in pairs(current_mission.objectives_flat) do
 					objective = v
 					objective.completed = true
