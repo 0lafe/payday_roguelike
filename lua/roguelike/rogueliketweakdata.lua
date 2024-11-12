@@ -81,7 +81,8 @@ function RoguelikeTweakData:init(tweak_data)
       job = "family"
     },
     art_gallery = {
-      job = "gallery"
+      job = "framing_frame",
+      day_id = 1
     },
     bank_heist_cash = {
       job = "branchbank_cash"
@@ -199,11 +200,11 @@ function RoguelikeTweakData:init(tweak_data)
       day_id = 2
     },
     club_house = {
-      job = "welcome_to_the_jungle",
+      job = "welcome_to_the_jungle_prof",
       day_id = 1
     },
     engine_problems = {
-      job = "welcome_to_the_jungle",
+      job = "welcome_to_the_jungle_prof",
       day_id = 2
     },
     train_trade = {

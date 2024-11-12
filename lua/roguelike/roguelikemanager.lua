@@ -207,11 +207,6 @@ function RoguelikeManager:_assign_objectives(objectives, mission)
     })
   end
 
-  -- add option to skip to completed tiers
-  if mission.tier == 0 and self.save_data.highest_tier > 0 then
-    mission.tier_skip = true
-  end
-
   mission.objectives = built_objectives
 
   mission.objectives_flat = {}

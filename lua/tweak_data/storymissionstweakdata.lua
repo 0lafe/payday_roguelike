@@ -224,12 +224,12 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       "ukrainian_job",
       "mallcrasher",
       "bus_stop",
+      "train_trade"
     },
     [1] = {
       "jewelry_store",
       "bank_heist",
       "nightclub",
-      "hoxton_revenge",
       "counterfeit",
       "boat_load",
       "club_house",
@@ -254,6 +254,7 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       "hostile_takeover",
       "framing",
       "go_bank",
+      "hoxton_revenge",
     },
     [3] = {
       "brooklyn_bank",

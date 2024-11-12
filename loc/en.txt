@@ -144,4 +144,5 @@
   "menu_sm_border_crossing": "Border Crossing",
   "menu_sm_lab_rats": "Lab Rats",
   "menu_sm_breaking_ballot": "Breaking Ballot",
+  "menu_sm_train_trade": "Train trade",
 }
