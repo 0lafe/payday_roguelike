@@ -224,7 +224,7 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       "ukrainian_job",
       "mallcrasher",
       "bus_stop",
-      "train_trade"
+      "train_trade",
     },
     [1] = {
       "jewelry_store",

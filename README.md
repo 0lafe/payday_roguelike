@@ -2,25 +2,26 @@ WiP
 
 # TODO
 
-- Scope drops to owned items
-- Escape days maybe?
+- Scope drops to owned items/dlc
 - Cost for rerolling
 - Check out "Skip Mission" button
 - redo tier skip rewards to account for additional tier
 - annoying ass popup menus
 - Spawn bags on boat load/code for meth/etc
+- jobmanager global causes problems
+- DLC attachments/attachment balance
+- Remove sidejob menu for client in prelobby
 
 # BUGS
 
 - Possible client completion problem with escapes (MissionEndState:chk_complete_heist_achievements())
 - Possible problem receiving perk deck reward when in lobby with other players
 - mask lootdrop animation is weird in coop lobby
-- Remove sidejob menu for client in prelobby
 
 # FEATURES
 
 - Handle CC/money gain
-- Recycling weapons/cards(?)
+- Recycling weapons(?)
 - Throwables?
 - Cosmetics?
 - Persist RNG?
@@ -43,3 +44,4 @@ WiP
 - SHR
 - SHN
 - Transports
+- Escape days

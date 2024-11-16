@@ -66,23 +66,19 @@ function RoguelikeTweakData:init(tweak_data)
       job = "man"
     },
     lions_den = {
-      job = "born",
-      day_id = 1
+      job = "lions_den",
     },
     interception = {
-      job = "born",
-      day_id = 2
+      job = "interception",
     },
     hotline_miami = {
-      job = "mia",
-      day_id = 1
+      job = "hotline_miami",
     },
     diamond_store = {
       job = "family"
     },
     art_gallery = {
-      job = "framing_frame",
-      day_id = 1
+      job = "framing_frame_1"
     },
     bank_heist_cash = {
       job = "branchbank_cash"
@@ -157,8 +153,7 @@ function RoguelikeTweakData:init(tweak_data)
       job = "chas"
     },
     four_floors = {
-      job = "mia",
-      day_id = 2
+      job = "four_floors",
     },
     mountain_master = {
       job = "pent"
@@ -170,12 +165,10 @@ function RoguelikeTweakData:init(tweak_data)
       job = "wwh"
     },
     right_track = {
-      job = "election_day",
-      day_id = 1
+      job = "right_track",
     },
     swing_vote = {
-      job = "election_day",
-      day_id = 2
+      job = "swing_vote",
     },
     green_bridge = {
       job = "glace"
@@ -184,48 +177,37 @@ function RoguelikeTweakData:init(tweak_data)
       job = "nmh"
     },
     truck_load = {
-      job = "watchdogs",
-      day_id = 1
+      job = "truck_load",
     },
     boat_load = {
-      job = "watchdogs",
-      day_id = 2
+      job = "boat_load",
     },
     airport = {
       job = "firestarter",
-      day_id = 1
     },
     fbi_server = {
       job = "firestarter",
-      day_id = 2
     },
     club_house = {
-      job = "welcome_to_the_jungle_prof",
-      day_id = 1
+      job = "club_house",
     },
     engine_problems = {
-      job = "welcome_to_the_jungle_prof",
-      day_id = 2
+      job = "engine_problems",
     },
     train_trade = {
-      job = "framing_frame",
-      day_id = 2
+      job = "train_trade",
     },
     framing = {
-      job = "framing_frame",
-      day_id = 3
+      job = "framing",
     },
     cook_off = {
-      job = "alex",
-      day_id = 1
+      job = "cook_off",
     },
     code_for_meth = {
-      job = "alex",
-      day_id = 2
+      job = "code_for_meth",
     },
     bus_stop = {
-      job = "alex",
-      day_id = 3
+      job = "bus_stop",
     },
     go_bank = {
       job = "roberts"
@@ -234,15 +216,13 @@ function RoguelikeTweakData:init(tweak_data)
       job = "jewelry_store"
     },
     bank_heist = {
-      job = "firestarter"
+      job = "bank_heist_good"
     },
     the_breakout = {
-      job = "hox",
-      day_id = 1
+      job = "the_breakout",
     },
     the_search = {
-      job = "hox",
-      day_id = 2
+      job = "the_search",
     },
     white_xmas = {
       job = "pines"
@@ -269,12 +249,10 @@ function RoguelikeTweakData:init(tweak_data)
       job = "moon"
     },
     highland_mortuary = {
-      job = "rvd",
-      day_id = 2
+      job = "highland_mortuary",
     },
     garnet_group_boutique = {
-      job = "rvd",
-      day_id = 1
+      job = "garnet_group_boutique",
     },
     border_crystals = {
       job = "mex_cooking"
@@ -298,8 +276,8 @@ function RoguelikeTweakData:init(tweak_data)
       job = "nail"
     },
     breaking_ballot = {
-      job = "election_day_3"
-    }
+      job = "breaking_ballot"
+    },
   }
 
   local lootdrop_table = {
