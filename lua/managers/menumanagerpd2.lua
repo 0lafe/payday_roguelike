@@ -1,5 +1,5 @@
 function MenuCallbackHandler:start_job(job_data)
-  if not managers.job:activate_job(job_data.job_id, job_data.single_day_id) then
+  if not managers.job:activate_job(job_data.job_id) then
     return
   end
 

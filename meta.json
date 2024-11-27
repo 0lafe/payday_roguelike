@@ -1,7 +1,7 @@
 [
   {
     "ident": "lafe_roguelike_mod",
-    "version": "0.30",
+    "version": "0.31",
     "patchnotes_url": "https://github.com/0lafe/payday_roguelike/commits",
     "download_url": "https://github.com/0lafe/payday_roguelike/archive/refs/heads/main.zip"
   }

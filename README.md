@@ -11,12 +11,14 @@ WiP
 - jobmanager global causes problems
 - DLC attachments/attachment balance
 - Remove sidejob menu for client in prelobby
+- Update narrativetweak to be like one day heists
 
 # BUGS
 
-- Possible client completion problem with escapes (MissionEndState:chk_complete_heist_achievements())
 - Possible problem receiving perk deck reward when in lobby with other players
 - mask lootdrop animation is weird in coop lobby
+- Check single day heist briefings
+- Make sure single day heists load
 
 # FEATURES
 

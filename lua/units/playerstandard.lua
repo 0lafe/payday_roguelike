@@ -1,5 +1,5 @@
 local function train_trade()
-  return managers.job:current_job_id() == "framing_frame" and managers.job:current_stage() == 2
+  return managers.job:current_job_id() == "train_trade"
 end
 
 -- force loud when hard mode enabled

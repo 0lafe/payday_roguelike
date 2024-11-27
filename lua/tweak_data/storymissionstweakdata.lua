@@ -227,7 +227,7 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       "train_trade",
     },
     [1] = {
-      "jewelry_store",
+      "hotline_miami",
       "bank_heist",
       "nightclub",
       "counterfeit",
@@ -239,7 +239,7 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       "breaking_ballot",
     },
     [2] = {
-      "hotline_miami",
+      "jewelry_store",
       "four_floors",
       "undercover",
       "first_world_bank",
@@ -384,7 +384,6 @@ function StoryMissionsTweakData:_level_progress(progress_id, ...)
   data.levels = data.levels or heist_data.job and {
     heist_data.job
   }
-  data.single_day_id = heist_data.day_id
 
   return data
 end

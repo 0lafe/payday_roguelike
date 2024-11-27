@@ -1,301 +1,278 @@
-Hooks:PostHook(NarrativeTweakData, "init", "roguelike_init_narrative_tweak_data", function(self, tweak_data)
-  self.jobs.breaking_ballot = deep_clone(self.jobs.election_day)
-  self.jobs.breaking_ballot.name_id = "heist_election_day_3_hl"
-  self.jobs.breaking_ballot.crimenet_videos = { "cn_elcday3" }
-  self.jobs.breaking_ballot.chain = {
-    {
-      level_id = "election_day_3",
-      type_id = "heist_type_knockover",
-      type = "d",
-    }
-  }
+if not tweak_data then return end
 
-  self.jobs.right_track = deep_clone(self.jobs.election_day)
-  self.jobs.right_track.name_id = "heist_election_day_1_hl"
-  self.jobs.right_track.crimenet_videos = { "cn_elcday1" }
-  self.jobs.right_track.chain = {
-    {
-      level_id = "election_day_1",
-      type_id = "heist_type_knockover",
-      type = "d",
-    }
-  }
+if not tweak_data.narrative.contacts.single_days then
+  tweak_data.narrative.contacts.single_days = {}
+  tweak_data.narrative.contacts.single_days.name_id = "heist_contact_single_days"
+  tweak_data.narrative.contacts.single_days.descriptions_id = "heist_contact_single_days_description"
+  tweak_data.narrative.contacts.single_days.package = "packages/contact_bain"
+  tweak_data.narrative.contacts.single_days.assets_gui = Idstring("guis/mission_briefing/preload_contact_bain")
+end
 
-  self.jobs.swing_vote = deep_clone(self.jobs.election_day)
-  self.jobs.swing_vote.name_id = "heist_election_day_2_hl"
-  self.jobs.swing_vote.crimenet_videos = { "cn_elcday2" }
-  self.jobs.swing_vote.chain = {
-    {
-      level_id = "election_day_2",
-      type_id = "heist_type_knockover",
-      type = "d",
-    }
-  }
+tweak_data.narrative.jobs.right_track = deep_clone(tweak_data.narrative.jobs.election_day)
+tweak_data.narrative.jobs.right_track.original_id = "election_day"
+tweak_data.narrative.jobs.right_track.name_id = "heist_election_day_1_hl"
+tweak_data.narrative.jobs.right_track.contact = "single_days"
+tweak_data.narrative.jobs.right_track.chain = {
+  tweak_data.narrative.stages.election_day_1
+}
 
-  self.jobs.framing_frame_1 = deep_clone(self.jobs.framing_frame)
-  self.jobs.framing_frame_1.name_id = "heist_framing_frame_1_hl"
-  self.jobs.framing_frame_1.crimenet_videos = { "cn_framingframe1" }
-  self.jobs.framing_frame_1.chain = {
-    {
-      level_id = "framing_frame_1",
-      type_id = "heist_type_knockover",
-      type = "d",
-    }
-  }
+tweak_data.narrative.jobs.swing_vote = deep_clone(tweak_data.narrative.jobs.election_day)
+tweak_data.narrative.jobs.swing_vote.original_id = "election_day"
+tweak_data.narrative.jobs.swing_vote.name_id = "heist_election_day_2_hl"
+tweak_data.narrative.jobs.swing_vote.contact = "single_days"
+tweak_data.narrative.jobs.swing_vote.chain = {
+  tweak_data.narrative.stages.election_day_2
+}
 
-  self.jobs.train_trade = deep_clone(self.jobs.framing_frame)
-  self.jobs.train_trade.name_id = "heist_framing_frame_2_hl"
-  self.jobs.train_trade.crimenet_videos = { "cn_framingframe2" }
-  self.jobs.train_trade.chain = {
-    {
-      level_id = "framing_frame_2",
-      type_id = "heist_type_knockover",
-      type = "d",
-    }
-  }
+tweak_data.narrative.jobs.breaking_ballot = deep_clone(tweak_data.narrative.jobs.election_day)
+tweak_data.narrative.jobs.breaking_ballot.original_id = "election_day"
+tweak_data.narrative.jobs.breaking_ballot.name_id = "heist_election_day_3_hl"
+tweak_data.narrative.jobs.breaking_ballot.contact = "single_days"
+tweak_data.narrative.jobs.breaking_ballot.chain = {
+  tweak_data.narrative.stages.election_day_3
+}
 
-  self.jobs.framing = deep_clone(self.jobs.framing_frame)
-  self.jobs.framing.name_id = "heist_framing_frame_3_hl"
-  self.jobs.framing.crimenet_videos = { "cn_framingframe3" }
-  self.jobs.framing.chain = {
-    {
-      level_id = "framing_frame_3",
-      type_id = "heist_type_knockover",
-      type = "d",
-    }
-  }
+tweak_data.narrative.jobs.framing_frame_1 = deep_clone(tweak_data.narrative.jobs.framing_frame)
+tweak_data.narrative.jobs.framing_frame_1.original_id = "framing_frame"
+tweak_data.narrative.jobs.framing_frame_1.name_id = "heist_framing_frame_1_hl"
+tweak_data.narrative.jobs.framing_frame_1.contact = "single_days"
+tweak_data.narrative.jobs.framing_frame_1.chain = {
+  tweak_data.narrative.stages.framing_frame_1
+}
 
-  self.jobs.lions_den = deep_clone(self.jobs.born)
-  self.jobs.lions_den.name_id = "heist_born_hl"
-  self.jobs.lions_den.crimenet_videos = { "cn_elcday1" }
-  self.jobs.lions_den.chain = {
-    {
-      level_id = "born",
-      type_id = "heist_type_knockover",
-      type = "d",
-    }
-  }
+tweak_data.narrative.jobs.train_trade = deep_clone(tweak_data.narrative.jobs.framing_frame)
+tweak_data.narrative.jobs.train_trade.original_id = "framing_frame"
+tweak_data.narrative.jobs.train_trade.name_id = "heist_framing_frame_2_hl"
+tweak_data.narrative.jobs.train_trade.contact = "single_days"
+tweak_data.narrative.jobs.train_trade.chain = {
+  tweak_data.narrative.stages.framing_frame_2
+}
 
-  self.jobs.interception = deep_clone(self.jobs.born)
-  self.jobs.interception.name_id = "heist_chew_hl"
-  self.jobs.interception.crimenet_videos = { "cn_elcday2" }
-  self.jobs.interception.chain = {
-    {
-      level_id = "chew",
-      type_id = "heist_type_knockover",
-      type = "d",
-    }
-  }
+tweak_data.narrative.jobs.framing = deep_clone(tweak_data.narrative.jobs.framing_frame)
+tweak_data.narrative.jobs.framing.original_id = "framing_frame"
+tweak_data.narrative.jobs.framing.name_id = "heist_framing_frame_3_hl"
+tweak_data.narrative.jobs.framing.contact = "single_days"
+tweak_data.narrative.jobs.framing.chain = {
+  tweak_data.narrative.stages.framing_frame_3
+}
 
-  self.jobs.hotline_miami = deep_clone(self.jobs.mia)
-  self.jobs.hotline_miami.name_id = "heist_mia_1_hl"
-  self.jobs.hotline_miami.crimenet_videos = { "cn_hlm1" }
-  self.jobs.hotline_miami.chain = {
-    {
-      level_id = "mia_1",
-      type_id = "heist_type_knockover",
-      type = "d",
-    }
-  }
+tweak_data.narrative.jobs.lions_den = deep_clone(tweak_data.narrative.jobs.born)
+tweak_data.narrative.jobs.lions_den.original_id = "born"
+tweak_data.narrative.jobs.lions_den.name_id = "heist_born_hl"
+tweak_data.narrative.jobs.lions_den.contact = "single_days"
+tweak_data.narrative.jobs.lions_den.chain = {
+  tweak_data.narrative.stages.born
+}
 
-  self.jobs.four_floors = deep_clone(self.jobs.mia)
-  self.jobs.four_floors.name_id = "heist_mia_2_hl"
-  self.jobs.four_floors.crimenet_videos = { "cn_hlm2" }
-  self.jobs.four_floors.chain = {
-    {
-      level_id = "mia_2",
-      type_id = "heist_type_knockover",
-      type = "d",
-    }
-  }
+tweak_data.narrative.jobs.interception = deep_clone(tweak_data.narrative.jobs.born)
+tweak_data.narrative.jobs.interception.original_id = "born"
+tweak_data.narrative.jobs.interception.name_id = "heist_chew_hl"
+tweak_data.narrative.jobs.interception.contact = "single_days"
+tweak_data.narrative.jobs.interception.chain = {
+  tweak_data.narrative.stages.chew
+}
 
-  self.jobs.truck_load = deep_clone(self.jobs.watchdogs)
-  self.jobs.truck_load.name_id = "heist_watchdogs_1_d_hl"
-  self.jobs.truck_load.crimenet_videos = { "cn_hlm2" }
-  self.jobs.truck_load.chain = {
-    {
-      level_id = "watchdogs_1_d",
-      type_id = "heist_type_knockover",
-      type = "d",
-    }
-  }
+tweak_data.narrative.jobs.hotline_miami = deep_clone(tweak_data.narrative.jobs.mia)
+tweak_data.narrative.jobs.hotline_miami.original_id = "mia"
+tweak_data.narrative.jobs.hotline_miami.name_id = "heist_mia_1_hl"
+tweak_data.narrative.jobs.hotline_miami.contact = "single_days"
+tweak_data.narrative.jobs.hotline_miami.chain = {
+  tweak_data.narrative.stages.mia_1
+}
 
-  self.jobs.boat_load = deep_clone(self.jobs.watchdogs)
-  self.jobs.boat_load.name_id = "heist_watchdogs_2_n_hl"
-  self.jobs.boat_load.crimenet_videos = { "cn_hlm2" }
-  self.jobs.boat_load.chain = {
-    {
-      level_id = "watchdogs_2_n",
-      type_id = "heist_type_knockover",
-      type = "d",
-    }
-  }
+tweak_data.narrative.jobs.four_floors = deep_clone(tweak_data.narrative.jobs.mia)
+tweak_data.narrative.jobs.four_floors.original_id = "mia"
+tweak_data.narrative.jobs.four_floors.name_id = "heist_mia_2_hl"
+tweak_data.narrative.jobs.four_floors.contact = "single_days"
+tweak_data.narrative.jobs.four_floors.chain = {
+  tweak_data.narrative.stages.mia_2
+}
 
-  self.jobs.the_breakout = deep_clone(self.jobs.hox)
-  self.jobs.the_breakout.name_id = "heist_hox_1_hl"
-  self.jobs.the_breakout.crimenet_videos = { "cn_hox1" }
-  self.jobs.the_breakout.chain = {
-    {
-      level_id = "hox_1",
-      type_id = "heist_type_knockover",
-      type = "d",
-    }
-  }
+tweak_data.narrative.jobs.truck_load_day = deep_clone(tweak_data.narrative.jobs.watchdogs_wrapper)
+tweak_data.narrative.jobs.truck_load_day.original_id = "watchdogs"
+tweak_data.narrative.jobs.truck_load_day.job_wrapper = nil
+tweak_data.narrative.jobs.truck_load_day.name_id = "heist_watchdogs_1_hl"
+tweak_data.narrative.jobs.truck_load_day.contact = "single_days"
+tweak_data.narrative.jobs.truck_load_day.chain = {
+  tweak_data.narrative.stages.watchdogs_1_d
+}
 
-  self.jobs.the_search = deep_clone(self.jobs.hox)
-  self.jobs.the_search.name_id = "heist_hox_2_hl"
-  self.jobs.the_search.crimenet_videos = { "cn_hox2" }
-  self.jobs.the_search.chain = {
-    {
-      level_id = "hox_2",
-      type_id = "heist_type_knockover",
-      type = "d",
-    }
-  }
+tweak_data.narrative.jobs.truck_load_night = deep_clone(tweak_data.narrative.jobs.watchdogs_wrapper)
+tweak_data.narrative.jobs.truck_load_night.original_id = "watchdogs"
+tweak_data.narrative.jobs.truck_load_night.job_wrapper = nil
+tweak_data.narrative.jobs.truck_load_night.name_id = "heist_watchdogs_1_night_hl"
+tweak_data.narrative.jobs.truck_load_night.contact = "single_days"
+tweak_data.narrative.jobs.truck_load_night.chain = {
+  tweak_data.narrative.stages.watchdogs_1_n
+}
 
-  self.jobs.the_search = deep_clone(self.jobs.hox)
-  self.jobs.the_search.name_id = "heist_hox_2_hl"
-  self.jobs.the_search.crimenet_videos = { "cn_hox2" }
-  self.jobs.the_search.chain = {
-    {
-      level_id = "hox_2",
-      type_id = "heist_type_knockover",
-      type = "d",
-    }
-  }
+tweak_data.narrative.jobs.boat_load_night = deep_clone(tweak_data.narrative.jobs.watchdogs_wrapper)
+tweak_data.narrative.jobs.boat_load_night.original_id = "watchdogs"
+tweak_data.narrative.jobs.boat_load_night.job_wrapper = nil
+tweak_data.narrative.jobs.boat_load_night.name_id = "heist_watchdogs_2_hl"
+tweak_data.narrative.jobs.boat_load_night.contact = "single_days"
+tweak_data.narrative.jobs.boat_load_night.chain = {
+  tweak_data.narrative.stages.watchdogs_2_n
+}
 
-  self.jobs.airport = deep_clone(self.jobs.firestarter)
-  self.jobs.airport.name_id = "heist_firestarter_1_hl"
-  self.jobs.airport.crimenet_videos = { "cn_fires1" }
-  self.jobs.airport.chain = {
-    {
-      level_id = "firestarter_1",
-      type_id = "heist_type_knockover",
-      type = "d",
-    }
-  }
+tweak_data.narrative.jobs.boat_load_day = deep_clone(tweak_data.narrative.jobs.watchdogs_wrapper)
+tweak_data.narrative.jobs.boat_load_day.original_id = "watchdogs"
+tweak_data.narrative.jobs.boat_load_day.job_wrapper = nil
+tweak_data.narrative.jobs.boat_load_day.name_id = "heist_watchdogs_2_day_hl"
+tweak_data.narrative.jobs.boat_load_day.contact = "single_days"
+tweak_data.narrative.jobs.boat_load_day.chain = {
+  tweak_data.narrative.stages.watchdogs_2_d
+}
 
-  self.jobs.fbi_server = deep_clone(self.jobs.firestarter)
-  self.jobs.fbi_server.name_id = "heist_firestarter_2_hl"
-  self.jobs.fbi_server.crimenet_videos = { "cn_fires2" }
-  self.jobs.fbi_server.chain = {
-    {
-      level_id = "firestarter_2",
-      type_id = "heist_type_knockover",
-      type = "d",
-    }
-  }
+tweak_data.narrative.jobs.the_breakout = deep_clone(tweak_data.narrative.jobs.hox)
+tweak_data.narrative.jobs.the_breakout.original_id = "watchdogs"
+tweak_data.narrative.jobs.the_breakout.name_id = "heist_hox_1_hl"
+tweak_data.narrative.jobs.the_breakout.contact = "single_days"
+tweak_data.narrative.jobs.the_breakout.chain = {
+  tweak_data.narrative.stages.hox_1
+}
 
-  self.jobs.bank_heist_good = deep_clone(self.jobs.firestarter)
-  self.jobs.bank_heist_good.name_id = "heist_firestarter_3_hl"
-  self.jobs.bank_heist_good.crimenet_videos = { "cn_fires3" }
-  self.jobs.bank_heist_good.chain = {
-    {
-      level_id = "firestarter_3",
-      type_id = "heist_type_knockover",
-      type = "d",
-    }
-  }
+tweak_data.narrative.jobs.the_search = deep_clone(tweak_data.narrative.jobs.hox)
+tweak_data.narrative.jobs.the_search.original_id = "watchdogs"
+tweak_data.narrative.jobs.the_search.name_id = "heist_hox_2_hl"
+tweak_data.narrative.jobs.the_search.contact = "single_days"
+tweak_data.narrative.jobs.the_search.chain = {
+  tweak_data.narrative.stages.hox_2
+}
 
-  self.jobs.club_house = deep_clone(self.jobs.welcome_to_the_jungle_wrapper_prof)
-  self.jobs.club_house.name_id = "heist_welcome_to_the_jungle_1_d_hl"
-  self.jobs.club_house.crimenet_videos = { "cn_fires3" }
-  self.jobs.club_house.chain = {
-    {
-      level_id = "welcome_to_the_jungle_1_d",
-      type_id = "heist_type_knockover",
-      type = "d",
-    }
-  }
+tweak_data.narrative.jobs.airport = deep_clone(tweak_data.narrative.jobs.firestarter)
+tweak_data.narrative.jobs.airport.original_id = "firestarter"
+tweak_data.narrative.jobs.airport.name_id = "heist_firestarter_1_hl"
+tweak_data.narrative.jobs.airport.contact = "single_days"
+tweak_data.narrative.jobs.airport.chain = {
+  tweak_data.narrative.stages.firestarter_1
+}
 
-  self.jobs.engine_problems = deep_clone(self.jobs.welcome_to_the_jungle_wrapper_prof)
-  self.jobs.engine_problems.name_id = "heist_welcome_to_the_jungle_2_hl"
-  self.jobs.engine_problems.crimenet_videos = { "cn_fires3" }
-  self.jobs.engine_problems.chain = {
-    {
-      level_id = "welcome_to_the_jungle_2",
-      type_id = "heist_type_knockover",
-      type = "d",
-    }
-  }
+tweak_data.narrative.jobs.fbi_server = deep_clone(tweak_data.narrative.jobs.firestarter)
+tweak_data.narrative.jobs.fbi_server.original_id = "firestarter"
+tweak_data.narrative.jobs.fbi_server.name_id = "heist_firestarter_2_hl"
+tweak_data.narrative.jobs.fbi_server.contact = "single_days"
+tweak_data.narrative.jobs.fbi_server.chain = {
+  tweak_data.narrative.stages.firestarter_2
+}
 
-  self.jobs.cook_off = deep_clone(self.jobs.alex)
-  self.jobs.cook_off.name_id = "heist_alex_1_hl"
-  self.jobs.cook_off.crimenet_videos = { "cn_rat1" }
-  self.jobs.cook_off.chain = {
-    {
-      level_id = "alex_1",
-      type_id = "heist_type_knockover",
-      type = "d",
-    }
-  }
+tweak_data.narrative.jobs.bank_heist_good = deep_clone(tweak_data.narrative.jobs.firestarter)
+tweak_data.narrative.jobs.bank_heist_good.original_id = "firestarter"
+tweak_data.narrative.jobs.bank_heist_good.name_id = "heist_firestarter_3_hl"
+tweak_data.narrative.jobs.bank_heist_good.contact = "single_days"
+tweak_data.narrative.jobs.bank_heist_good.chain = {
+  tweak_data.narrative.stages.firestarter_3
+}
 
-  self.jobs.code_for_meth = deep_clone(self.jobs.alex)
-  self.jobs.code_for_meth.name_id = "heist_alex_2_hl"
-  self.jobs.code_for_meth.crimenet_videos = { "cn_rat2" }
-  self.jobs.code_for_meth.chain = {
-    {
-      level_id = "alex_2",
-      type_id = "heist_type_knockover",
-      type = "d",
-    }
-  }
+tweak_data.narrative.jobs.cook_off = deep_clone(tweak_data.narrative.jobs.alex)
+tweak_data.narrative.jobs.cook_off.original_id = "alex"
+tweak_data.narrative.jobs.cook_off.name_id = "heist_alex_1_hl"
+tweak_data.narrative.jobs.cook_off.contact = "single_days"
+tweak_data.narrative.jobs.cook_off.chain = {
+  tweak_data.narrative.stages.alex_1
+}
 
-  self.jobs.bus_stop = deep_clone(self.jobs.alex)
-  self.jobs.bus_stop.name_id = "heist_alex_3_hl"
-  self.jobs.bus_stop.crimenet_videos = { "cn_rat3" }
-  self.jobs.bus_stop.chain = {
-    {
-      level_id = "alex_3",
-      type_id = "heist_type_knockover",
-      type = "d",
-    }
-  }
+tweak_data.narrative.jobs.code_for_meth = deep_clone(tweak_data.narrative.jobs.alex)
+tweak_data.narrative.jobs.code_for_meth.original_id = "alex"
+tweak_data.narrative.jobs.code_for_meth.name_id = "heist_alex_2_hl"
+tweak_data.narrative.jobs.code_for_meth.contact = "single_days"
+tweak_data.narrative.jobs.code_for_meth.chain = {
+  tweak_data.narrative.stages.alex_2
+}
 
-  self.jobs.highland_mortuary = deep_clone(self.jobs.rvd)
-  self.jobs.highland_mortuary.name_id = "heist_rvd_1_hl"
-  self.jobs.highland_mortuary.crimenet_videos = { "cn_rat1" }
-  self.jobs.highland_mortuary.chain = {
-    {
-      level_id = "rvd_1",
-      type_id = "heist_type_knockover",
-      type = "d",
-    }
-  }
+tweak_data.narrative.jobs.bus_stop = deep_clone(tweak_data.narrative.jobs.alex)
+tweak_data.narrative.jobs.bus_stop.original_id = "alex"
+tweak_data.narrative.jobs.bus_stop.name_id = "heist_alex_3_hl"
+tweak_data.narrative.jobs.bus_stop.contact = "single_days"
+tweak_data.narrative.jobs.bus_stop.chain = {
+  tweak_data.narrative.stages.alex_3
+}
 
-  self.jobs.garnet_group_boutique = deep_clone(self.jobs.rvd)
-  self.jobs.garnet_group_boutique.name_id = "heist_rvd_2_hl"
-  self.jobs.garnet_group_boutique.crimenet_videos = { "cn_rat1" }
-  self.jobs.garnet_group_boutique.chain = {
-    {
-      level_id = "rvd_2",
-      type_id = "heist_type_knockover",
-      type = "d",
-    }
-  }
+tweak_data.narrative.jobs.highland_mortuary = deep_clone(tweak_data.narrative.jobs.rvd)
+tweak_data.narrative.jobs.highland_mortuary.original_id = "rvd"
+tweak_data.narrative.jobs.highland_mortuary.name_id = "heist_rvd1_hl"
+tweak_data.narrative.jobs.highland_mortuary.contact = "single_days"
+tweak_data.narrative.jobs.highland_mortuary.chain = {
+  tweak_data.narrative.stages.rvd_1
+}
 
-  table.insert(self._jobs_index, "breaking_ballot")
-  table.insert(self._jobs_index, "right_track")
-  table.insert(self._jobs_index, "swing_vote")
-  table.insert(self._jobs_index, "framing_frame_1")
-  table.insert(self._jobs_index, "train_trade")
-  table.insert(self._jobs_index, "framing")
-  table.insert(self._jobs_index, "lions_den")
-  table.insert(self._jobs_index, "interception")
-  table.insert(self._jobs_index, "hotline_miami")
-  table.insert(self._jobs_index, "four_floors")
-  table.insert(self._jobs_index, "truck_load")
-  table.insert(self._jobs_index, "boat_load")
-  table.insert(self._jobs_index, "the_breakout")
-  table.insert(self._jobs_index, "the_search")
-  table.insert(self._jobs_index, "airport")
-  table.insert(self._jobs_index, "fbi_server")
-  table.insert(self._jobs_index, "bank_heist_good")
-  table.insert(self._jobs_index, "club_house")
-  table.insert(self._jobs_index, "engine_problems")
-  table.insert(self._jobs_index, "cook_off")
-  table.insert(self._jobs_index, "code_for_meth")
-  table.insert(self._jobs_index, "bus_stop")
-  table.insert(self._jobs_index, "highland_mortuary")
-  table.insert(self._jobs_index, "garnet_group_boutique")
-end)
+tweak_data.narrative.jobs.garnet_group_boutique = deep_clone(tweak_data.narrative.jobs.rvd)
+tweak_data.narrative.jobs.garnet_group_boutique.original_id = "rvd"
+tweak_data.narrative.jobs.garnet_group_boutique.name_id = "heist_rvd2_hl"
+tweak_data.narrative.jobs.garnet_group_boutique.contact = "single_days"
+tweak_data.narrative.jobs.garnet_group_boutique.chain = {
+  tweak_data.narrative.stages.rvd_2
+}
+
+tweak_data.narrative.jobs.club_house_day = deep_clone(tweak_data.narrative.jobs.welcome_to_the_jungle_wrapper_prof)
+tweak_data.narrative.jobs.club_house_day.original_id = "welcome_to_the_jungle_prof"
+tweak_data.narrative.jobs.club_house_day.job_wrapper = nil
+tweak_data.narrative.jobs.club_house_day.name_id = "heist_welcome_to_the_jungle_1_hl"
+tweak_data.narrative.jobs.club_house_day.contact = "single_days"
+tweak_data.narrative.jobs.club_house_day.chain = {
+  tweak_data.narrative.stages.welcome_to_the_jungle_1_d
+}
+
+tweak_data.narrative.jobs.club_house_night = deep_clone(tweak_data.narrative.jobs.welcome_to_the_jungle_wrapper_prof)
+tweak_data.narrative.jobs.club_house_night.original_id = "welcome_to_the_jungle_prof"
+tweak_data.narrative.jobs.club_house_night.job_wrapper = nil
+tweak_data.narrative.jobs.club_house_night.name_id = "heist_welcome_to_the_jungle_1_n_hl"
+tweak_data.narrative.jobs.club_house_night.contact = "single_days"
+tweak_data.narrative.jobs.club_house_night.chain = {
+  tweak_data.narrative.stages.welcome_to_the_jungle_1_n
+}
+
+tweak_data.narrative.jobs.engine_problems = deep_clone(tweak_data.narrative.jobs.welcome_to_the_jungle_wrapper_prof)
+tweak_data.narrative.jobs.engine_problems.original_id = "welcome_to_the_jungle_prof"
+tweak_data.narrative.jobs.engine_problems.job_wrapper = nil
+tweak_data.narrative.jobs.engine_problems.name_id = "heist_welcome_to_the_jungle_2_hl"
+tweak_data.narrative.jobs.engine_problems.contact = "single_days"
+tweak_data.narrative.jobs.engine_problems.chain = {
+  tweak_data.narrative.stages.welcome_to_the_jungle_2
+}
+
+tweak_data.narrative.jobs.this_was_not_the_deal = deep_clone(tweak_data.narrative.jobs.peta)
+tweak_data.narrative.jobs.this_was_not_the_deal.original_id = "peta"
+tweak_data.narrative.jobs.this_was_not_the_deal.name_id = "heist_peta_hl"
+tweak_data.narrative.jobs.this_was_not_the_deal.contact = "single_days"
+tweak_data.narrative.jobs.this_was_not_the_deal.chain = {
+  tweak_data.narrative.stages.peta_1
+}
+
+tweak_data.narrative.jobs.dirty_work = deep_clone(tweak_data.narrative.jobs.peta)
+tweak_data.narrative.jobs.dirty_work.original_id = "peta"
+tweak_data.narrative.jobs.dirty_work.name_id = "heist_peta2_hl"
+tweak_data.narrative.jobs.dirty_work.contact = "single_days"
+tweak_data.narrative.jobs.dirty_work.chain = {
+  tweak_data.narrative.stages.peta_2
+}
+
+table.insert(tweak_data.narrative._jobs_index, "breaking_ballot")
+table.insert(tweak_data.narrative._jobs_index, "right_track")
+table.insert(tweak_data.narrative._jobs_index, "swing_vote")
+table.insert(tweak_data.narrative._jobs_index, "framing_frame_1")
+table.insert(tweak_data.narrative._jobs_index, "train_trade")
+table.insert(tweak_data.narrative._jobs_index, "framing")
+table.insert(tweak_data.narrative._jobs_index, "lions_den")
+table.insert(tweak_data.narrative._jobs_index, "interception")
+table.insert(tweak_data.narrative._jobs_index, "hotline_miami")
+table.insert(tweak_data.narrative._jobs_index, "four_floors")
+table.insert(tweak_data.narrative._jobs_index, "truck_load_day")
+table.insert(tweak_data.narrative._jobs_index, "truck_load_night")
+table.insert(tweak_data.narrative._jobs_index, "boat_load_day")
+table.insert(tweak_data.narrative._jobs_index, "boat_load_night")
+table.insert(tweak_data.narrative._jobs_index, "the_breakout")
+table.insert(tweak_data.narrative._jobs_index, "the_search")
+table.insert(tweak_data.narrative._jobs_index, "airport")
+table.insert(tweak_data.narrative._jobs_index, "fbi_server")
+table.insert(tweak_data.narrative._jobs_index, "bank_heist_good")
+table.insert(tweak_data.narrative._jobs_index, "cook_off")
+table.insert(tweak_data.narrative._jobs_index, "code_for_meth")
+table.insert(tweak_data.narrative._jobs_index, "bus_stop")
+table.insert(tweak_data.narrative._jobs_index, "highland_mortuary")
+table.insert(tweak_data.narrative._jobs_index, "garnet_group_boutique")
+table.insert(tweak_data.narrative._jobs_index, "club_house_day")
+table.insert(tweak_data.narrative._jobs_index, "club_house_night")
+table.insert(tweak_data.narrative._jobs_index, "engine_problems")
+table.insert(tweak_data.narrative._jobs_index, "this_was_not_the_deal")
+table.insert(tweak_data.narrative._jobs_index, "dirty_work")
