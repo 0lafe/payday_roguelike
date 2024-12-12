@@ -4,10 +4,8 @@ end)
 
 -- ugly ass stupid ass file
 -- does too much for a hook but there is way too much to override
-local large_font = tweak_data.menu.pd2_large_font
 local medium_font = tweak_data.menu.pd2_medium_font
 local small_font = tweak_data.menu.pd2_small_font
-local large_font_size = tweak_data.menu.pd2_large_font_size
 local medium_font_size = tweak_data.menu.pd2_medium_font_size
 local small_font_size = tweak_data.menu.pd2_small_font_size
 
@@ -171,7 +169,7 @@ function StoryMissionsGui:_update_info(mission)
       font_size = small_font_size,
       color = tweak_data.screen_colors.challenge_title
     }))
-    local tier_heists = tweak_data.story:heist_pool(mission.list_tier)
+    local tier_heists = tweak_data.story:heist_pool(mission.tier_list)
     local all_heists = ""
     for _, heist in pairs(tier_heists) do
       all_heists = all_heists .. managers.localization:text("menu_sm_" .. heist) .. "\n"

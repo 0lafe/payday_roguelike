@@ -1,52 +1,84 @@
 -- Contains Overwrites and additions to career mode data
 function StoryMissionsTweakData:_init_missions(tweak_data)
+  -- game crash without this option but unused in the mod
   self.sm_2_skillpoints = 8
+
+  -- global index trackers
+  self.current_act_id = 0
+  self.current_mission_id = 1
+
+  self.tier_0_count = 3
+  self.tier_1_count = 5
+  self.tier_2_count = 7
+  self.tier_3_count = 9
+  self.tier_4_count = 11
+  self.tier_5_count = 6
+
   self.missions = {
-    self:_mission("sm_act_0", {
+    -- tier 0 divider
+    self:_act({
       rewarded = true,
       completed = true,
       is_header = true,
       objectives = {}
     }),
-    self:_mission("sm_1", {
+
+    -- tier 0 intro description
+    self:_mission({
       reward_id = "menu_sm_perkdeck_reward",
       voice_line = "Play_pln_stq_01",
       objectives = {},
       rewards = self:_perkdeck_reward(),
       completed = true,
       hide_progress = true,
-      auto_complete = true
-    }),
-    self:_mission("sm_2", {
-      reward_id = "menu_sm_default_reward",
-      voice_line = "Play_pln_stq_01",
-      objectives = {},
-      rewards = self:_default_reward(),
-      tier = 0
-    }),
-    self:_mission("sm_act_1", {
-      rewarded = true,
-      completed = true,
-      is_header = true,
-      objectives = {}
-    }),
-    self:_mission("sm_3", {
-      reward_id = "menu_sm_perkdeck_reward",
-      voice_line = "Play_pln_stq_01",
-      objectives = {},
-      rewards = self:_perkdeck_reward(),
-      completed = true,
-      hide_progress = true,
-      tier_list = true,
-      list_tier = 1,
-      auto_complete = true
+      auto_complete = true,
+      name_id = "sm_1_name",
+      desc_id = "sm_1_desc",
+      objective_id = "sm_1_obj"
     }),
   }
 
-  -- create multiple tier 1 missions
-  for i = 4, 6 do
+  -- create multiple tier 0 missions
+  for _ = 1, self.tier_0_count do
     table.insert(self.missions,
-      self:_mission("sm_" .. i, {
+      self:_mission({
+        reward_id = "menu_sm_default_reward",
+        voice_line = "Play_pln_stq_01",
+        objectives = {},
+        rewards = self:_default_reward(),
+        tier = 0
+      })
+    )
+  end
+
+  -- tier 1 divider
+  table.insert(self.missions,
+    self:_act({
+      rewarded = true,
+      completed = true,
+      is_header = true,
+      objectives = {}
+    })
+  )
+
+  -- tier 1 intro description
+  table.insert(self.missions,
+    self:_mission({
+      reward_id = "menu_sm_perkdeck_reward",
+      voice_line = "Play_pln_stq_01",
+      objectives = {},
+      rewards = self:_perkdeck_reward(),
+      completed = true,
+      hide_progress = true,
+      tier_list = 1,
+      auto_complete = true
+    })
+  )
+
+  -- create multiple tier 1 missions
+  for _ = 1, self.tier_1_count do
+    table.insert(self.missions,
+      self:_mission({
         reward_id = "menu_sm_default_reward",
         voice_line = "Play_pln_stq_01",
         objectives = {},
@@ -56,9 +88,9 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
     )
   end
 
-  -- tier divider
+  -- tier 2 divider
   table.insert(self.missions,
-    self:_mission("sm_act_2", {
+    self:_act({
       rewarded = true,
       completed = true,
       is_header = true,
@@ -68,22 +100,22 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
 
   -- tier 2 intro description
   table.insert(self.missions,
-    self:_mission("sm_7", {
+    self:_mission({
       reward_id = "menu_sm_perkdeck_reward",
       voice_line = "Play_pln_stq_01",
       objectives = {},
       rewards = self:_perkdeck_reward(),
       completed = true,
       hide_progress = true,
-      tier_list = true,
-      list_tier = 2,
+      tier_list = 2,
       auto_complete = true
     })
   )
+
   -- create multiple tier 2 missions
-  for i = 8, 13 do
+  for _ = 1, self.tier_2_count do
     table.insert(self.missions,
-      self:_mission("sm_" .. i, {
+      self:_mission({
         reward_id = "menu_sm_default_reward",
         voice_line = "Play_pln_stq_01",
         objectives = {},
@@ -93,9 +125,9 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
     )
   end
 
-  -- tier divider
+  -- tier 3 divider
   table.insert(self.missions,
-    self:_mission("sm_act_3", {
+    self:_act({
       rewarded = true,
       completed = true,
       is_header = true,
@@ -105,23 +137,22 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
 
   -- tier 3 intro description
   table.insert(self.missions,
-    self:_mission("sm_14", {
+    self:_mission({
       reward_id = "menu_sm_perkdeck_reward",
       voice_line = "Play_pln_stq_01",
       objectives = {},
       rewards = self:_perkdeck_reward(),
       completed = true,
       hide_progress = true,
-      tier_list = true,
-      list_tier = 3,
+      tier_list = 3,
       auto_complete = true
     })
   )
 
   -- create multiple tier 3 missions
-  for i = 15, 22 do
+  for _ = 1, self.tier_3_count do
     table.insert(self.missions,
-      self:_mission("sm_" .. i, {
+      self:_mission({
         reward_id = "menu_sm_default_reward",
         voice_line = "Play_pln_stq_01",
         objectives = {},
@@ -131,9 +162,9 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
     )
   end
 
-  -- tier divider
+  -- tier 4 divider
   table.insert(self.missions,
-    self:_mission("sm_act_4", {
+    self:_act({
       rewarded = true,
       completed = true,
       is_header = true,
@@ -143,23 +174,22 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
 
   -- tier 4 intro description
   table.insert(self.missions,
-    self:_mission("sm_23", {
+    self:_mission({
       reward_id = "menu_sm_perkdeck_reward",
       voice_line = "Play_pln_stq_01",
       objectives = {},
       rewards = self:_perkdeck_reward(),
       completed = true,
       hide_progress = true,
-      tier_list = true,
-      list_tier = 4,
+      tier_list = 4,
       auto_complete = true
     })
   )
 
   -- create multiple tier 4 missions
-  for i = 24, 31 do
+  for _ = 1, self.tier_4_count do
     table.insert(self.missions,
-      self:_mission("sm_" .. i, {
+      self:_mission({
         reward_id = "menu_sm_default_reward",
         voice_line = "Play_pln_stq_01",
         objectives = {},
@@ -169,9 +199,9 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
     )
   end
 
-  -- tier divider
+  -- tier 5 divider
   table.insert(self.missions,
-    self:_mission("sm_act_5", {
+    self:_act({
       rewarded = true,
       completed = true,
       is_header = true,
@@ -179,42 +209,45 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
     })
   )
 
-  -- tier 4 intro description
+  -- tier 5 intro description
   table.insert(self.missions,
-    self:_mission("sm_32", {
+    self:_mission({
       reward_id = "menu_sm_perkdeck_reward",
       voice_line = "Play_pln_stq_01",
       objectives = {},
       rewards = self:_perkdeck_reward(),
       completed = true,
       hide_progress = true,
-      tier_list = true,
-      list_tier = 4,
+      tier_list = 5,
       auto_complete = true
     })
   )
 
-  -- create multiple tier 4 missions
-  for i = 33, 37 do
+  -- create multiple tier 5 missions
+  for _ = 1, self.tier_5_count do
     table.insert(self.missions,
-      self:_mission("sm_" .. i, {
+      self:_mission({
         reward_id = "menu_sm_default_reward",
         voice_line = "Play_pln_stq_01",
         objectives = {},
         rewards = self:_default_reward(),
-        tier = 4
+        tier = 5
       })
     )
   end
 
   -- WiP for ending information
   table.insert(self.missions,
-    self:_mission("sm_end", {
+    {
+      id = "sm_end",
       rewarded = true,
       completed = true,
       last_mission = true,
-      objectives = {}
-    })
+      objectives = {},
+      name_id = "sm_end_name",
+      desc_id = "sm_end_desc",
+      objective_id = "sm_end_obj"
+    }
   )
 
   -- Main list of heist pool by tier
@@ -274,9 +307,9 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       "alesso",
       "crude_awakening",
       "brooklyn_10_10",
+      "right_track",
     },
     [4] = {
-      "right_track",
       "scarface_mansion",
       "heat_street",
       "hells_island",
@@ -351,21 +384,38 @@ function StoryMissionsTweakData:heist_in_tier(mission_tier, heist_name)
   return output
 end
 
+function StoryMissionsTweakData:_act(data)
+  local id = "sm_act_" .. self.current_act_id
+  -- increment instance variable to automatically create unique ids
+  self.current_act_id = self.current_act_id + 1
+
+  return {
+    id = id,
+    rewarded = true,
+    completed = true,
+    is_header = true,
+    objectives = {},
+    name_id = id .. "_name",
+    desc_id = id .. "_desc",
+    objective_id = id .. "_obj"
+  }
+end
+
 -- change how missions are built to be more dynamic
-function StoryMissionsTweakData:_mission(id, data)
-  data = data or {}
+function StoryMissionsTweakData:_mission(data)
+  local data = data or {}
+  local id = "sm_" .. self.current_mission_id
+  -- increment instance variable to automatically create unique ids
+  self.current_mission_id = self.current_mission_id + 1
+
   data.id = id
   if data.tier then
     data.name_id = "roguelike_tier_" .. data.tier .. "_name"
     data.desc_id = "roguelike_tier_" .. data.tier .. "_desc"
     data.objective_id = "roguelike_tier_" .. data.tier .. "_obj"
   elseif data.tier_list then
-    data.name_id = "roguelike_tier_" .. data.list_tier .. "_intro_title"
-    data.desc_id = "roguelike_tier_" .. data.list_tier .. "_intro_desc"
-  else
-    data.name_id = id .. "_name"
-    data.desc_id = id .. "_desc"
-    data.objective_id = id .. "_obj"
+    data.name_id = "roguelike_tier_" .. data.tier_list .. "_intro_title"
+    data.desc_id = "roguelike_tier_" .. data.tier_list .. "_intro_desc"
   end
 
   return data
