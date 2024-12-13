@@ -5,7 +5,6 @@ WiP
 - Scope drops to owned items/dlc
 - Cost for rerolling
 - Check out "Skip Mission" button
-- redo tier skip rewards to account for additional tier
 - annoying ass popup menus
 - DLC attachments/attachment balance
 - Remove sidejob menu for client in prelobby

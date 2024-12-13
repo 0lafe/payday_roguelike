@@ -14,6 +14,12 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
   self.tier_4_count = 11
   self.tier_5_count = 6
 
+  -- how many weapons you get from the default reward
+  self.weapons_per_reward = 1
+
+  -- how many weapon mods you get from the default reward
+  self.mods_per_reward = 10
+
   self.missions = {
     -- tier 0 divider
     self:_act({
@@ -350,11 +356,11 @@ function StoryMissionsTweakData:_default_reward()
   return {
     {
       weapon_reward = "random",
-      quantity = 1
+      quantity = self.weapons_per_reward
     },
     {
       mod_reward = "random",
-      quantity = 10
+      quantity = self.mods_per_reward
     }
   }
 end

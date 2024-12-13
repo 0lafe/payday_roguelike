@@ -210,19 +210,6 @@ function RoguelikeManager:_assign_objectives(objectives, mission)
   mission.objectives = built_objectives
 
   mission.objectives_flat = {}
-
-  for _, t in pairs(mission.objectives) do
-    for _, o in pairs(t) do
-      mission.objectives_flat[o.progress_id] = o
-      local dlc = nil
-
-      for _, id in pairs(o.levels or {}) do
-        local found = tweak_data.narrative.jobs[id].dlc
-
-        o.dlc = found
-      end
-    end
-  end
 end
 
 -- link the story mission gui manager
@@ -254,21 +241,60 @@ function RoguelikeManager:reroll()
   self.story_mission_gui:_update(current_mission)
 end
 
+-- returns the total amount of missions completed by a given tier
+function RoguelikeManager:_missions_completed_by_tier(tier)
+  out = 0
+  for i = 1, tier do
+    out = out + tweak_data.story["tier_" .. i - 1 .. "_count"]
+  end
+  return out
+end
+
+local static_reward_values = {
+  {
+    200000,
+    40
+  },
+  {
+    1000000,
+    70
+  },
+  {
+    2000000,
+    80
+  },
+  {
+    5000000,
+    90
+  },
+  {
+    10000000,
+    100
+  },
+}
+
+-- How many of various rewrads you've gained by a given tier
+function RoguelikeManager:_resources_gained_by_tier(tier)
+  local completed_missions = self:_missions_completed_by_tier(tier)
+  return {
+    perkdecks = tier,
+    weapons = completed_missions * tweak_data.story.weapons_per_reward,
+    mods = completed_missions * tweak_data.story.mods_per_reward,
+    money = static_reward_values[tier][1],
+    level = static_reward_values[tier][2]
+  }
+end
+
 -- handles adding rewards when skipping tiers
 function RoguelikeManager:tier_skip_rewards(tier)
   -- perkdeck, weapon, weapon mods, money, level
-  local values = {
-    { 1, 1,  5,   50000,    25 },
-    { 2, 4,  20,  500000,   60 },
-    { 3, 10, 50,  5000000,  80 },
-    { 4, 20, 100, 20000000, 100 },
-  }
+  local values = self:_resources_gained_by_tier(tier)
 
-  self:add_perkdeck(values[tier][1])
-  self:add_weapons(values[tier][2])
-  self:add_weapon_mods(values[tier][3])
-  managers.money:_set_total(values[tier][4])
-  for i = managers.experience:current_level(), values[tier][5] - 1 do
+  self:add_perkdeck(values["perkdecks"])
+  self:add_weapons(values["weapons"])
+  self:add_weapon_mods(values["mods"])
+  managers.money:_set_total(values["money"])
+  for i = managers.experience:current_level(), values["level"] - 1 do
     managers.experience:_level_up()
   end
 end
