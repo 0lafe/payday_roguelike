@@ -61,7 +61,7 @@ Hooks:PostHook(MenuManager, "init", "init_show_career", function(self, is_start_
     story_node._parameters.trial_buy = true
   end
 
-  for _, v in pairs({ "crimenet_nj", "crimenet_j" }) do
+  for _, v in pairs({ "crimenet_nj", "crimenet_j", "side_jobs" }) do
     local node = lobby_node:item(v)
     if node then
       node:set_visible(false)

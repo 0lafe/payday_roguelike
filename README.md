@@ -7,13 +7,13 @@ WiP
 - Check out "Skip Mission" button
 - annoying ass popup menus
 - DLC attachments/attachment balance
-- Remove sidejob menu for client in prelobby
+- Reroll/new heist should be different than last heist
 
 # BUGS
 
-- Possible problem receiving perk deck reward when in lobby with other players
 - mask lootdrop animation is weird in coop lobby
-- Crew AI doesn't start aggro with hard mode
+- Tier doesn't complete as client
+- Remove tier skip on multiple tier 0 heists
 
 # FEATURES
 

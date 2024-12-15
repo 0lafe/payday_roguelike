@@ -1,10 +1,14 @@
-local function train_trade()
-  return managers.job:current_job_id() == "train_trade"
+local function blacklisted_heist()
+  local blacklist = {
+    train_trade = true
+  }
+  return blacklist[managers.job:current_job_id()] or false
 end
 
 -- force loud when hard mode enabled
 Hooks:PostHook(PlayerStandard, "init", "toggle_forced_loud", function(self, unit)
-  if Network:is_server() and Roguelike:hard_mode() and not train_trade() then
-    managers.groupai:state():set_whisper_mode(false)
+  if Network:is_server() and Roguelike:hard_mode() and not blacklisted_heist() then
+    -- managers.groupai:state():set_whisper_mode(false)
+    managers.groupai:state():on_police_called("met_criminal")
   end
 end)

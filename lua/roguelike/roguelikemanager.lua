@@ -86,8 +86,9 @@ function RoguelikeManager:add_perkdeck(quantity)
 
     local selected_deck = perkdeck_list[math.random(#perkdeck_list)]
 
-    managers.skilltree:give_specialization_points(1370000)
-    managers.skilltree:spend_specialization_points(13700, selected_deck)
+    for _ = 1, 9 do
+      managers.skilltree:_increase_specialization_tier(selected_deck)
+    end
 
     -- Logic to run on initial deck unlock
     if #completed_decks == 0 then
@@ -210,6 +211,12 @@ function RoguelikeManager:_assign_objectives(objectives, mission)
   mission.objectives = built_objectives
 
   mission.objectives_flat = {}
+
+  for _, t in pairs(mission.objectives) do
+    for _, o in pairs(t) do
+      mission.objectives_flat[o.progress_id] = o
+    end
+  end
 end
 
 -- link the story mission gui manager
