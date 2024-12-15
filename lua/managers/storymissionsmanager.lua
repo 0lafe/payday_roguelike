@@ -1,7 +1,7 @@
 -- handle custom reward logic
 function StoryMissionsManager:_reward(reward)
 	if reward.perkdeck_reward then
-		managers.roguelike:add_perkdeck()
+		managers.roguelike:add_perkdeck(1)
 	elseif reward.weapon_reward then
 		managers.roguelike:add_weapons(reward.quantity)
 	elseif reward.mod_reward then

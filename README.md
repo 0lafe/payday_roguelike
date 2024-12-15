@@ -13,7 +13,6 @@ WiP
 
 - mask lootdrop animation is weird in coop lobby
 - Tier doesn't complete as client
-- Remove tier skip on multiple tier 0 heists
 
 # FEATURES
 

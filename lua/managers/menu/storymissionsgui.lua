@@ -106,7 +106,7 @@ function StoryMissionsGui:_update_info(mission)
     self:toggle_voice_message(mission.voice_line)
   end
 
-  if mission.tier == 0 and not mission.completed and managers.roguelike.save_data.highest_tier > 0 then
+  if mission.id == "sm_2" and not mission.completed and managers.roguelike.save_data.highest_tier > 0 then
     placer:add_row(canvas:fine_text({
       text = managers.localization:to_upper_text("menu_challenge_roguelike_tierskip_challenge"),
       font = small_font,
