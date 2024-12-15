@@ -7,7 +7,6 @@ WiP
 - Check out "Skip Mission" button (StoryMissionsManager:skip_mission)
 - annoying ass popup menus
 - DLC attachments/attachment balance
-- Shorten welcome message to show progress button on screen
 
 # BUGS
 
