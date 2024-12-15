@@ -189,6 +189,26 @@ function RoguelikeManager:build_objectives(mission)
   -- generate a heist based on list for given tier
   if not objectives then
     local heist_pool = tweak_data.story:heist_pool(mission.tier)
+
+    -- prevent rolling the same heist twice in a row
+    local previous_mission = managers.story:previous_mission(mission)
+    if previous_mission and previous_mission.tier and previous_mission.tier == mission.tier then
+      local previous_mission_levels = self.save_data.rolled_heists[previous_mission.id]
+      local unique_heists = {}
+      for _, heist in pairs(heist_pool) do
+        local heist_unique = true
+        for _, level in pairs(previous_mission_levels) do
+          if level == heist then
+            heist_unique = false
+          end
+        end
+        if heist_unique then
+          table.insert(unique_heists, heist)
+        end
+      end
+      heist_pool = unique_heists
+    end
+
     objectives = { heist_pool[math.random(#heist_pool)] }
     self.save_data.rolled_heists[mission.id] = objectives
     self:_save_to_file()

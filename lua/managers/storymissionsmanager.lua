@@ -118,3 +118,17 @@ function StoryMissionsManager:start_mission(mission, objective_id)
 			data
 		})
 end
+
+-- helper to get previous mission in order
+function StoryMissionsManager:previous_mission(mission)
+	local previous_index = nil
+	for k, v in pairs(self:missions_in_order()) do
+		if v.id == mission.id then
+			previous_index = k - 1
+		end
+	end
+
+	if previous_index then
+		return self:get_mission_at(previous_index)
+	end
+end

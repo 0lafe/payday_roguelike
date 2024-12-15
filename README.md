@@ -4,15 +4,17 @@ WiP
 
 - Scope drops to owned items/dlc
 - Cost for rerolling
-- Check out "Skip Mission" button
+- Check out "Skip Mission" button (StoryMissionsManager:skip_mission)
 - annoying ass popup menus
 - DLC attachments/attachment balance
-- Reroll/new heist should be different than last heist
+- Shorten welcome message to show progress button on screen
 
 # BUGS
 
 - mask lootdrop animation is weird in coop lobby
-- Tier doesn't complete as client
+- Mask lootdrop includes missing textures
+- Tier doesn't complete as client sometimes
+- Unlocking perkdeck doesnt save
 
 # FEATURES
 
