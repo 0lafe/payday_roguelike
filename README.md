@@ -14,7 +14,6 @@ WiP
 - mask lootdrop animation is weird in coop lobby
 - Mask lootdrop includes missing textures
 - Tier doesn't complete as client sometimes
-- Unlocking perkdeck doesnt save
 
 # FEATURES
 

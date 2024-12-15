@@ -90,6 +90,14 @@ function RoguelikeManager:add_perkdeck(quantity)
       managers.skilltree:_increase_specialization_tier(selected_deck)
     end
 
+    local tree_data = managers.skilltree._global.specializations[selected_deck]
+    tree_data.points_spent = managers.skilltree:digest_value(
+      managers.skilltree:digest_value(tree_data.points_spent, false) + 13700, true
+    )
+    managers.skilltree._global.specializations.points = managers.skilltree:digest_value(
+      managers.skilltree:digest_value(managers.skilltree._global.specializations.points, false) - 13700, true
+    )
+
     -- Logic to run on initial deck unlock
     if #completed_decks == 0 then
       managers.skilltree:set_current_specialization(selected_deck)
