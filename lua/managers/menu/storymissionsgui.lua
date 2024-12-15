@@ -426,24 +426,6 @@ function StoryMissionsGui:_update_info(mission)
 
     self:_change_legend("select", true)
   end
-
-  if not mission.completed then
-    can_skip_mission = can_skip_mission or table.contains(levels, managers.story:get_last_failed_heist())
-
-    if can_skip_mission then
-      local btn = TextButton:new(canvas, {
-        text_id = "menu_skip_story",
-        font = medium_font,
-        font_size = medium_font_size
-      }, callback(self, self, "_skip_mission_dialog"))
-
-      placer:add_row(btn)
-      btn:set_right(canvas:w())
-      btn:set_y(btn:y() + 15)
-    end
-
-    self:_change_legend("skip_mission", can_skip_mission)
-  end
 end
 
 -- Turns dropped items into a readable string

@@ -4,7 +4,6 @@ WiP
 
 - Scope drops to owned items/dlc
 - Cost for rerolling
-- Check out "Skip Mission" button (StoryMissionsManager:skip_mission)
 - annoying ass popup menus
 - DLC attachments/attachment balance
 
@@ -30,7 +29,6 @@ WiP
 
 - Hard Mode
   - Blacklists certain weapons/decks/etc
-  - lock to DS loud
   - reduce/remove bots
 - Pro Job
   - Resets save on fail
