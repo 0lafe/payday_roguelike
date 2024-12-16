@@ -4,7 +4,6 @@ WiP
 
 - Scope drops to owned items/dlc
 - Cost for rerolling
-- annoying ass popup menus
 - DLC attachments/attachment balance
 
 # BUGS
@@ -15,7 +14,6 @@ WiP
 
 # FEATURES
 
-- Handle CC/money gain
 - Recycling weapons(?)
 - Throwables?
 - Cosmetics?

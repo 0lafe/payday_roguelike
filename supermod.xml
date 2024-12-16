@@ -5,8 +5,9 @@
     <group :script_path="managers/" :hook_id="managers/">
       <post :script_path="blackmarketmanager.lua" :hook_id="blackmarketmanager"/>
       <post :script_path="dlcmanager.lua" :hook_id="dlcmanager"/>
-      <post :script_path="localizationmanager.lua" :hook_id="localizationmanager"/>
+      <post :script_path="featuremanager.lua" :hook_id="featuremanager"/>
       <post :script_path="jobmanager.lua" :hook_id="jobmanager"/>
+      <post :script_path="localizationmanager.lua" :hook_id="localizationmanager"/>
       <post :script_path="menumanager.lua" :hook_id="menumanager"/>
       <post :script_path="menumanagerpd2.lua" :hook_id="menumanagerpd2"/>
       <post :script_path="savefilemanager.lua" :hook_id="savefilemanager"/>
