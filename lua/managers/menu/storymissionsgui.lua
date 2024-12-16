@@ -245,6 +245,8 @@ function StoryMissionsGui:_update_info(mission)
           table.list_append(levels, objective.levels or {})
         end
 
+        Utils.PrintTable(objective.levels, 4)
+
         if (not mission.completed or objective.basic) and (not objective.completed or objective.basic) and objective.levels and (not objective.basic or not Network:is_server()) and not Network:is_client() and mission.completed == mission.rewarded then
           if not owned and gvalue_tweak and gvalue_tweak.hide_unavailable then
             placer:add_right(canvas:fine_text({

@@ -176,11 +176,17 @@ function RoguelikeTweakData:init(tweak_data)
     no_mercy = {
       job = "nmh"
     },
-    truck_load = {
-      job = "truck_load",
+    truck_load_day = {
+      job = "truck_load_day",
     },
-    boat_load = {
-      job = "boat_load",
+    truck_load_night = {
+      job = "truck_load_night",
+    },
+    boat_load_night = {
+      job = "boat_load_night",
+    },
+    boat_load_day = {
+      job = "boat_load_day",
     },
     airport = {
       job = "firestarter",
@@ -188,8 +194,11 @@ function RoguelikeTweakData:init(tweak_data)
     fbi_server = {
       job = "firestarter",
     },
-    club_house = {
-      job = "club_house",
+    club_house_day = {
+      job = "club_house_day",
+    },
+    club_house_night = {
+      job = "club_house_night",
     },
     engine_problems = {
       job = "engine_problems",
