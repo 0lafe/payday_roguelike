@@ -15,3 +15,12 @@ end)
 Hooks:PostHook(JobManager, "next_stage", "roguelike_complete_job_hook", function(self)
   managers.story:award_roguelike(self:current_job_id(), self:current_stage())
 end)
+
+-- Get some vanilla projob funcitonality if projob is enabled
+function JobManager:is_current_job_professional()
+  if not self._global.current_job then
+    return
+  end
+
+  return Roguelike:pro_job()
+end

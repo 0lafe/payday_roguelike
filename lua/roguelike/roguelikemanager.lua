@@ -111,6 +111,7 @@ end
 
 -- callback on the default progress reset function
 function RoguelikeManager:reset_progress()
+  managers.story:current_mission().completed = true
   local heisted_tier = self.save_data.highest_tier
   local settings = self.save_data.settings
   self.save_data = self:_create_save_data(heisted_tier, settings)

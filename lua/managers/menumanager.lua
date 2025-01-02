@@ -71,6 +71,5 @@ end)
 
 -- Handles resetting roguelike data when account progression is reset
 Hooks:PostHook(MenuCallbackHandler, "_dialog_clear_progress_yes", "_dialog_clear_progress_yes_roguelike", function(self)
-  managers.story:current_mission().completed = true
   managers.roguelike:reset_progress()
 end)

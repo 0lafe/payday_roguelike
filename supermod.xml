@@ -43,6 +43,7 @@
 
     <group :script_path="states/" :hook_id="states/">
       <post :script_path="ingamelobbymenu.lua" :hook_id="ingamelobbymenu"/>
+      <post :script_path="gameoverstate.lua" :hook_id="gameoverstate"/>
     </group>
 
     <group :script_path="tweak_data/" :hook_id="tweak_data/">

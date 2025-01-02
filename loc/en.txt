@@ -57,6 +57,7 @@
   "roguelike_main_settings_desc": "Settings for the Roguelike mod",
   "roguelike_toggle_pro_job": "Pro Job",
   "roguelike_toggle_pro_job_desc": "Will reset your progress if you fail a heist",
+  "roguelike_pro_job_failure": "Restart Run",
   "roguelike_toggle_hard_mode": "Hard Mode",
   "roguelike_toggle_hard_mode_desc": "Enables a few changes to make the game harder",
   "menu_challenge_roguelike_tierskip_challenge": "Bonus:"
