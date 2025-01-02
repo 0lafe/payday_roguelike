@@ -20,6 +20,7 @@ WiP
 
 # Ideas
 
+- Different loot pools based on tier?
 - Hard Mode
 
   - Blacklists certain weapons/decks/etc

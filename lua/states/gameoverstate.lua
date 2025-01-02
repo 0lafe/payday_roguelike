@@ -16,7 +16,7 @@ function GameOverState:_set_continue_button_text()
 end
 
 -- Delete save data on fail
-Hooks:PreHook(GameOverState, "continue", "roguelike_pro_job_failure", function(self)
+Hooks:PostHook(GameOverState, "at_enter", "roguelike_enter_gameover_state", function(self, ...)
   if Roguelike:pro_job() then
     managers.menu:do_clear_progress()
 
