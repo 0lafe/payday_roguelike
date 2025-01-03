@@ -1,9 +1,5 @@
 WiP
 
-# TODO
-
-- Day/Night
-
 # BUGS
 
 - Mask lootdrop animation is weird in coop lobby
@@ -15,6 +11,7 @@ WiP
 
 - Recycling weapons(?)
 - Infamy system
+- Day/Night
 
 # IDEAS
 
