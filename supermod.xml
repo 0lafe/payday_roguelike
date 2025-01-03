@@ -41,6 +41,10 @@
       <post :script_path="rogueliketweakdata.lua" :hook_id="tweak_data/weapontweakdata"/>
     </group>
 
+    <group :script_path="setups/" :hook_id="setups/">
+      <post :script_path="setup.lua" :hook_id="setup"/>
+    </group>
+
     <group :script_path="states/" :hook_id="states/">
       <post :script_path="ingamelobbymenu.lua" :hook_id="ingamelobbymenu"/>
       <post :script_path="gameoverstate.lua" :hook_id="gameoverstate"/>
@@ -50,7 +54,6 @@
       <post :script_path="narrativetweakdata.lua" :hook_id="tweakdata"/>
       <post :script_path="skilltreetweakdata.lua" :hook_id="skilltreetweakdata"/>
       <post :script_path="storymissionstweakdata.lua" :hook_id="storymissionstweakdata"/>
-      <post :script_path="upgradestweakdata.lua" :hook_id="upgradestweakdata"/>
     </group>
 
     <group :script_path="units/" :hook_id="units/">

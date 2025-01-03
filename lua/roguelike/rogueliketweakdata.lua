@@ -15,10 +15,12 @@ function RoguelikeTweakData:initialize_weapon_drop_tables(tweak_data, upgrade_tw
     if v.category == 'weapon' then
       local weapon_data = weapon_tweak_data[k]
       if weapon_data and weapon_data.use_data and weapon_data.use_data.selection_index and weapon_data.use_data.selection_index < 3 then
-        if weapon_data.use_data.selection_index == 1 then
-          table.insert(all_secondary_keys, k)
-        else
-          table.insert(all_primary_keys, k)
+        if (v.dlc and managers.dlc:is_dlc_unlocked(v.dlc)) or not v.dlc then
+          if weapon_data.use_data.selection_index == 1 then
+            table.insert(all_secondary_keys, k)
+          else
+            table.insert(all_primary_keys, k)
+          end
         end
         table.insert(all_weapon_keys, k)
       end
@@ -31,6 +33,7 @@ function RoguelikeTweakData:initialize_weapon_drop_tables(tweak_data, upgrade_tw
 end
 
 function RoguelikeTweakData:init(tweak_data)
+  -- maps level name to mission id
   self.missions = {
     cursed_kill_room = {
       job = "hvh"
@@ -289,6 +292,7 @@ function RoguelikeTweakData:init(tweak_data)
     },
   }
 
+  -- data for loot card end screen
   local lootdrop_table = {
     masks = {
       chance = 50,
@@ -315,6 +319,7 @@ function RoguelikeTweakData:init(tweak_data)
     }
   }
 
+  -- assigns weights to drops in a lazy way
   self.lootdrop_table = {}
   for _, v in pairs(lootdrop_table) do
     for i = 1, v.chance do

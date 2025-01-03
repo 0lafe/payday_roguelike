@@ -74,9 +74,12 @@ function RoguelikeManager:add_perkdeck(quantity)
     for i = 1, 23 do
       local tier = managers.skilltree:get_specialization_value(i, "tiers", "current_tier")
       if tier < 9 then
-        table.insert(perkdeck_list, i)
+        local tree_tweak = tweak_data.skilltree.specializations[i]
+        if tree_tweak.dlc == nil or managers.dlc:is_dlc_unlocked(tree_tweak.dlc) then
+          table.insert(perkdeck_list, i)
+        end
       else
-        table.insert(completed_decks, tier)
+        table.insert(completed_decks, i)
       end
     end
 

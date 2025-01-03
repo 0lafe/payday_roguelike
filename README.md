@@ -2,9 +2,7 @@ WiP
 
 # TODO
 
-- Scope drops to owned items/dlc
 - Cost for rerolling
-- DLC attachments/attachment balance
 - Day/Night
 
 # BUGS
@@ -12,13 +10,14 @@ WiP
 - Mask lootdrop animation is weird in coop lobby
 - Mask lootdrop includes missing textures
 - Tier doesn't complete as client sometimes
+- Weapon Mods aren't locked to owned dlc
 
-# FEATURES
+# PlANNED FEATURES
 
 - Recycling weapons(?)
 - Infamy system
 
-# Ideas
+# IDEAS
 
 - Different loot pools based on tier?
 - Hard Mode
@@ -31,8 +30,9 @@ WiP
 - RNG Assets?
 - Something with heist xp modifiers
 - RNG bag spawn for single day heists
+- DLC attachments/attachment balance
 
-# Missing Heists
+# MISSING HEISTS
 
 - GGC
 - SHR
