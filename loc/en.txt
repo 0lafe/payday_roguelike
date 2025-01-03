@@ -1,7 +1,5 @@
 {
   "roguelike_error_no_inventory_space": "Your inventory is full",
-  "roguelike_copycat_unlock": "Fully Unlocked Copycat Deck",
-  "roguelike_copycat_reward": "A New Copycat Card",
   "roguelike_weapon_reward_2": "2 Random Weapons",
   "roguelike_mod_reward_5": "10 Random Weapon Mods",
   "xp_roguelike_lootdrop": "Free Levels",
@@ -19,6 +17,8 @@
   "sm_1_name": "Welcome to Roguelike Payday 2",
   "sm_1_desc": "This mod will hopefully change up the way you normally play payday. The idea is to transform payday into more of a roguelike experience. This means you will deal with more random drops, random heists, and much less control over your builds\n\nThere are a few changes you will notice off the bat. All perk decks have been locked and are unable to be leveled up. Instead you will slowly unlock more perkdecks as you play the game.Instead of buying weapons, you will obtain them from completing missions. Most will give you some weapons, as well as weapon mods.\n\nIf you want an added challenge checkout the mod option menu. There you can enable Pro Job or Hard Mode. Both will increase the difficulty in their own way.\nHard mode will force you to play on Death Sentence and start every heist in loud. Pro Job will function somewhat similarly to the old mechanic. If you fail a heist all your progress will be reset.",
   "sm_1_obj": "Read and understand the rules and changes to the game",
+  "roguelike_reroll_title": "Reroll",
+  "roguelike_reroll_text": "Pay 6 CC to reroll the heist selection",
   "roguelike_tierskip_button": "Go",
   "roguelike_tierskip_title": "Skip to tier",
   "roguelike_tierskip_complete_title": "Skipped to tier",

@@ -251,11 +251,6 @@ function RoguelikeManager:_assign_objectives(objectives, mission)
   end
 end
 
--- link the story mission gui manager
-function RoguelikeManager:set_story_mission_gui(story_mission_gui)
-  self.story_mission_gui = story_mission_gui
-end
-
 -- function for rerolling heists
 function RoguelikeManager:reroll()
   local current_mission = managers.story:current_mission()
@@ -277,7 +272,6 @@ function RoguelikeManager:reroll()
   local heists = { unique_heists[math.random(#unique_heists)] }
   self.save_data.rolled_heists[current_mission.id] = heists
   self:_save_to_file()
-  self.story_mission_gui:_update(current_mission)
 end
 
 -- returns the total amount of missions completed by a given tier
@@ -312,7 +306,7 @@ local static_reward_values = {
   },
 }
 
--- How many of various rewrads you've gained by a given tier
+-- How many of various rewards you've gained by a given tier
 function RoguelikeManager:_resources_gained_by_tier(tier)
   local completed_missions = self:_missions_completed_by_tier(tier)
   return {

@@ -1,7 +1,3 @@
-Hooks:PostHook(StoryMissionsGui, "init", "link_to_roguelike_manager", function(self)
-  managers.roguelike:set_story_mission_gui(self)
-end)
-
 -- ugly ass stupid ass file
 -- does too much for a hook but there is way too much to override
 local medium_font = tweak_data.menu.pd2_medium_font
@@ -210,7 +206,24 @@ function StoryMissionsGui:_update_info(mission)
         font = small_font,
         font_size = small_font_size
       }, function()
-        managers.roguelike:reroll()
+        local dialog_data = {
+          title = managers.localization:text("roguelike_reroll_title"),
+          text = managers.localization:text("roguelike_reroll_text")
+        }
+        local yes_button = {
+          text = managers.localization:text("dialog_yes"),
+          callback_func = callback(self, self, "_reroll")
+        }
+        local no_button = {
+          text = managers.localization:text("dialog_cancel"),
+          cancel_button = true
+        }
+        dialog_data.button_list = {
+          yes_button,
+          no_button
+        }
+
+        managers.system_menu:show(dialog_data)
       end)
       placer:add_row(reroll_btn)
     end
@@ -615,4 +628,13 @@ function StoryMissionGuiRewardItem:init(panel, reward_data, config, skipped_miss
   self.scale_font_to_fit(self._text, self:w())
   self._text:set_bottom(self:h())
   self._text:set_x(self:w() * 0.5 - self._text:w() * 0.5)
+end
+
+function StoryMissionsGui:_reroll()
+  if managers.custom_safehouse:coins() >= 6 then
+    managers.custom_safehouse:deduct_coins(6)
+    managers.roguelike:reroll()
+    local current_mission = managers.story:current_mission()
+    self:_update(current_mission)
+  end
 end

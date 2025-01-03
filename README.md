@@ -2,7 +2,6 @@ WiP
 
 # TODO
 
-- Cost for rerolling
 - Day/Night
 
 # BUGS
