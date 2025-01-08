@@ -14,8 +14,9 @@ WiP
 - Day/Night
 - Stealth heists available when hardmode not selected
 - Different loot pools based on tier?
+- Bring back crimenet
 
-# IDEAS
+# Future
 
 - Hard Mode
 

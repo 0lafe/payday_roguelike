@@ -243,3 +243,7 @@ table.insert(tweak_data.narrative._jobs_index, "dirty_work")
 function NarrativeTweakData:get_index_from_job_id(job_id)
   return tweak_data.story:get_index_from_job_id(job_id) or 0
 end
+
+function NarrativeTweakData:get_job_name_from_index(index)
+  return tweak_data.story._jobs_index[index]
+end
