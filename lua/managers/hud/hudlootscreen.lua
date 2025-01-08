@@ -3,7 +3,9 @@ local function _get_random_mask_texture()
   local masks = tweak_data.blackmarket.masks
   local mask_keys = {}
   for k, v in pairs(masks) do
-    table.insert(mask_keys, k)
+    if not v.inaccessible then
+      table.insert(mask_keys, k)
+    end
   end
   local guis_mask_id = mask_keys[math.random(#mask_keys)]
   local mask = masks[guis_mask_id]
@@ -593,84 +595,4 @@ function HUDLootScreen:show_item(peer_id)
     self._need_item = self._need_item or {}
     self._need_item[peer_id] = true
   end
-end
-
-function HUDLootScreen:create_stars_giving_animation()
-  local lootdrops = self:fetch_local_lootdata()
-  local human_players = managers.network:session() and managers.network:session():amount_of_alive_players() or 1
-  local all_humans = human_players == tweak_data.max_players
-
-  if not lootdrops or not lootdrops[5] then
-    return
-  end
-
-  local max_pc = lootdrops[5]
-  local job_stars = managers.job:has_active_job() and managers.job:current_job_and_difficulty_stars() or 1
-  local difficulty_stars = managers.job:has_active_job() and managers.job:current_difficulty_stars() or 0
-  local player_stars = managers.experience:level_to_stars()
-  local bonus_stars = all_humans and 1 or 0
-  local level_stars = player_stars < max_pc and tweak_data.lootdrop.level_limit or 0
-  local max_number_of_stars = job_stars
-
-  if self._stars_panel then
-    self._stars_panel:stop()
-    self._stars_panel:parent():remove(self._stars_panel)
-
-    self._stars_panel = nil
-  end
-
-  self._stars_panel = self._foreground_layer_safe:panel()
-
-  self._stars_panel:set_left(self._foreground_layer_safe:child("loot_text"):right() + 10)
-
-  local star_reason_text = self._stars_panel:text({
-    text = "",
-    font = tweak_data.menu.pd2_medium_font,
-    font_size = tweak_data.menu.pd2_medium_font_size
-  })
-
-  star_reason_text:set_left(max_number_of_stars * 35)
-  star_reason_text:set_h(tweak_data.menu.pd2_medium_font_size)
-  star_reason_text:set_world_center_y(math.round(self._foreground_layer_safe:child("loot_text"):world_center_y()) + 2)
-
-  local function animation_func(o)
-    local texture, rect = tweak_data.hud_icons:get_icon_data("risk_pd")
-    local latest_star = 0
-
-    wait(1.35)
-
-    for i = 1, max_number_of_stars do
-      wait(0.1)
-
-      local star = self._stars_panel:bitmap({
-        h = 32,
-        w = 32,
-        blend_mode = "add",
-        name = "star_" .. tostring(i),
-        texture = texture,
-        texture_rect = rect,
-        color = i > max_number_of_stars - difficulty_stars and tweak_data.screen_colors.risk or
-            tweak_data.screen_colors.text
-      })
-      local star_color = star:color()
-
-      star:set_alpha(0)
-      star:set_x((i - 1) * 35)
-      star:set_world_center_y(math.round(self._foreground_layer_safe:child("loot_text"):world_center_y()))
-      managers.menu_component:post_event("Play_star_hit")
-      over(0.45, function(p)
-        star:set_alpha(math.min(p * 10, 1))
-        star:set_color(math.lerp(star_color, star_color, p) - math.clamp(math.sin(p * 180), 0, 1) * Color(1, 1, 1))
-        star:set_color(star:color():with_alpha(1))
-      end)
-
-      latest_star = i
-    end
-
-    over(0.5, function(p)
-      star_reason_text:set_alpha(1 - p)
-    end)
-  end
-
-  self._stars_panel:animate(animation_func)
 end

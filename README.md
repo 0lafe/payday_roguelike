@@ -4,7 +4,6 @@ WiP
 
 - Mask lootdrop animation is weird in coop lobby
 - Mask lootdrop includes missing textures
-- Tier doesn't complete as client sometimes (client sometimes sees wrong level)
 - Weapon Mods aren't locked to owned dlc
 
 # PLANNED FEATURES
@@ -15,6 +14,8 @@ WiP
 - Stealth heists available when hardmode not selected
 - Different loot pools based on tier?
 - Bring back crimenet
+- Rarity colors on loot cards
+- More loot cards
 
 # Future
 
