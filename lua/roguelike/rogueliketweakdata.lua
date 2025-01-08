@@ -192,10 +192,10 @@ function RoguelikeTweakData:init(tweak_data)
       job = "boat_load_day",
     },
     airport = {
-      job = "firestarter",
+      job = "airport",
     },
     fbi_server = {
-      job = "firestarter",
+      job = "fbi_server",
     },
     club_house_day = {
       job = "club_house_day",

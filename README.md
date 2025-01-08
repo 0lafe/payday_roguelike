@@ -3,7 +3,6 @@ WiP
 # BUGS
 
 - Mask lootdrop animation is weird in coop lobby
-- Mask lootdrop includes missing textures
 - Weapon Mods aren't locked to owned dlc
 
 # PLANNED FEATURES
