@@ -17,7 +17,7 @@ function StoryMissionsManager:award(id, steps)
 end
 
 -- re-does completion logic a bit to handle better COOP and single day heists
-function StoryMissionsManager:award_roguelike(job_id, job_stage)
+function StoryMissionsManager:award_roguelike(job_id)
 	local current_mission = self:current_mission() or {}
 
 	if current_mission.completed then
@@ -27,13 +27,7 @@ function StoryMissionsManager:award_roguelike(job_id, job_stage)
 	local job_name = nil
 	for k, v in pairs(tweak_data.roguelike.missions) do
 		if v.job and v.job == job_id then
-			if v.day_id then
-				if v.day_id == job_stage then
-					job_name = k
-				end
-			else
-				job_name = k
-			end
+			job_name = k
 		end
 	end
 

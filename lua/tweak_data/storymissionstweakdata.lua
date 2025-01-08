@@ -349,6 +349,23 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       "lab_rats",
     }
   }
+
+  -- ordered index of jobs for match making
+  self._jobs_index = {}
+  for _, i in pairs({ 0, 1, 2, 3, 4, 5 }) do
+    for _, v in pairs(self._heist_pool[i]) do
+      table.insert(self._jobs_index, v)
+    end
+  end
+end
+
+-- finds global index of job
+function StoryMissionsTweakData:get_index_from_job_id(job_id)
+  for index, entry_name in ipairs(self._jobs_index) do
+    if entry_name == job_id then
+      return index
+    end
+  end
 end
 
 -- standard reward for most heists

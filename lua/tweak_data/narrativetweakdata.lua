@@ -239,3 +239,7 @@ table.insert(tweak_data.narrative._jobs_index, "club_house_night")
 table.insert(tweak_data.narrative._jobs_index, "engine_problems")
 table.insert(tweak_data.narrative._jobs_index, "this_was_not_the_deal")
 table.insert(tweak_data.narrative._jobs_index, "dirty_work")
+
+function NarrativeTweakData:get_index_from_job_id(job_id)
+  return managers.story:get_index_from_job_id(job_id) or 0
+end

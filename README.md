@@ -4,18 +4,19 @@ WiP
 
 - Mask lootdrop animation is weird in coop lobby
 - Mask lootdrop includes missing textures
-- Tier doesn't complete as client sometimes
+- Tier doesn't complete as client sometimes (client sometimes sees wrong level)
 - Weapon Mods aren't locked to owned dlc
 
-# PlANNED FEATURES
+# PLANNED FEATURES
 
 - Recycling weapons(?)
 - Infamy system
 - Day/Night
+- Stealth heists available when hardmode not selected
+- Different loot pools based on tier?
 
 # IDEAS
 
-- Different loot pools based on tier?
 - Hard Mode
 
   - Blacklists certain weapons/decks/etc
@@ -36,3 +37,4 @@ WiP
 - CKR
 - Transports
 - Escape days
+- Stealth Heists

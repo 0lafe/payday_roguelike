@@ -13,7 +13,7 @@ Hooks:PostHook(JobManager, "_setup", "roguelike_jobmanager_setup", function(self
 end)
 
 Hooks:PostHook(JobManager, "next_stage", "roguelike_complete_job_hook", function(self)
-  managers.story:award_roguelike(self:current_job_id(), self:current_stage())
+  managers.story:award_roguelike(self:current_job_id())
 end)
 
 -- Get some vanilla projob funcitonality if projob is enabled
