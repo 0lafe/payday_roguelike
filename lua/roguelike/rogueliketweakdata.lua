@@ -297,36 +297,36 @@ function RoguelikeTweakData:init(tweak_data)
 
   -- data for loot card end screen
   local lootdrop_table = {
-    -- masks = {
-    --   chance = 50,
-    --   data = {
-    --     name = "masks",
-    --     masks = 10,
-    --     colors = 10,
-    --     patterns = 10
-    --   }
-    -- },
-    -- mods = {
-    --   chance = 30,
-    --   data = {
-    --     name = "mods",
-    --     quantity = 20
-    --   }
-    -- },
-    -- xp = {
-    --   chance = 15,
-    --   data = {
-    --     name = "xp",
-    --     quantity = 2
-    --   }
-    -- },
-    -- weapons = {
-    --   chance = 4,
-    --   data = {
-    --     name = "weapons",
-    --     quantity = 5
-    --   }
-    -- },
+    masks = {
+      chance = 50,
+      data = {
+        name = "masks",
+        masks = 10,
+        colors = 10,
+        patterns = 10
+      }
+    },
+    mods = {
+      chance = 30,
+      data = {
+        name = "mods",
+        quantity = 20
+      }
+    },
+    xp = {
+      chance = 15,
+      data = {
+        name = "xp",
+        quantity = 2
+      }
+    },
+    weapons = {
+      chance = 4,
+      data = {
+        name = "weapons",
+        quantity = 5
+      }
+    },
     perk_deck = {
       chance = 1,
       data = {

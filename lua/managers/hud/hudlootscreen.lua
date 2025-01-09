@@ -50,7 +50,6 @@ function HUDLootScreen:make_lootdrop(lootdrop_data)
   self._peer_data[peer_id].lootdrops = lootdrop_data
   self._peer_data[peer_id].active = true
   self._peer_data[peer_id].wait_for_lootdrop = nil
-  self._image_items = {}
   local panel = self._peers_panel:child("peer" .. tostring(peer_id))
   local item_panel = panel:child("item")
   local drop_name = lootdrop_data[4]
@@ -139,8 +138,6 @@ function HUDLootScreen:texture_loaded_clbk(params, texture_idstring)
       texture = texture_idstring
     })
   end
-  self._image_item = item
-
   TextureCache:unretrieve(texture_idstring)
 
   local texture_width = item:texture_width()
@@ -168,7 +165,11 @@ function HUDLootScreen:texture_loaded_clbk(params, texture_idstring)
   local dw = texture_width / s
   local dh = texture_height / s
 
-  item:set_size(math.round(dw * panel_width), math.round(dh * panel_height))
+  if drop_name == "perk_deck" then
+    item:set_size(panel_width, panel_height)
+  else
+    item:set_size(math.round(dw * panel_width), math.round(dh * panel_height))
+  end
   item:set_rotation(360)
   item:set_center(panel:w() * 0.5, panel:h() * 0.5)
 
