@@ -282,7 +282,6 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       "four_floors",
       "undercover",
       "first_world_bank",
-      "diamond_store",
       "breakfast_in_tijuana",
       "big_bank",
       "the_diamond",
@@ -296,6 +295,7 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
       "hoxton_revenge",
     },
     [3] = {
+      "diamond_store",
       "brooklyn_bank",
       "airport",
       "truck_load_day",
@@ -354,7 +354,8 @@ function StoryMissionsTweakData:_init_missions(tweak_data)
   self._jobs_index = {}
   for _, i in pairs({ 0, 1, 2, 3, 4, 5 }) do
     for _, v in pairs(self._heist_pool[i]) do
-      table.insert(self._jobs_index, v)
+      local job_data = tweak_data.roguelike.missions[v]
+      table.insert(self._jobs_index, job_data.job)
     end
   end
 end

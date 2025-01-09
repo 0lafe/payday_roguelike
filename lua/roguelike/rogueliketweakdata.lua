@@ -290,6 +290,9 @@ function RoguelikeTweakData:init(tweak_data)
     breaking_ballot = {
       job = "breaking_ballot"
     },
+    border_crossing = {
+      job = "mex"
+    },
   }
 
   -- data for loot card end screen
