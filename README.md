@@ -6,11 +6,11 @@ WiP
 
 # PLANNED FEATURES
 
+- Different loot pools based on tier?
+- Stealth heists available when hardmode not selected
 - Recycling weapons(?)
 - Infamy system
 - Day/Night
-- Stealth heists available when hardmode not selected
-- Different loot pools based on tier?
 
 # Future
 
