@@ -14,7 +14,7 @@ WiP
 - Different loot pools based on tier?
 - Bring back crimenet
 - Rarity colors on loot cards
-- More loot cards
+- More loot cards ( cosmetics, xp/cc, weapon mods, weapons, perk deck )
 
 # Future
 

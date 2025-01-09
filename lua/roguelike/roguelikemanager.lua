@@ -423,6 +423,12 @@ function RoguelikeManager:handle_lootdrop()
     managers.custom_safehouse:add_coins(drop.quantity)
   elseif drop.name == "masks" then
     self:_give_mask_customization(drop.masks)
+  elseif drop.name == "mods" then
+    self:add_weapon_mods(drop.quantity)
+  elseif drop.name == "weapons" then
+    self:add_weapons(drop.quantity)
+  elseif drop.name == "perk_deck" then
+    self:add_perkdeck(drop.quantity)
   end
 
   return drop

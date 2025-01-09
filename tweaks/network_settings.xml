@@ -9,7 +9,8 @@
     <message name="feed_lootdrop" delivery="ordered" receiver="connection">
 			<param type="int" min="0" max="10" /> <!-- left card pc, 0=JOKER -->
 			<param type="int" min="0" max="10" /> <!-- right card pc, 0=JOKER -->
-			<param type="string" />				  <!-- drop_name -->
+			<param type="string" />				        <!-- drop_name -->
+			<param type="string" />				        <!-- drop_meta -->
 		</message>
   </target>
 </tweak>

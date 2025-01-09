@@ -72,6 +72,79 @@ local function _mask_anim_function(hudlootscreen, panel, peer_id)
   end
 end
 
+local function _weapon_anim_func(hudlootscreen, panel, peer_id)
+  if hudlootscreen._image_item then
+    panel:remove(hudlootscreen._image_item)
+  end
+
+  local texture_path = managers.blackmarket:get_weapon_icon_path(tweak_data.roguelike.all_weapon_keys
+    [math.random(#tweak_data.roguelike.all_weapon_keys)]
+  )
+  local item = panel:bitmap({
+    blend_mode = "normal",
+    layer = 1,
+    texture = texture_path
+  })
+  hudlootscreen._image_item = item
+
+  local texture_width = item:texture_width()
+  local texture_height = item:texture_height()
+  local panel_width = 100
+  local panel_height = 100
+
+  if texture_width == 0 or texture_height == 0 or panel_width == 0 or panel_height == 0 then
+    panel:remove(item)
+
+    local rect = panel:rect({
+      blend_mode = "add",
+      w = 100,
+      h = 100,
+      rotation = 360,
+      color = Color.red
+    })
+
+    rect:set_center(panel:w() * 0.5, panel:h() * 0.5)
+
+    return
+  end
+
+  local s = math.min(texture_width, texture_height)
+  local dw = texture_width / s
+  local dh = texture_height / s
+
+  item:set_size(math.round(dw * panel_width), math.round(dh * panel_height))
+  item:set_rotation(360)
+  item:set_center(panel:w() * 0.5, panel:h() * 0.5)
+
+  if hudlootscreen._need_item and hudlootscreen._need_item[peer_id] then
+    hudlootscreen._need_item[peer_id] = false
+
+    hudlootscreen:show_item(peer_id)
+  end
+end
+
+local rarity_colors = {
+  common = tweak_data.economy.rarities.common.color,
+  uncommon = tweak_data.economy.rarities.uncommon.color,
+  rare = tweak_data.economy.rarities.rare.color,
+  epic = tweak_data.economy.rarities.epic.color,
+  legendary = tweak_data.economy.rarities.legendary.color
+}
+
+local function _get_rarity_color(reward)
+  local mappings = {
+    masks = "common",
+    xp = "uncommon",
+    coins = "uncommon",
+    mods = "rare",
+    weapons = "epic",
+    perk_deck = "legendary"
+  }
+
+  local test = mappings[reward]
+  return rarity_colors[test]
+end
+
 function HUDLootScreen:make_lootdrop(lootdrop_data)
   local peer = lootdrop_data[1]
   local peer_id = peer and peer:id() or 1
@@ -81,10 +154,12 @@ function HUDLootScreen:make_lootdrop(lootdrop_data)
   local panel = self._peers_panel:child("peer" .. tostring(peer_id))
   local item_panel = panel:child("item")
   local drop_name = lootdrop_data[4]
+  local drop_meta = lootdrop_data[5]
 
   local texture_loaded_clbk = callback(self, self, "texture_loaded_clbk", {
     peer_id,
-    drop_name
+    drop_name,
+    drop_meta
   })
   local texture_path = nil
 
@@ -93,7 +168,19 @@ function HUDLootScreen:make_lootdrop(lootdrop_data)
   elseif drop_name == "coins" then
     texture_path = "guis/dlcs/chill/textures/pd2/safehouse/continental_coins_drop"
   elseif drop_name == "masks" then
+    texture_path = _get_random_mask_texture()
+  elseif drop_name == "mods" then
+    texture_path = "guis/textures/pd2/icon_modbox_df"
+  elseif drop_name == "weapons" then
     texture_path = "guis/textures/pd2/blackmarket/cash_drop"
+  elseif drop_name == "perk_deck" then
+    local specialization_data = tweak_data.skilltree.specializations[drop_meta]
+    local tier_data = specialization_data[9]
+    local guis_catalog = "guis/"
+    if tier_data.texture_bundle_folder then
+      guis_catalog = guis_catalog .. "dlcs/" .. tostring(tier_data.texture_bundle_folder) .. "/"
+    end
+    texture_path = guis_catalog .. "textures/pd2/specialization/icons_atlas"
   end
 
   if DB:has(Idstring("texture"), texture_path) then
@@ -118,12 +205,35 @@ function HUDLootScreen:texture_loaded_clbk(params, texture_idstring)
 
   local peer_id = params[1]
   local drop_name = params[2]
+  local drop_meta = params[3]
   local panel = self._peers_panel:child("peer" .. tostring(peer_id)):child("item")
-  local item = panel:bitmap({
-    blend_mode = "normal",
-    layer = 1,
-    texture = texture_idstring
-  })
+  local item
+
+  if drop_name == "perk_deck" then
+    local specialization_data = tweak_data.skilltree.specializations[drop_meta]
+    local tier_data = specialization_data[9]
+    local texture_rect_x = tier_data.icon_xy and tier_data.icon_xy[1] or 0
+    local texture_rect_y = tier_data.icon_xy and tier_data.icon_xy[2] or 0
+    local texture_rect = {
+      texture_rect_x * 64,
+      texture_rect_y * 64,
+      64,
+      64
+    }
+
+    item = panel:bitmap({
+      blend_mode = "normal",
+      layer = 1,
+      texture = texture_idstring,
+      texture_rect = texture_rect
+    })
+  else
+    item = panel:bitmap({
+      blend_mode = "normal",
+      layer = 1,
+      texture = texture_idstring
+    })
+  end
   self._image_item = item
 
   TextureCache:unretrieve(texture_idstring)
@@ -168,6 +278,13 @@ function HUDLootScreen:texture_loaded_clbk(params, texture_idstring)
       while true do
         _G.wait(0.5)
         _mask_anim_function(self, panel, peer_id)
+      end
+    end)
+  elseif drop_name == "weapons" then
+    panel:animate(function(o)
+      while true do
+        _G.wait(0.5)
+        _weapon_anim_func(self, panel, peer_id)
       end
     end)
   end
@@ -443,7 +560,15 @@ function HUDLootScreen:begin_choose_card(peer_id, card_id)
     upcard:set_rotation(downcard:rotation())
     upcard:set_shape(downcard:shape())
 
-    upcard:set_color(Color(math.random(), math.random(), math.random()))
+    local color_keys = {}
+    for k, _ in pairs(rarity_colors) do
+      table.insert(color_keys, k)
+    end
+    if card_id == i then
+      upcard:set_color(_get_rarity_color(lootdrop_data[4]))
+    else
+      upcard:set_color(rarity_colors[color_keys[math.random(#color_keys)]])
+    end
 
     if coords then
       local tl = Vector3(coords[1][1], coords[1][2], 0)
@@ -567,7 +692,12 @@ function HUDLootScreen:show_item(peer_id)
     local global_value_text = card_info_panel:child("global_value_text")
     local lootdrop_data = self._peer_data[peer_id].lootdrops
     local drop_name = lootdrop_data[4]
+    local drop_meta = lootdrop_data[5]
     local item_text = managers.localization:text(drop_name .. "_roguelike_lootdrop")
+    if drop_name == "perk_deck" then
+      item_text = item_text ..
+          ": " .. managers.localization:text(tweak_data.skilltree.specializations[drop_meta].name_id)
+    end
 
     main_text:set_text(managers.localization:to_upper_text("menu_l_you_got", {
       category = managers.localization:text("bm_menu_roguelike_lootdrop"),

@@ -10,18 +10,23 @@ function IngameLobbyMenuState:set_lootdrop()
 
   local drop = managers.roguelike:handle_lootdrop()
   local drop_name = drop.name
+  local drop_meta = nil
+  if drop_name == "perk_deck" then
+    drop_meta = managers.roguelike._dropped_perkdecks[1]
+  end
 
   local lootdrop_data = {
     peer,
     card_left_pc,
     card_right_pc,
-    drop_name
+    drop_name,
+    drop_meta
   }
 
   managers.hud:make_lootdrop_hud(lootdrop_data)
 
   if not Global.game_settings.single_player and managers.network:session() then
-    managers.network:session():send_to_peers("feed_lootdrop", card_left_pc, card_right_pc, drop_name)
+    managers.network:session():send_to_peers("feed_lootdrop", card_left_pc, card_right_pc, drop_name, drop_meta)
   end
 end
 
