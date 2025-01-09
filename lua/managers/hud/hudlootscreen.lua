@@ -34,9 +34,8 @@ local rarity_colors = {
 local function _get_rarity_color(reward)
   local mappings = {
     masks = "common",
-    xp = "uncommon",
-    coins = "uncommon",
-    mods = "rare",
+    mods = "uncommon",
+    xp = "rare",
     weapons = "epic",
     perk_deck = "legendary"
   }
@@ -66,8 +65,6 @@ function HUDLootScreen:make_lootdrop(lootdrop_data)
 
   if drop_name == "xp" then
     texture_path = "guis/textures/pd2/blackmarket/xp_drop"
-  elseif drop_name == "coins" then
-    texture_path = "guis/dlcs/chill/textures/pd2/safehouse/continental_coins_drop"
   elseif drop_name == "masks" then
     texture_path = _get_random_mask_texture()
   elseif drop_name == "mods" then
@@ -580,10 +577,10 @@ function HUDLootScreen:show_item(peer_id)
     local lootdrop_data = self._peer_data[peer_id].lootdrops
     local drop_name = lootdrop_data[4]
     local drop_meta = lootdrop_data[5]
-    local item_text = managers.localization:text(drop_name .. "_roguelike_lootdrop")
+    local item_text = managers.localization:to_upper_text(drop_name .. "_roguelike_lootdrop")
     if drop_name == "perk_deck" then
-      item_text = item_text ..
-          ": " .. managers.localization:text(tweak_data.skilltree.specializations[drop_meta].name_id)
+      item_text =
+          item_text .. ": " .. managers.localization:text(tweak_data.skilltree.specializations[drop_meta].name_id)
     end
 
     main_text:set_text(managers.localization:to_upper_text("menu_l_you_got", {

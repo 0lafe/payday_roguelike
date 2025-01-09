@@ -419,8 +419,6 @@ function RoguelikeManager:handle_lootdrop()
     for i = 1, levels do
       managers.experience:_level_up()
     end
-  elseif drop.name == "coins" then
-    managers.custom_safehouse:add_coins(drop.quantity)
   elseif drop.name == "masks" then
     self:_give_mask_customization(drop.masks)
   elseif drop.name == "mods" then
