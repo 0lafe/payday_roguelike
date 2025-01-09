@@ -344,3 +344,14 @@ function RoguelikeTweakData:init(tweak_data)
     end
   end
 end
+
+-- returns mission name from a given job id
+function RoguelikeTweakData:get_mission_name(job_id)
+  local mission = nil
+  for k, v in pairs(self.missions) do
+    if v.job == job_id then
+      mission = k
+    end
+  end
+  return mission
+end

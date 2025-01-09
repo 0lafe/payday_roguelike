@@ -6,7 +6,6 @@ WiP
 
 # PLANNED FEATURES
 
-- Bring back crimenet
 - Recycling weapons(?)
 - Infamy system
 - Day/Night

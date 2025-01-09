@@ -408,6 +408,20 @@ function StoryMissionsTweakData:heist_in_tier(mission_tier, heist_name)
   return output
 end
 
+-- returns tier of a mission based on name
+function StoryMissionsTweakData:get_mission_tier(mission_name)
+  local out = nil
+  for tier, missions in pairs(self._heist_pool) do
+    for _, v in pairs(missions) do
+      if mission_name == v then
+        out = tier
+      end
+    end
+  end
+  return out
+end
+
+-- generates act data
 function StoryMissionsTweakData:_act(data)
   local id = "sm_act_" .. self.current_act_id
   -- increment instance variable to automatically create unique ids
