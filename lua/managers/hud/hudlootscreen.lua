@@ -81,6 +81,11 @@ function HUDLootScreen:make_lootdrop(lootdrop_data)
       guis_catalog = guis_catalog .. "dlcs/" .. tostring(tier_data.texture_bundle_folder) .. "/"
     end
     texture_path = guis_catalog .. "textures/pd2/specialization/icons_atlas"
+    self._peer_data[peer_id].effects = {
+      show_wait = "lootdrop_safe_drop_show_wait",
+      show_item = "lootdrop_safe_drop_show_item",
+      flip_card = "lootdrop_safe_drop_flip_card"
+    }
   end
 
   if DB:has(Idstring("texture"), texture_path) then
