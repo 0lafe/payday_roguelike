@@ -21,7 +21,7 @@ local function _get_random_mask_texture()
   return guis_catalog .. "textures/pd2/blackmarket/icons/masks/" .. guis_mask_id
 end
 
--- animate function to change drop image between masks
+-- function called when animating mask reward panel
 local function _mask_anim_function(hudlootscreen, panel, peer_id)
   if hudlootscreen._image_item then
     panel:remove(hudlootscreen._image_item)
@@ -72,9 +72,10 @@ local function _mask_anim_function(hudlootscreen, panel, peer_id)
   end
 end
 
+-- function called when animating weapon reward panel
 local function _weapon_anim_func(hudlootscreen, panel, peer_id)
-  if hudlootscreen._image_item then
-    panel:remove(hudlootscreen._image_item)
+  if hudlootscreen._image_items.peer_id then
+    panel:remove(hudlootscreen._image_items.peer_id)
   end
 
   local texture_path = managers.blackmarket:get_weapon_icon_path(tweak_data.roguelike.all_weapon_keys
@@ -85,7 +86,7 @@ local function _weapon_anim_func(hudlootscreen, panel, peer_id)
     layer = 1,
     texture = texture_path
   })
-  hudlootscreen._image_item = item
+  hudlootscreen._image_items.peer_id = item
 
   local texture_width = item:texture_width()
   local texture_height = item:texture_height()
@@ -123,6 +124,7 @@ local function _weapon_anim_func(hudlootscreen, panel, peer_id)
   end
 end
 
+-- maps rarity to color value
 local rarity_colors = {
   common = tweak_data.economy.rarities.common.color,
   uncommon = tweak_data.economy.rarities.uncommon.color,
@@ -131,6 +133,7 @@ local rarity_colors = {
   legendary = tweak_data.economy.rarities.legendary.color
 }
 
+-- returns color value for a given drop type
 local function _get_rarity_color(reward)
   local mappings = {
     masks = "common",
@@ -151,6 +154,7 @@ function HUDLootScreen:make_lootdrop(lootdrop_data)
   self._peer_data[peer_id].lootdrops = lootdrop_data
   self._peer_data[peer_id].active = true
   self._peer_data[peer_id].wait_for_lootdrop = nil
+  self._image_items = {}
   local panel = self._peers_panel:child("peer" .. tostring(peer_id))
   local item_panel = panel:child("item")
   local drop_name = lootdrop_data[4]
@@ -172,7 +176,9 @@ function HUDLootScreen:make_lootdrop(lootdrop_data)
   elseif drop_name == "mods" then
     texture_path = "guis/textures/pd2/icon_modbox_df"
   elseif drop_name == "weapons" then
-    texture_path = "guis/textures/pd2/blackmarket/cash_drop"
+    texture_path = managers.blackmarket:get_weapon_icon_path(tweak_data.roguelike.all_weapon_keys
+      [math.random(#tweak_data.roguelike.all_weapon_keys)]
+    )
   elseif drop_name == "perk_deck" then
     local specialization_data = tweak_data.skilltree.specializations[drop_meta]
     local tier_data = specialization_data[9]
