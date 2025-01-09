@@ -49,11 +49,34 @@ Hooks:PostHook(MenuManager, "init", "init_show_career", function(self, is_start_
 
   -- Hides extra menu options
   local main_node = nodes and nodes.main
-  for _, v in pairs({ "crimenet", "crimenet_offline", "social_hub" }) do
-    local node = main_node:item(v)
-    if node then
-      node:set_visible(false)
+
+  local crimenet_index
+  local social_hud_index
+  local story_missions_index
+  for k, v in pairs(main_node._items) do
+    if v._parameters and v._parameters.name then
+      local name = v._parameters.name
+      if name == "crimenet" then
+        crimenet_index = k
+      elseif name == "social_hub" then
+        social_hud_index = k
+      elseif name == "story_missions" then
+        story_missions_index = k
+      end
     end
+  end
+
+  local temp_crimenet = main_node._items[crimenet_index]
+  local temp_social_hud = main_node._items[social_hud_index]
+  local temp_story_missions = main_node._items[story_missions_index]
+
+  main_node._items[crimenet_index] = temp_story_missions
+  main_node._items[social_hud_index] = temp_crimenet
+  main_node._items[story_missions_index] = temp_social_hud
+
+  local node = main_node:item("crimenet_offline")
+  if node then
+    node:set_visible(false)
   end
 
   local story_node = main_node:item("story_missions")

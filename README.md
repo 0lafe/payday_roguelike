@@ -6,12 +6,12 @@ WiP
 
 # PLANNED FEATURES
 
+- Bring back crimenet
 - Recycling weapons(?)
 - Infamy system
 - Day/Night
 - Stealth heists available when hardmode not selected
 - Different loot pools based on tier?
-- Bring back crimenet
 
 # Future
 

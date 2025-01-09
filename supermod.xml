@@ -17,6 +17,7 @@
       <group :script_path="menu/" :hook_id="menu/">
         <post :script_path="blackmarketgui.lua" :hook_id="blackmarketgui"/>
         <post :script_path="extendeduielemets.lua" :hook_id="extendeduielemets"/>
+        <post :script_path="menunodegui.lua" :hook_id="menunodegui"/>
         <post :script_path="playerinventorygui.lua" :hook_id="playerinventorygui"/>
         <post :script_path="specializationguinew.lua" :hook_id="specializationguinew"/>
         <post :script_path="storymissionsgui.lua" :hook_id="storymissionsgui"/>
