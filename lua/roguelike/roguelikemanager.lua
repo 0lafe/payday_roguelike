@@ -205,7 +205,7 @@ function RoguelikeManager:build_objectives(mission)
     -- prevent rolling the same heist twice in a row
     local previous_mission = managers.story:previous_mission(mission)
     if previous_mission and previous_mission.tier and previous_mission.tier == mission.tier then
-      local previous_mission_levels = self.save_data.rolled_heists[previous_mission.id]
+      local previous_mission_levels = self.save_data.rolled_heists[previous_mission.id] or {}
       local unique_heists = {}
       for _, heist in pairs(heist_pool) do
         local heist_unique = true
