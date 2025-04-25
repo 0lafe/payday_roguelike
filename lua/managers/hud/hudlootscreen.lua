@@ -455,7 +455,8 @@ function HUDLootScreen:begin_choose_card(peer_id, card_id)
       table.insert(color_keys, k)
     end
     if card_id == i then
-      upcard:set_color(_get_rarity_color(lootdrop_data[4]))
+      item_color = _get_rarity_color(lootdrop_data[4])
+      upcard:set_color(item_color or Color.white)
     else
       upcard:set_color(rarity_colors[color_keys[math.random(#color_keys)]])
     end
